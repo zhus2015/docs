@@ -11,7 +11,7 @@ Welcome to zhusdocs's documentation!
    :caption: Contents:
 
    introduce
-   step_by_step
+   linux
 
 
 Indices and tables
