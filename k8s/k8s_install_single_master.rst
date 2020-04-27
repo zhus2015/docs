@@ -10,64 +10,38 @@
 初始化环境
 ----------
 
-**关闭防火墙**
-
-
 ..  code-block:: shell
 
+	# 关闭防火墙
 	$ systemctl stop firewalld
 	$ systemctl disable firewalld
 
-
-**关闭selinux**
-
-..  code-block:: shell
-
-	$ sed -i ‘s/enforcing/disabled/’ /etc/selinux/config
+	# 关闭selinux
+	$ sed -i 's/enforcing/disabled/' /etc/selinux/config
 	$ setenforce 0
 
-
-**关闭swap**
-
-..  code-block:: shell
-
+	# 关闭swap
 	$ swapoff -a #临时
 	$ vi /etc/fstab #永久
 
-
-**添加主机名和IP的对应关系**
-
-..  code-block:: vim
-
+	# 添加主机名和IP的对应关系
 	$ vim /etc/hosts
 	10.10.10.50 k8s-01
 	10.10.10.51 k8s-02
 	10.10.10.52 k8s-03
 
-
-**将桥接的IPv4流量传递到iptables的链：**
-
-..  code-block:: shell
-
+	# 将桥接的IPv4流量传递到iptables的链
 	$ cat > /etc/sysctl.d/k8s.conf << EOF
 	net.bridge.bridge-nf-call-ip6tables = 1
 	net.bridge.bridge-nf-call-iptables = 1
 	net.ipv4.ip_forward = 1
 	EOF
 	$ sysctl –system
-
-
-**安装工具包**
-
-..  code-block:: shell
-
+	
+	# 安装工具包**
 	$ yum install ntpdate wget vim -y
 
-
-**同步时间**
-
-..  code-block:: shell
-
+	# 同步时间
 	$ ntpdate ntp.api.bz
 
 
@@ -86,7 +60,7 @@
 安装k8s
 -----------
 
-**添加阿里云软件源**
+	#添加阿里云软件源
 
 ..  code-block:: shell
 
@@ -101,32 +75,18 @@
 	http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 	EOF
 
-
-**安装指定版本的kubeadm，kubelet和kubectl**
-
-
-..  code-block:: shell
-
+	# 安装指定版本的kubeadm，kubelet和kubectl
 	$ yum install -y kubelet-1.14.0 kubeadm-1.14.0 kubectl-1.14.0
 	$ systemctl enable kubelet
 
-
-**安装k8s**
-
-在k8s-01(10.10.10.50)节点上执行
-
-..  code-block:: shell
-
+	# 安装k8s
+	在k8s-01(10.10.10.50)节点上执行
 	$ kubeadm init   –apiserver-advertise-address=10.10.10.50  
 	–image-repository registry.aliyuncs.com/google_containers  
 	–kubernetes-version v1.14.0   –service-cidr=10.1.0.0/16  
 	–pod-network-cidr=10.244.0.0/16
-
-
-**配置kubectl工具**
-
-..  code-block:: shell
-
+	
+	# 配置kubectl工具
 	$ mkdir -p $HOME/.kube
 	$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 	$ sudo chown :math:`(id -u):`\ (id -g) $HOME/.kube/config
