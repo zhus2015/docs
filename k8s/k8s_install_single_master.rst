@@ -3,7 +3,7 @@
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: Contents:
    
    
@@ -131,7 +131,7 @@ https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c11463
 -------------
 
 最好先下载下来，因为我们要修改一部分内容
-========================================
+------------------------------------------
 
 | 使用下载yaml的方式部署
 | $ kubectl apply -f
