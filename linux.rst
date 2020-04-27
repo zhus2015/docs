@@ -10,7 +10,7 @@ Linux，全称GNU/Linux，是一套免费使用和自由传播的类UNIX操作�
 
    shell
    sys_install_and_setting
-   setup_by_prod
+   
    
 .. code-block:: vim
 

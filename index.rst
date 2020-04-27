@@ -12,6 +12,7 @@ Welcome to zhusdocs's documentation!
 
    introduce
    linux
+   docker_and_k8s
 
 
 Indices and tables
