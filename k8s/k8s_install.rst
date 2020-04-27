@@ -11,7 +11,7 @@ k8s部署
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: Contents:
    
    k8s_install_single_master
