@@ -1,9 +1,7 @@
-容器及k8s
+Docker
 =========================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
    
-   docker
-   k8s

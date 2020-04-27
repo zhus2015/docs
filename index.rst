@@ -11,9 +11,9 @@ Welcome to zhusdocs's documentation!
    :caption: Contents:
 
    introduce
-   linux
-   docker_and_k8s
-
+   linux/index
+   docker/index
+   k8s/index
 
 Indices and tables
 ==================
