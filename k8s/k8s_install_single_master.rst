@@ -3,7 +3,7 @@
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
    
    
@@ -83,9 +83,10 @@
 	Docker version 18.06.1-ce, build e68fc7a
 
 
+安装k8s
+-----------
 
-添加阿里云软件源
-----------------
+**添加阿里云软件源**
 
 ..  code-block:: shell
 
@@ -101,8 +102,8 @@
 	EOF
 
 
-安装指定版本的kubeadm，kubelet和kubectl
----------------------------------------
+**安装指定版本的kubeadm，kubelet和kubectl**
+
 
 ..  code-block:: shell
 
@@ -110,13 +111,9 @@
 	$ systemctl enable kubelet
 
 
-安装k8s master
---------------
+**安装k8s**
 
-安装
-~~~~
-
-| 在k8s-01(10.10.10.50)节点上执行
+在k8s-01(10.10.10.50)节点上执行
 
 ..  code-block:: shell
 
@@ -125,8 +122,8 @@
 	–kubernetes-version v1.14.0   –service-cidr=10.1.0.0/16  
 	–pod-network-cidr=10.244.0.0/16
 
-使用kubectl工具
-~~~~~~~~~~~~~~~
+
+**配置kubectl工具**
 
 ..  code-block:: shell
 
@@ -161,8 +158,7 @@
 部署Dashboard
 -------------
 
-最好先下载下来，因为我们要修改一部分内容
-------------------------------------------
+**最好先下载下来，因为我们要修改一部分内容**
 
 ..  code-block:: shell
 
