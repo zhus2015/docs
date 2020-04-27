@@ -15,5 +15,3 @@ Linux，全称GNU/Linux，是一套免费使用和自由传播的类UNIX操作�
 .. code-block:: vim
 
 
-
-如遇到问题可参考 `FAQ <faq.html>`_
