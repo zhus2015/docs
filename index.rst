@@ -14,6 +14,7 @@ Welcome to zhusdocs's documentation!
    linux/index
    docker/index
    k8s/index
+   sphinx
 
 Indices and tables
 ==================
