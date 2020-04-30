@@ -6,19 +6,13 @@
 Welcome to zhusdocs's documentation!
 ====================================
 
+**目录:**
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    introduce
    linux/index
    docker/index
    k8s/index
    sphinx
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
