@@ -16,3 +16,4 @@ k8s部署
    
    k8s_install_single_master
    k8s_install_cluster
+   k8s_install_binary
