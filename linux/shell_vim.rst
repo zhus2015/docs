@@ -36,16 +36,17 @@ $ (shift+4)到行尾
 - 删除当前光标上的单词 d+i+w
 - 选中当前光标上的单词 v+i+w
 
-.. image:: /_static/imges/vim1.png
+
+.. image:: _static/images/vim1.png
 
 
-.. image:: /_static/imges/vim2.png
+.. image:: _static/images/vim2.png
 
 
-.. image:: /_static/imges/vim3.png
+.. image:: _static/images/vim3.png
 
 
-.. image:: /_static/imges/vim4.png
+.. image:: _static/images/vim4.png
 
 
 
