@@ -15,5 +15,5 @@ Welcome to zhusdocs's documentation!
    linux/index
    database/index
    docker/index
-   k8s/index
+   k8s/k8s_index
    sphinx

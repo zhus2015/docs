@@ -14,6 +14,5 @@ k8s部署
    :maxdepth: 1
    :caption: Contents:
    
-   k8s_install/k8s_install_single_master
-   k8s_install/k8s_install_cluster
-   k8s_install/k8s_install_binary
+   k8s_install_single_master
+   k8s_install_cluster
