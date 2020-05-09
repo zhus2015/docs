@@ -3,7 +3,6 @@ k8s
 
 .. toctree::
    :maxdepth: 5
-   :caption: Contents:
    
    k8s_introduce
    k8s_install/k8s_install_index

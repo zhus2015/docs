@@ -11,4 +11,3 @@ kubernetes，简称K8s，是用8代替8个字符“ubernete”而成的缩写。
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
