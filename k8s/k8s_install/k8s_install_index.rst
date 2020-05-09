@@ -1,4 +1,4 @@
-k8s部署
+kuberadmin安装k8s
 =========================
 
 **配置建议**
@@ -11,7 +11,7 @@ k8s部署
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
    
    k8s_install_single_master

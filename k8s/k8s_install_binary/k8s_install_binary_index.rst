@@ -1,4 +1,4 @@
-k8s二进制部署
+二进制部署k8s
 =========================
 
 **配置建议**
@@ -10,7 +10,7 @@ k8s二进制部署
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
    
    k8s_install_base_binary

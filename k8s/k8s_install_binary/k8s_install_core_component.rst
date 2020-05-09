@@ -327,7 +327,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 rbac
 ''''
 
-   /data/k8s-yaml/coredns/rbac.yaml
+/data/k8s-yaml/coredns/rbac.yaml
 
 .. code:: yaml
 
@@ -382,7 +382,7 @@ rbac
 configMap
 '''''''''
 
-   /data/k8s-yaml/coredns/cm.yaml
+/data/k8s-yaml/coredns/cm.yaml
 
 .. code:: yaml
 
@@ -410,7 +410,7 @@ configMap
 Deployment
 ''''''''''
 
-   /data/k8s-yaml/coredns/dp.yaml
+/data/k8s-yaml/coredns/dp.yaml
 
 .. code:: yaml
 
@@ -477,7 +477,7 @@ Deployment
 Service
 '''''''
 
-   /data/k8s-yaml/coredns/svc.yaml
+/data/k8s-yaml/coredns/svc.yaml
 
 .. code:: yaml
 
@@ -593,7 +593,7 @@ K8S服务暴露插件-traefik
 RABC
 ''''
 
-   /data/k8s-yaml/traefik/rbac.yaml
+/data/k8s-yaml/traefik/rbac.yaml
 
 .. code:: yaml
 
@@ -646,7 +646,7 @@ RABC
 DemonSet
 ''''''''
 
-   /data/k8s-yaml/traefik/ds.yaml
+/data/k8s-yaml/traefik/ds.yaml
 
 .. code:: yaml
 
@@ -699,7 +699,7 @@ DemonSet
 Service
 '''''''
 
-   /data/k8s-yaml/traefik/svc.yaml
+/data/k8s-yaml/traefik/svc.yaml
 
 .. code:: yaml
 
@@ -725,7 +725,7 @@ Service
 Ingress
 '''''''
 
-   /data/k8s-yaml/traefik/ingress.yaml
+/data/k8s-yaml/traefik/ingress.yaml
 
 .. code:: yaml
 
