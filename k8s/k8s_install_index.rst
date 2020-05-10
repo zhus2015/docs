@@ -1,4 +1,4 @@
-kuberadmin安装k8s
+K8S安装部署
 =========================
 
 **配置建议**
@@ -9,9 +9,8 @@ kuberadmin安装k8s
 - 硬盘>=40G
 
 
-
 .. toctree::
    :maxdepth: 3
    
-   k8s_install_single_master
-   k8s_install_cluster
+   k8s_install/k8s_install_index
+   k8s_install_binary/k8s_install_binary_index

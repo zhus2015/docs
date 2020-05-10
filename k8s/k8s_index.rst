@@ -2,10 +2,9 @@ k8s
 =========================
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 3
    
    k8s_introduce
-   k8s_install/k8s_install_index
-   k8s_install_binary/k8s_install_binary_index
-   k8s_use
-   k8s_net
+   k8s_install_index
+   k8s_use_index
+   k8s_net_index
