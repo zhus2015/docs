@@ -10,7 +10,7 @@ K8S安装部署
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
    
-   k8s_install/k8s_install_index
+   k8s_install/k8s_install_kuberadmin_index
    k8s_install_binary/k8s_install_binary_index

@@ -17,3 +17,4 @@ Welcome to zhusdocs's documentation!
    docker/index
    k8s/k8s_index
    sphinx
+   reStructuredText
