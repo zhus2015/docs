@@ -456,7 +456,7 @@ Deployment
              protocol: TCP
            livenessProbe:
              httpGet:
-               path: /healtk
+               path: /health
                port: 8080
                scheme: HTTP
              initialDelaySeconds: 60
