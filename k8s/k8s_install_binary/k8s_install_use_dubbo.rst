@@ -1,11 +1,11 @@
-.. _header-n0:
+
 
 交付Dubbo微服务到K8S
 ====================
 
 本文档基于k8s二进制安装
 
-.. _header-n3:
+
 
 集群规划
 --------
@@ -20,12 +20,12 @@ home-10-31.host.com  k8s运算节点2，jenkins   10.10.10.31
 home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
 ==================== ======================= ============
 
-.. _header-n30:
+
 
 部署zookeeper
 -------------
 
-.. _header-n31:
+
 
 安装jdk1.8
 ~~~~~~~~~~
@@ -51,14 +51,14 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
    Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
 
-.. _header-n36:
+
 
 安装zookeeper
 ~~~~~~~~~~~~~
 
 **此步骤在服务器10.10.10.20、10.10.10.21、10.10.10.30上同时操作**
 
-.. _header-n38:
+
 
 解压安装
 ^^^^^^^^
@@ -89,7 +89,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    server.3=zk3.od.com:2888:3888
    EOF
 
-.. _header-n45:
+
 
 配置DNS
 ^^^^^^^
@@ -106,7 +106,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    [root@home-10-20 opt]# dig -t A zk1.od.com @10.10.10.20 +short
    10.10.10.20
 
-.. _header-n49:
+
 
 配置机器的id
 ^^^^^^^^^^^^
@@ -138,7 +138,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    [root@home-10-30 opt]# vim /data/zookeeper/data/myid
    3
 
-.. _header-n61:
+
 
 依次启动
 ^^^^^^^^
@@ -152,14 +152,14 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
 
 最好将启动命令加入开机启动脚本rc.local中
 
-.. _header-n65:
+
 
 部署Jenkins
 -----------
 
 部署到k8s中
 
-.. _header-n67:
+
 
 准备镜像
 ~~~~~~~~
@@ -176,7 +176,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    [root@home-10-200 ~]# docker push harbor.od.com/public/jenkins
    [root@home-10-200 ~]# docker tag 5307ff34e221 harbor.od.com/public/jenkins:v2.222.3
 
-.. _header-n73:
+
 
 自定义Dockerfile
 ~~~~~~~~~~~~~~~~
@@ -237,14 +237,14 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
 
 仓库地址：https://gitee.com/zhus2015/dubbo-demo-service
 
-.. _header-n99:
+
 
 创建私有仓库
 ~~~~~~~~~~~~
 
 在harbor中创建名称为infra的私有仓库
 
-.. _header-n102:
+
 
 推送镜像
 ~~~~~~~~
@@ -261,7 +261,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
 
    # docker run --rm harbor.od.com/infra/jenkins:v2.222.3 ssh -i /root/.ssh/id_rsa -T git@gitee.com
 
-.. _header-n109:
+
 
 创建kubernetes名称空间
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -280,12 +280,12 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    # kubectl create secret docker-registry harbor --docker-server=harbor.od.com --docker-username=admin --docker-password=Harbor12345 -n infra
    secret/harbor created
 
-.. _header-n117:
+
 
 准备共享存储
 ~~~~~~~~~~~~
 
-.. _header-n118:
+
 
 安装NFS
 ^^^^^^^
@@ -296,7 +296,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
 
    # yum install -y nfs-utils 
 
-.. _header-n122:
+
 
 配置NFS
 ^^^^^^^
@@ -318,7 +318,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
 
    # mkdir /data/nfs-volume
 
-.. _header-n133:
+
 
 启动NFS
 ^^^^^^^
@@ -330,7 +330,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    # systemctl start nfs
    # systemctl enable nfs
 
-.. _header-n137:
+
 
 准备资源配置清单
 ~~~~~~~~~~~~~~~~
@@ -342,7 +342,7 @@ home-10-200.host.com k8s运维节点(docker仓库) 10.10.10.200
    # mkdir /data/k8s-yaml/jenkins
    # mkdir /data/nfs-volume/jenkins_home
 
-.. _header-n140:
+
 
 dp.yaml
 ^^^^^^^
@@ -405,7 +405,7 @@ vim /data/k8s-yaml/jenkins/dp.yaml
      revisionHistoryLimit: 7
      progressDeadlineSeconds: 600          
 
-.. _header-n144:
+
 
 svc.yaml
 ^^^^^^^^
@@ -427,7 +427,7 @@ vim /data/k8s-yaml/jenkins/svc.yaml
      selector:
        app: jenkins
 
-.. _header-n148:
+
 
 ingress.yaml
 ^^^^^^^^^^^^
@@ -450,7 +450,7 @@ vim /data/k8s-yaml/jenkins/ingress.yaml
            serviceName: jenkins
            servicePort: 80
 
-.. _header-n152:
+
 
 依次创建资源
 ~~~~~~~~~~~~
@@ -463,14 +463,14 @@ vim /data/k8s-yaml/jenkins/ingress.yaml
    # kubectl apply -f http://k8s-yaml.od.com/jenkins/svc.yaml
    # kubectl apply -f http://k8s-yaml.od.com/jenkins/ingress.yaml
 
-.. _header-n156:
+
 
 域名解析
 ~~~~~~~~
 
 10.10.10.20 dns服务器上增加jenkins的A记录10.10.10.25
 
-.. _header-n159:
+
 
 访问检查
 ~~~~~~~~
@@ -479,26 +479,26 @@ dig -t A jenkins.od.com @10.10.10.20 +short
 
 通过页面访问http://jenkins.od.com
 
-.. _header-n163:
+
 
 安装Blue Ocean插件
 ~~~~~~~~~~~~~~~~~~
 
-.. _header-n165:
+
 
 maven安装配置
 -------------
 
 **此步骤在10.10.10.200运维主机上进行操作**
 
-.. _header-n167:
+
 
 下载二进制包
 ~~~~~~~~~~~~
 
 版本3.6.1
 
-.. _header-n170:
+
 
 解压到指定目录
 ~~~~~~~~~~~~~~
@@ -510,7 +510,7 @@ maven安装配置
    # cd /data/nfs-volume/jenkins_home/maven-3.6.1-8u151
    # mv ../apache-maven-3.6.1/* ../
 
-.. _header-n173:
+
 
 修改maven源
 ~~~~~~~~~~~
@@ -528,14 +528,14 @@ maven安装配置
            <mirrorOf>central</mirrorOf>
        </mirror>
 
-.. _header-n177:
+
 
 制作dubbo微服务的底包镜像
 -------------------------
 
 **此步骤在10.10.10.200运维主机上进行操作**
 
-.. _header-n180:
+
 
 jre镜像准备
 ~~~~~~~~~~~
@@ -546,7 +546,7 @@ jre镜像准备
    # docker tag fa3a085d6ef1 harbor.od.com/public/jre:8u112
    # docker push harbor.od.com/public/jre:8u112
 
-.. _header-n184:
+
 
 自定义Dockerfile
 ~~~~~~~~~~~~~~~~
@@ -593,14 +593,14 @@ jre镜像准备
 
    chmod u+x /data/dockerfile/jre8/entrypoint.sh
 
-.. _header-n204:
+
 
 创建公开仓库
 ~~~~~~~~~~~~
 
 在harbor中创建一个公开的bash仓库
 
-.. _header-n207:
+
 
 构建镜像
 ~~~~~~~~
@@ -610,7 +610,7 @@ jre镜像准备
    # cd /data/dockerfile/jre8/
    # docker build . -t harbor.od.com/base/jre8:8u112
 
-.. _header-n210:
+
 
 推送到私有仓库
 ~~~~~~~~~~~~~~
@@ -619,12 +619,12 @@ jre镜像准备
 
    # docker push harbor.od.com/base/jre8:8u112
 
-.. _header-n213:
+
 
 创建Jenkins项目
 ---------------
 
-.. _header-n214:
+
 
 创建pipeline项目
 ~~~~~~~~~~~~~~~~
@@ -633,7 +633,7 @@ jre镜像准备
 
 勾选discard old builds 参数 3 30
 
-.. _header-n217:
+
 
 参数化构建
 ~~~~~~~~~~
@@ -736,7 +736,7 @@ jre镜像准备
 
        Description：编译使用的maven版本
 
-.. _header-n297:
+
 
 Pipeline script
 ~~~~~~~~~~~~~~~
@@ -771,12 +771,12 @@ Pipeline script
        }
    }
 
-.. _header-n301:
+
 
 交付dubbo为服务至kubernetes集群
 -------------------------------
 
-.. _header-n302:
+
 
 通过jenkins进行一次CI
 ~~~~~~~~~~~~~~~~~~~~~
@@ -803,12 +803,12 @@ base_image：base/jre8:8u112
 
 maven：3.6.1-8u151
 
-.. _header-n315:
+
 
 检查Harbor仓库中的镜像
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. _header-n317:
+
 
 准备K8S资源配置清单
 ~~~~~~~~~~~~~~~~~~~
@@ -864,14 +864,14 @@ maven：3.6.1-8u151
      revisionHistoryLimit: 7
      progressDeadlineSeconds: 600
 
-.. _header-n323:
+
 
 应用K8S资源配置清单
 ~~~~~~~~~~~~~~~~~~~
 
 **在任意计算节点执行**
 
-.. _header-n325:
+
 
 创建app名称空间
 ^^^^^^^^^^^^^^^
@@ -880,7 +880,7 @@ maven：3.6.1-8u151
 
    kubectl create ns app
 
-.. _header-n328:
+
 
 创建secret资源
 ^^^^^^^^^^^^^^
@@ -891,7 +891,7 @@ maven：3.6.1-8u151
 
    kubectl create secret docker-registry harbor --docker-server=harbor.od.com --docker-username=admin --docker-password=Harbor12345 -n app
 
-.. _header-n332:
+
 
 应用资源配置文件
 ^^^^^^^^^^^^^^^^
@@ -900,7 +900,7 @@ maven：3.6.1-8u151
 
    # kubectl apply -f http://k8s-yaml.od.com/dubbo-demo-service/dp.yaml
 
-.. _header-n335:
+
 
 到zookeeper中检查服务
 ~~~~~~~~~~~~~~~~~~~~~

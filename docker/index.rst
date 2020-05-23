@@ -3,5 +3,6 @@ Docker
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   
+   make_images_jre8
    

@@ -18,3 +18,4 @@ Welcome to zhusdocs's documentation!
    k8s/k8s_index
    sphinx
    reStructuredText
+   README

@@ -1,21 +1,20 @@
-.. _header-n0:
 
 k8s核心组件安装
 ===============
 
 kubernetes设计了网络模型，但却将它的实现交给了网络插件，CNI网络插件最主要的功能就是实现POD资源能够跨宿主机进行通信
 
-.. _header-n4:
+
 
 K8S的CNI网络插件-Flannel
 ------------------------
 
-.. _header-n6:
+
 
 集群规划
 ~~~~~~~~
 
-.. _header-n8:
+
 
 下载软件包
 ~~~~~~~~~~
@@ -31,7 +30,7 @@ https://github.com/coreos/flannel/releases
    # cd /opt/src
    # wget https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.11.0-linux-amd64.tar.gz
 
-.. _header-n16:
+
 
 创建相关目录解压软件包
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -42,7 +41,7 @@ https://github.com/coreos/flannel/releases
    # tar xf flannel-v0.11.0-linux-amd64.tar.gz -C /opt/flannel-v0.11.0
    # ln -s /opt/flannel-v0.11.0 /opt/flannel
 
-.. _header-n19:
+
 
 拷贝证书
 ~~~~~~~~
@@ -58,7 +57,7 @@ https://github.com/coreos/flannel/releases
    # scp  root@10.10.10.200:/opt/certs/client.pem .
    # scp  root@10.10.10.200:/opt/certs/client-key.pem .
 
-.. _header-n24:
+
 
 创建配置文件
 ~~~~~~~~~~~~
@@ -74,7 +73,7 @@ https://github.com/coreos/flannel/releases
    FLANNEL_MTU=1500
    FLANNEL_IPMASQ=false
 
-.. _header-n29:
+
 
 创建启动脚本
 ~~~~~~~~~~~~
@@ -93,7 +92,7 @@ https://github.com/coreos/flannel/releases
      --subnet-file=./subnet.env \
      --healthz-port=2401
 
-.. _header-n32:
+
 
 检查配置、权限、创建日志目录
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,7 +102,7 @@ https://github.com/coreos/flannel/releases
    # chmod +x /opt/flannel/flanneld.sh
    # mkdir -p /data/logs/flanneld
 
-.. _header-n35:
+
 
 设置flannel的网络配置
 ~~~~~~~~~~~~~~~~~~~~~
@@ -137,7 +136,7 @@ https://github.com/coreos/flannel/releases
 
       '{"Network": "172.10.0.0/16","Backend": {"Type": "VxLan","Directrouting"： true}}'
 
-.. _header-n55:
+
 
 创建flannel的supervisor配置文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,7 +164,7 @@ https://github.com/coreos/flannel/releases
    stdout_events_enabled=false
    EOF
 
-.. _header-n58:
+
 
 启动验证
 ~~~~~~~~
@@ -180,7 +179,7 @@ https://github.com/coreos/flannel/releases
    iptables -P INPUT ACCEPT
    iptables -P FORWARD ACCEPT
 
-.. _header-n62:
+
 
 优化
 ~~~~
@@ -212,14 +211,14 @@ https://github.com/coreos/flannel/releases
 
    注意要删除两台机器上的reject规则，否则会出现
 
-.. _header-n71:
+
 
 K8S的服务发现插件-CoreDNS
 -------------------------
 
 k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的关系
 
-.. _header-n74:
+
 
 部署k8s的内网资源配置清单http服务
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -228,7 +227,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
 此步骤在10.10.10.200机器上执行
 
-.. _header-n78:
+
 
 配置nginx
 ^^^^^^^^^
@@ -249,7 +248,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
    }
    EOF
 
-.. _header-n81:
+
 
 重启nginx
 ^^^^^^^^^
@@ -258,7 +257,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
    # nginx -s reload
 
-.. _header-n84:
+
 
 配置内网域名解析
 ~~~~~~~~~~~~~~~~
@@ -274,19 +273,19 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
    # systemctl restart named
 
-.. _header-n88:
+
 
 部署CoreDNS
 ~~~~~~~~~~~
 
-.. _header-n89:
+
 
 准备镜像
 ^^^^^^^^
 
 此步骤在10.10.10.200上执行
 
-.. _header-n91:
+
 
 获取镜像
 ''''''''
@@ -295,7 +294,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
    # docker pull docker.io/coredns/coredns:1.6.1
 
-.. _header-n94:
+
 
 镜像打包
 ''''''''
@@ -304,7 +303,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
    # docker tag c0f6e815079e harbor.od.com/public/coredns:v1.6.1
 
-.. _header-n97:
+
 
 推送镜像到私有仓库
 ''''''''''''''''''
@@ -313,7 +312,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
    # docker push harbor.od.com/public/coredns:v1.6.1
 
-.. _header-n100:
+
 
 准备资源配置清单
 ^^^^^^^^^^^^^^^^
@@ -322,7 +321,7 @@ k8s里的dns只负责自动维护“服务名”->“集群网络IP”之前的�
 
 官方参考地址：https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/coredns
 
-.. _header-n103:
+
 
 rbac
 ''''
@@ -377,7 +376,7 @@ rbac
      name: coredns
      namespace: kube-system
 
-.. _header-n108:
+
 
 configMap
 '''''''''
@@ -405,7 +404,7 @@ configMap
            loadbalance
          }
 
-.. _header-n113:
+
 
 Deployment
 ''''''''''
@@ -472,7 +471,7 @@ Deployment
                - key: Corefile
                  path: Corefile
 
-.. _header-n118:
+
 
 Service
 '''''''
@@ -505,7 +504,7 @@ Service
        port: 9153
        protocol: TCP
 
-.. _header-n123:
+
 
 依次创建相关资源
 ^^^^^^^^^^^^^^^^
@@ -519,7 +518,7 @@ Service
    # kubectl apply -f http://k8s-yaml.od.com/coredns/dp.yaml
    # kubectl apply -f http://k8s-yaml.od.com/coredns/svc.yaml
 
-.. _header-n128:
+
 
 检查验证
 ^^^^^^^^
@@ -551,19 +550,19 @@ Service
    # dig -t A nginx-dp.kube-public.svc.cluster.local. @192.168.0.2 +short
    192.168.122.94
 
-.. _header-n133:
+
 
 K8S服务暴露插件-traefik
 -----------------------
 
 官方地址：https://github.com/containous/traefik
 
-.. _header-n136:
+
 
 部署traefik
 ~~~~~~~~~~~
 
-.. _header-n137:
+
 
 准备镜像
 ^^^^^^^^
@@ -579,7 +578,7 @@ K8S服务暴露插件-traefik
    推送镜像到私有仓库
    # docker push harbor.od.com/public/traefik:v1.7.2
 
-.. _header-n143:
+
 
 准备资源配置清单
 ^^^^^^^^^^^^^^^^
@@ -588,7 +587,7 @@ K8S服务暴露插件-traefik
 
    参考地址：https://github.com/containous/traefik/blob/v1.7.2/examples/k8s
 
-.. _header-n148:
+
 
 RABC
 ''''
@@ -641,7 +640,7 @@ RABC
      name: traefik-ingress-controller
      namespace: kube-system
 
-.. _header-n153:
+
 
 DemonSet
 ''''''''
@@ -694,7 +693,7 @@ DemonSet
            - --traefiklog.filepath=/var/log/traefik.log
            - --metrics.prometheus
 
-.. _header-n158:
+
 
 Service
 '''''''
@@ -720,7 +719,7 @@ Service
          port: 8080
          name: admin-web
 
-.. _header-n163:
+
 
 Ingress
 '''''''
@@ -747,7 +746,7 @@ Ingress
              serviceName: traefik-ingress-service
              servicePort: 8080
 
-.. _header-n168:
+
 
 依次创建相关资源
 ^^^^^^^^^^^^^^^^
@@ -761,7 +760,7 @@ Ingress
    # kubectl apply -f http://k8s-yaml.od.com/traefik/svc.yaml
    # kubectl apply -f http://k8s-yaml.od.com/traefik/ingress.yaml
 
-.. _header-n173:
+
 
 创建反向代理
 ~~~~~~~~~~~~
@@ -794,14 +793,14 @@ Ingress
    重启nginx
    # nginx -s reload
 
-.. _header-n178:
+
 
 内部域名解析
 ~~~~~~~~~~~~
 
 在DNS服务器上配置traefik的A的记录指向lvs的vip
 
-.. _header-n181:
+
 
 验证
 ~~~~

@@ -1,16 +1,16 @@
-.. _header-n0:
+
 
 交付Dubbo-monitor监控到k8s
 =============================
 
-.. _header-n2:
+
 
 准备docker镜像
 --------------
 
 **在运维主机10.10.10.200上执行**
 
-.. _header-n4:
+
 
 下载镜像
 ~~~~~~~~
@@ -20,7 +20,7 @@
    # cd /opt/src
    # wget https://github.com/Jeromefromcn/dubbo-monitor/archive/master.zip
 
-.. _header-n7:
+
 
 解压、修改配置
 ~~~~~~~~~~~~~~
@@ -38,7 +38,7 @@
    dubbo.charts.directory=/dubbo-monitor-simple/charts
    dubbo.log4j.file=logs/dubbo-monitor.log
 
-.. _header-n10:
+
 
 优化Docker镜像
 ~~~~~~~~~~~~~~
@@ -47,7 +47,7 @@
 
    # sed -r -i -e '/^nohup/{p;:a;N;$!ba;d}'  ./dubbo-monitor-simple/bin/start.sh && sed  -r -i -e "s%^nohup(.*)%exec \1%"  ./dubbo-monitor-simple/bin/start.sh
 
-.. _header-n13:
+
 
 制作镜像
 ~~~~~~~~
@@ -59,7 +59,7 @@
    # docker build . -t harbor.od.com/infra/dubbo-monitor:latest
    # docker push harbor.od.com/infra/dubbo-monitor:latest
 
-.. _header-n16:
+
 
 准备资源配置清单
 ----------------
@@ -71,7 +71,7 @@
    # mkdir /data/k8s-yaml/dubbo-monitor
    # cd /data/k8s-yaml/dubbo-monitor
 
-.. _header-n20:
+
 
 dp.yaml
 ~~~~~~~
@@ -122,7 +122,7 @@ dp.yaml
      revisionHistoryLimit: 7
      progressDeadlineSeconds: 600
 
-.. _header-n25:
+
 
 svc.yaml
 ~~~~~~~~
@@ -144,7 +144,7 @@ svc.yaml
      selector: 
        app: dubbo-monitor
 
-.. _header-n30:
+
 
 ingress.yaml
 ~~~~~~~~~~~~
@@ -168,7 +168,7 @@ ingress.yaml
              serviceName: dubbo-monitor
              servicePort: 8080
 
-.. _header-n35:
+
 
 应用资源清单
 ------------
@@ -181,7 +181,7 @@ ingress.yaml
    # kubectl apply -f http://k8s-yaml.od.com/dubbo-monitor/svc.yaml
    # kubectl apply -f http://k8s-yaml.od.com/dubbo-monitor/ingress.yaml
 
-.. _header-n39:
+
 
 配置域名解析
 ------------
@@ -196,7 +196,7 @@ ingress.yaml
 
    # dig -t A dubbo-monitor.od.com @10.10.10.20 +short
 
-.. _header-n45:
+
 
 页面访问
 --------
