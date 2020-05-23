@@ -206,7 +206,7 @@ commit 命令可以把一个正在运行的容器变成一个新的镜像。
 
 
 
-持久化容器**
+持久化容器
 ~~~~~~~~~~~~~~~~~~~
 
 export命令用于持久化容器
@@ -229,11 +229,11 @@ Save命令用于持久化镜像
 导入持久化container
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-删除container 2161509ff65e
+删除container 50bce921eb0a
 
 .. code:: 
 
-   docker rm 2161509ff65e
+   docker rm 50bce921eb0a
 
 导入export.tar文件
 
@@ -245,11 +245,11 @@ Save命令用于持久化镜像
 导入持久化image
 ~~~~~~~~~~~~~~~~~~~~
 
-删除image daa11948e23d
+删除image 677abd55f910
 
 .. code:: 
 
-   docker rmi daa11948e23d
+   docker rmi 677abd55f910
 
 导入save.tar文件
 
@@ -261,7 +261,7 @@ Save命令用于持久化镜像
 
 .. code:: 
 
-   docker tag daa11948e23d load:tag
+   docker tag 677abd55f910 load:tag
 
 
 export-import与save-load的区别
