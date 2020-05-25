@@ -19,8 +19,12 @@ theme:
 nav:
     - 介绍: index.md
     - K8S:
-      - 安装文档: k8s/k8s_base_install.md
-
+      - 二进制安装: 
+         - K8S安装基础组件: k8s/k8s_base_install.md
+         - K8S安装核心组件: k8s/k8s_core_install.md
+         - K8S交付apollo配置中心: k8s/k8s_apollo_install.md
+         - K8S交付Dubbo微服务: k8s/k8s_dubbo_install.md
+         - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md
      
 markdown_extensions:
     - admonition
