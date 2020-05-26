@@ -15,7 +15,7 @@ theme:
     hljs_languages:
         - yaml
         - bash
-    font: false
+    #font: false
     palette:
         primary: 'indigo'
         accent: 'indigo'
@@ -27,7 +27,9 @@ nav:
            - Shell基础: system_base/shell.md
            - Shell逻辑判断: system_base/shell_logic.md
     - 常用服务: 
-         - FTP: common_services/vsftp.md
+         - FTP: 
+           - FTP错误代码: common_services/vsftp_error_code.md
+           - FTP安装脚本: common_services/vsftp_install_scripte.md
     - 开源监控: 
          - Zabbix安装部署: open_source_monitor/zabbix_install.md
     - K8S:
