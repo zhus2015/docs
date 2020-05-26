@@ -10,14 +10,20 @@ theme:
         tabs: true
     hljs_languages:
         - yaml
-        - django
-
+        - bash
+    
     palette:
-        primary: 'green'
+        primary: 'blue'
         accent: 'red'
   
 nav:
     - 介绍: index.md
+    - 系统基础:
+         - Shell: system_base/shell.md
+    - 常用服务: 
+         - FTP: common_services/vsftp.md
+    - 开源监控: 
+         - Zabbix安装部署: open_source_monitor/zabbix_install.md
     - K8S:
       - 二进制安装: 
          - K8S安装基础组件: k8s/k8s_base_install.md
@@ -58,3 +64,11 @@ markdown_extensions:
     - pymdownx.betterem
     - pymdownx.superfences
     - pymdownx.progressbar
+
+extra_css:
+    - css/extra.css
+
+#copyright: Copyright &copy; 2014-2020 <a href="https://www.fit2cloud.com">杭州飞致云信息科技有限公司</a>, All Rights Reserved. <a href="http://www.beian.miit.gov.cn" target="_blank">京ICP备15023818号</a>
+#google_analytics: ['UA-147297392-6','docs.jumpserver.org']
+plugins:
+    - search
