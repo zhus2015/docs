@@ -205,29 +205,29 @@ grep -E ==egrep 可以不使用\符号
 
  	例如：grep '[A-Z]'  1.txt ：列出包含字母A--Z的行
 
-![img](F:/Git/docs/docs/system_base/images/clipboard-1590459286794.png)
+![png](../images/clipboard-1590459286794.png)
 
  grep  '[0-9]'  1.txt ：列出包含数字的行
 
 \- '^[条件]' :列出以"条件"开头的行
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459314228.png)
+![png](../images/clipboard-1590459314228.png)
 
 -'[^条件]'：列出除去"条件"的行
 
    例如:grep --color '[^0-9]' 1.txt 
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459325836.png)
+![img](../images/clipboard-1590459325836.png)
 
 -'[r.o]':表示匹配.前后的任意一个字符
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459332028.png)
+![img](../images/clipboard-1590459332028.png)
 
 -'r*o':表示0个或多个*前面的字符
 
 -'r.*o':匹配到任意r开头o结尾的行（贪婪匹配）
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459344565.png)
+![img](../images/clipboard-1590459344565.png)
 
 -'r\?o': 0或1个？前面的字符(\是为了对？进行脱意)  必须使用egrep或者grep -E
 
@@ -279,128 +279,179 @@ sed 's/[a-z]/\u&/g' filename
 
 sed 's/[A-Z]/\l&/g' filename
 
+
+
+**sed练习题**
+
+> 把/etc/passwd 复制到/root/test.txt，用sed打印所有行
+
+```
+ cp /etc/passwd /root/test.txt;sed -n '1,$'p test.txt
+```
+
+> 打印test.txt的3到10行
+
+```
+sed -n '3,10'p test.txt
+```
+
+> 打印test.txt 中包含 ‘root’ 的行
+
+```
+sed -n '/root/'p test.txt
+```
+
+> 删除test.txt 的15行以及以后所有行
+
+```
+sed '15,$'d test.txt
+```
+
+> 删除test.txt中包含 ‘bash’ 的行
+
+```
+        sed '/bash/'d test.txt
+```
+
+> 替换test.txt 中 ‘root’ 为 ‘toor’
+
+```
+ 	sed 's/root/toor/g' test.txt
+```
+
+> 替换test.txt中 ‘/sbin/nologin’ 为 ‘/bin/login’
+
+```
+sed 's#sbin/noloin#bin/login#g' test.txt
+```
+
+> 删除test.txt中5到10行中所有的数字
+
+```
+sed  '5,10s/[0-9]//g' test.txt
+```
+
+> 删除test.txt 中所有特殊字符（除了数字以及大小写字母）
+
+```
+sed  's/[^0-9a-zA-Z]//g' test.txt
+```
+
+> 把test.txt中第一个单词和最后一个单词调换位置
+
+```
+    sed's/\(^[a-zA-Z][a-zA-Z]*\)\([^a-zA-Z].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z]*$\)/\4\2\3\1/' test.txt
+```
+
+> 把test.txt中出现的第一个数字和最后一个单词替换位置
+
+```
+sed's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z]*$\)#\1\5\3\4\2#' test.txt
+```
+
+> 把test.txt 中第一个数字移动到行末尾
+
+```
+ sed 's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*$\)#\1\3\2#' test.txt
+```
+
+> 在test.txt 20行到末行最前面加 ‘aaa:’
+
+```
+ sed '20,$s/^.*$/aaa:&/' test.txt
+```
+
+
+
 ## **awk命令**
 
 awk -F ':' '{print $3}' 2.txt  以：为分隔符，显示第3段运行结果如图：
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459366136.png)
+![img](../images/clipboard-1590459366136.png)
 
 awk -F ':' '{print $3,$4}' 2.txt 运行结果如图：
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459370829.png)
+![img](../images/clipboard-1590459370829.png)
 
 awk -F ':' 'OFS=":"  {print $3,$4}' 2.txt 指定3段和4段之间的分隔符是： 运行结果如图：
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459379538.png)
+![img](../images/clipboard-1590459379538.png)
 
 awk  '/user/' 2.txt 匹配2.txt中包含user的行 运行结果如图：
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459391306.png)
+![img](../images/clipboard-1590459391306.png)
 
 awk  '/root|user/' 2.txt  匹配2.txt文件中包含user或者root 的行 
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459395843.png)
+![img](../images/clipboard-1590459395843.png)
 
 awk -F ':' '$1~/r*o/' 1.txt  匹配1.txt中以：分割第一段中包含r或者o的行
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459406326.png)
+![img](../images/clipboard-1590459406326.png)
 
 awk -F ':' '$3>=500' 1.txt   匹配第三段数字大于等于500的行，注意数字不能加“”
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459413975.png)
+![img](../images/clipboard-1590459413975.png)
 
 awk -F ':' 'NR<10' 1.txt   匹配小于10行
 
-![img](F:\Git\docs\docs\system_base\images\clipboard-1590459419621.png)
+![img](../images/clipboard-1590459419621.png)
 
-awk练习
 
-1、用awk 打印整个test.txt （以下操作都是用awk工具实现，针对test.txt）
 
- awk '$0' test.txt
+**awk练习**
 
-2、查找所有包含 ‘bash’ 的行
+> 用awk 打印整个test.txt （以下操作都是用awk工具实现，针对test.txt）
 
+```
+awk '$0' test.txt
+```
+
+> 查找所有包含 ‘bash’ 的行
+
+```
 awk '/bash/' test.txt
+```
 
-3、用 ‘:’ 作为分隔符，查找第三段等于0的行
+> 用 ‘:’ 作为分隔符，查找第三段等于0的行
 
- awk -F ':' '$3==0' test.txt
+```
+awk -F ':' '$3==0' test.txt
+```
 
-4、用 ‘:’ 作为分隔符，查找第一段为 ‘root’ 的行，并把该段的 ‘root’ 换成 ‘toor’ (可以连同sed一起使用)
+> 用 ‘:’ 作为分隔符，查找第一段为 ‘root’ 的行，并把该段的 ‘root’ 换成 ‘toor’ (可以连同sed一起使用)
 
-  awk -F ':' '$1=="root"' test.txt|sed 's/root/toor/'
+```
+awk -F ':' '$1=="root"' test.txt|sed 's/root/toor/'
+```
 
-5、用 ‘:’ 作为分隔符，打印最后一段
+> 用 ‘:’ 作为分隔符，打印最后一段
 
- awk -F ':' '{print $NF}' test.txt
+```
+awk -F ':' '{print $NF}' test.txt
+```
 
-6、打印行数大于20的所有行
+> 打印行数大于20的所有行
 
-  awk -F ':' 'NR>20' test.txt
+```
+awk -F ':' 'NR>20' test.txt
+```
 
-7、用 ‘:’ 作为分隔符，打印所有第三段小于第四段的行
+> 用 ‘:’ 作为分隔符，打印所有第三段小于第四段的行
 
- awk -F ':' '$3<$4' test.txt
+```
+awk -F ':' '$3<$4' test.txt
+```
 
-8、用 ‘:’ 作为分隔符，打印第一段以及最后一段，并且中间用 ‘@’ 连接 （例如，第一行应该是这样的形式 'root@/bin/bash‘ ）
+> 用 ‘:’ 作为分隔符，打印第一段以及最后一段，并且中间用 ‘@’ 连接 （例如，第一行应该是这样的形式 'root@/bin/bash‘ ）
 
- awk -F ':' 'OFS="@" {print $1,$NF}' test.txt
+```
+awk -F ':' 'OFS="@" {print $1,$NF}' test.txt
+```
 
-9、用 ‘:’ 作为分隔符，把整个文档的第四段相加，求和
+> 用 ‘:’ 作为分隔符，把整个文档的第四段相加，求和
 
- awk -F ':' '{sum+=$4};END {print sum}' test.txt
+```
+awk -F ':' '{sum+=$4};END {print sum}' test.txt
+```
 
-sed练习题
-
-1. 把/etc/passwd 复制到/root/test.txt，用sed打印所有行
-
-​        cp /etc/passwd /root/test.txt;sed -n '1,$'p test.txt
-
-1. 打印test.txt的3到10行
-
-​         sed -n '3,10'p test.txt
-
-1. 打印test.txt 中包含 ‘root’ 的行
-
-   	sed -n '/root/'p test.txt
-
-1. 删除test.txt 的15行以及以后所有行
-
-​        sed '15,$'d test.txt
-
-1. 删除test.txt中包含 ‘bash’ 的行
-
-​        sed '/bash/'d test.txt
-
-1. 替换test.txt 中 ‘root’ 为 ‘toor’
-
- 	sed 's/root/toor/g' test.txt
-
-1. 替换test.txt中 ‘/sbin/nologin’ 为 ‘/bin/login’
-
-sed 's#sbin/noloin#bin/login#g' test.txt
-
-1. 删除test.txt中5到10行中所有的数字
-
-sed  '5,10s/[0-9]//g' test.txt
-
-1. 删除test.txt 中所有特殊字符（除了数字以及大小写字母）
-
-sed  's/[^0-9a-zA-Z]//g' test.txt
-
-1. 把test.txt中第一个单词和最后一个单词调换位置
-
-​    sed's/\(^[a-zA-Z][a-zA-Z]*\)\([^a-zA-Z].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z]*$\)/\4\2\3\1/' test.txt
-
-1. 把test.txt中出现的第一个数字和最后一个单词替换位置
-
-sed's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z]*$\)#\1\5\3\4\2#' test.txt
-
-1. 把test.txt 中第一个数字移动到行末尾
-
- sed 's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*$\)#\1\3\2#' test.txt
-
-1. 在test.txt 20行到末行最前面加 ‘aaa:’
-
- sed '20,$s/^.*$/aaa:&/' test.txt

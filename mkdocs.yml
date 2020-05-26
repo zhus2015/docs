@@ -1,5 +1,9 @@
 site_name: zhus Docs
 
+#repo_name: 'Github Star'
+#repo_url: 'https://github.com/zhus2015/docs'
+edit_uri: ''
+
 theme:
     name: 'material'
     #logo: 'img/logo.png'
@@ -11,15 +15,17 @@ theme:
     hljs_languages:
         - yaml
         - bash
-    
+    font: false
     palette:
-        primary: 'blue'
-        accent: 'red'
+        primary: 'indigo'
+        accent: 'indigo'
   
 nav:
     - 介绍: index.md
     - 系统基础:
-         - Shell: system_base/shell.md
+         - Shell: 
+           - Shell基础: system_base/shell.md
+           - Shell逻辑判断: system_base/shell_logic.md
     - 常用服务: 
          - FTP: common_services/vsftp.md
     - 开源监控: 
@@ -67,6 +73,10 @@ markdown_extensions:
 
 extra_css:
     - css/extra.css
+    
+extra_javascript:
+    - 'js/extra.js'
+    - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
 
 #copyright: Copyright &copy; 2014-2020 <a href="https://www.fit2cloud.com">杭州飞致云信息科技有限公司</a>, All Rights Reserved. <a href="http://www.beian.miit.gov.cn" target="_blank">京ICP备15023818号</a>
 #google_analytics: ['UA-147297392-6','docs.jumpserver.org']
