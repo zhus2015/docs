@@ -1,7 +1,7 @@
 site_name: zhus Docs
 
 #repo_name: 'Github Star'
-#repo_url: 'https://github.com/zhus2015/docs'
+repo_url: 'https://github.com/zhus2015/docs'
 edit_uri: ''
 
 theme:
@@ -23,23 +23,44 @@ theme:
 nav:
     - 介绍: index.md
     - 系统基础:
-         - Shell: 
-           - Shell基础: system_base/shell.md
-           - Shell逻辑判断: system_base/shell_logic.md
-    - 常用服务: 
-         - FTP: 
-           - FTP错误代码: common_services/vsftp_error_code.md
-           - FTP安装脚本: common_services/vsftp_install_scripte.md
+        - Shell: 
+            - Shell基础: system_base/shell.md
+            - Shell逻辑判断: system_base/shell_logic.md
+    - 常用服务:
+        - FTP: 
+            - FTP错误代码: common_services/vsftp_error_code.md
+            - FTP安装脚本: common_services/vsftp_install_scripte.md
+        - DNS:
+            - Bind9安装配置: common_services/bind9.md 
+    - 中间件: 
+        - Nginx:
+            - Nginx的内置变量: middleware/nginx/nginx_var.md
+            - Nginx处理跨域问题: middleware/nginx/nginx_cross_domain.md
     - 开源监控: 
-         - Zabbix安装部署: open_source_monitor/zabbix_install.md
-    - K8S:
-      - 二进制安装: 
-         - K8S安装基础组件: k8s/k8s_base_install.md
-         - K8S安装核心组件: k8s/k8s_core_install.md
-         - K8S交付apollo配置中心: k8s/k8s_apollo_install.md
-         - K8S交付Dubbo微服务: k8s/k8s_dubbo_install.md
-         - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md
-     
+        - Zabbix安装部署: open_source_monitor/zabbix_install.md
+    - 日志收集处理:
+        - ELK: 
+            - ELK安装部署: elk/elk_install.md
+    - 容器云:
+        - Docker:
+            - Docker基础: docker/docker_basic.md
+            - Docker的网络模式: docker/docker_network.md
+            - 制作jre镜像: docker/make_jre_images.md
+            - 制作运行jar包的镜像: docker/make_jre_jar_images.md
+            - 制作tomcat镜像: docker/make_tomcat_images.md
+            
+        - K8S:
+            - 二进制安装: 
+                - K8S安装基础组件: k8s/k8s_base_install.md
+                - K8S安装核心组件: k8s/k8s_core_install.md
+                - K8S交付apollo配置中心: k8s/k8s_apollo_install.md
+                - K8S交付Dubbo微服务: k8s/k8s_dubbo_install.md
+                - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md
+    - 关于:
+         - 联系方式: about/contact.md
+         - MKdocs个性标签: about/mkdocs.md
+         
+
 markdown_extensions:
     - admonition
     - codehilite:
