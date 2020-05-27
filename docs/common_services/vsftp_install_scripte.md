@@ -1,5 +1,9 @@
 
 
+!!! warning "请自行测试过后使用"
+
+!!! node "此脚本是搬运而来，如有侵权请联系删除"
+
 ```shell
 #!/bin/bash
 #centos 7
