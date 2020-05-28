@@ -49,7 +49,11 @@ $：使用
 
 \>>：追加重定向
 
-[0-9]:表示其中一个  ls[1-3].txt=ls 1.txt;ls 2.txt;ls 3.txt
+\[0-9]：表示其中一个数字  ls[1-3].txt=ls 1.txt;ls 2.txt;ls 3.txt
+
+\[a-z]：小写字母
+
+\[A-Z]：大写字母
 
 
 
@@ -79,6 +83,8 @@ sort -r 反序排序 一般配置-n 使用
 
 sort -u 去重复排序，配合n之类的使用
 
+
+
 ## **wc命令**
 
 -l：计算文档有多少行
@@ -86,6 +92,8 @@ sort -u 去重复排序，配合n之类的使用
 -w：有多少个单词，以空格为分隔符
 
 -m：有多少个字符，换行符也会计算在内
+
+
 
 ## **uniq** 
 
@@ -96,6 +104,8 @@ sort -u 去重复排序，配合n之类的使用
 tee 不仅仅重定向而且打印输出 （覆盖原来内容）
 
 tee用法：echo "1111111" |tee 1.txt 将“1111111”重定向到文件1.txt中并在屏幕上打印内容
+
+
 
 ## **set**
 
@@ -138,6 +148,8 @@ set指令能设置所使用shell的执行方式，可依照不同的需求来做
 　-x 　执行指令后，会先显示该指令及所下的参数。
 
 　+<参数> 　取消某个set曾启动的参数。
+
+
 
 ## **tr**
 
@@ -203,7 +215,7 @@ grep -E ==egrep 可以不使用\符号
 
 -'[条件]' ：匹配[条件]的行
 
- 	例如：grep '[A-Z]'  1.txt ：列出包含字母A--Z的行
+ 例如：grep '[A-Z]'  1.txt ：列出包含字母A--Z的行
 
 ![](../images/clipboard-1590459286794-1590472168725.png)
 
@@ -233,11 +245,17 @@ grep -E ==egrep 可以不使用\符号
 
 -'r+o'一个或多个+前面的字符  必须使用egrep或者grep -E
 
+![image-20200528130839175](../images/image-20200528130839175.png)
+
 -'(rr)+' 出现了1个或多个rrd
+
+![image-20200528130858028](../images/image-20200528130858028.png)
 
 -'(rr){1,3}' 出现了1-3次rr的
 
 -'[root|nologin]' 或者命令
+
+
 
 ## **sed命令**
 
@@ -267,21 +285,25 @@ sed 's/^.*$/&login/g'  1.txt  将文件1.txt所有行的末尾增加一个login
 
 sed -r 's#(^[a-z0-9]+)(:.*:)(.*$)#\3\2\1#g' 1.txt 将1.txt文档所有行（以：为分隔符）第一段和最后一段交还位置
 
-\1. 把每个单词的第一个小写字母变大写：
+
+
+!!! note "几个转换用法"
+
+把每个单词的第一个小写字母变大写：
 
 sed 's/\b[a-z]/\u&/g' filename
 
-\2. 把所有小写变大写：
+把所有小写变大写：
 
 sed 's/[a-z]/\u&/g' filename
 
-\3. 大写变小写：
+大写变小写：
 
 sed 's/[A-Z]/\l&/g' filename
 
 
 
-**sed练习题**
+!!! note "sed练习题"
 
 > 把/etc/passwd 复制到/root/test.txt，用sed打印所有行
 
@@ -310,13 +332,13 @@ sed '15,$'d test.txt
 > 删除test.txt中包含 ‘bash’ 的行
 
 ```
-        sed '/bash/'d test.txt
+sed '/bash/'d test.txt
 ```
 
 > 替换test.txt 中 ‘root’ 为 ‘toor’
 
 ```
- 	sed 's/root/toor/g' test.txt
+sed 's/root/toor/g' test.txt
 ```
 
 > 替换test.txt中 ‘/sbin/nologin’ 为 ‘/bin/login’
@@ -328,19 +350,19 @@ sed 's#sbin/noloin#bin/login#g' test.txt
 > 删除test.txt中5到10行中所有的数字
 
 ```
-sed  '5,10s/[0-9]//g' test.txt
+sed '5,10s/[0-9]//g' test.txt
 ```
 
 > 删除test.txt 中所有特殊字符（除了数字以及大小写字母）
 
 ```
-sed  's/[^0-9a-zA-Z]//g' test.txt
+sed 's/[^0-9a-zA-Z]//g' test.txt
 ```
 
 > 把test.txt中第一个单词和最后一个单词调换位置
 
 ```
-    sed's/\(^[a-zA-Z][a-zA-Z]*\)\([^a-zA-Z].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z]*$\)/\4\2\3\1/' test.txt
+sed 's/\(^[a-zA-Z][a-zA-Z]*\)\([^a-zA-Z].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z]*$\)/\4\2\3\1/' test.txt
 ```
 
 > 把test.txt中出现的第一个数字和最后一个单词替换位置
@@ -355,7 +377,7 @@ sed's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z
  sed 's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*$\)#\1\3\2#' test.txt
 ```
 
-> 在test.txt 20行到末行最前面加 ‘aaa:’
+> 在test.txt 20行到末行最前面加 ‘aaa:’ 
 
 ```
  sed '20,$s/^.*$/aaa:&/' test.txt
@@ -399,7 +421,7 @@ awk -F ':' 'NR<10' 1.txt   匹配小于10行
 
 
 
-**awk练习**
+!!! note "awk练习题"
 
 > 用awk 打印整个test.txt （以下操作都是用awk工具实现，针对test.txt）
 

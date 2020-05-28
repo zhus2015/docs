@@ -1,4 +1,24 @@
-mkdocs标签
+# mkdocs使用
+
+## 安装使用
+
+```
+# 安装
+pip install mkdocs
+
+# 创建新的项目
+mkdocs new project
+
+# 开启本地服务器
+mkdocs serve
+注意：这是是serve不是server
+```
+
+
+
+
+
+## mkdocs的个性标签
 
 !!! info "信息"
 
@@ -25,6 +45,16 @@ mkdocs标签
 
 
 
+!!! danger "危险"
+
+\!!! danger "文本内容"
+
+
+
+??? danger "危险"
+
+
+
 !!! tip "提示"
     此行有四个英文空格缩进
 
@@ -35,4 +65,4 @@ mkdocs标签
 
 !!! note "内容"
 
-\!!! node ""
+\!!! note ""

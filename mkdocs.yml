@@ -26,6 +26,7 @@ nav:
         - Shell: 
             - Shell基础: system_base/shell.md
             - Shell逻辑判断: system_base/shell_logic.md
+            - Shell小实验: system_base/shell_test.md
     - 常用服务:
         - FTP: 
             - FTP错误代码: common_services/vsftp_error_code.md
@@ -58,8 +59,7 @@ nav:
                 - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md
     - 关于:
          - 联系方式: about/contact.md
-         - MKdocs个性标签: about/mkdocs.md
-         
+         - MKdocs使用: about/mkdocs.md         
 
 markdown_extensions:
     - admonition
