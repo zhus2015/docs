@@ -3,7 +3,7 @@
 
 ??? note "答案"
 
-	```
+	```shell
 	#/bin/bash
 	#Program:
 	#这个程序的功能是在终端上显示“Hello World”
@@ -39,15 +39,17 @@
 假设今天的日期2017年3月21日
 即：filename_20170319、filename_20170319、filename_20170319
 ??? note "答案"
-	```
+
+	```shell
 	###主要练习date命令
 	#!/bin/bash
 	# Program:
 	# Creates three files,which named by user's input and date command
 	# History:
 	# 2017/03/21 zhus First release
+
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-	​export PATH
+	export PATH
 	echo -e "I will use 'touch' command create 3 files."
 	read -p "Please input your filename: " fileuser
 	filename=${fileuser:-"filename"}
@@ -66,7 +68,7 @@
 
 此案例是乘法运算
 ??? note "答案"
-	```
+	```shell
 	#!/bin/bash
 	#Program:
 	#User input 2 numbers;program owill cross these two numbers;
@@ -83,12 +85,13 @@
 5、输入一个文件名，判断这个文件是否存在，是文件还是目录，判断这个文件的权限
 
 ??? note "答案"
-	```
+
+	```shell
 	###主要练习简单的判断
 	#!/bin/bash
 	#Program:
-	#       User input a filename ,program will check the flowing:
-	#       1.)exist?  2.)file/directory?  3.)file permissions
+	#User input a filename ,program will check the flowing:
+	#1.)exist?  2.)file/directory?  3.)file permissions
 	#History:
 	#2017/3/22 zhus First release
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
@@ -102,10 +105,10 @@
 	test -r $filename && perm="r"
 	test -w $filename && perm="$perm w"
 	test -x $fielname && perm="$perm x"
-	​echo "The filename $filename is a $filetype "
-	​echo "And the permission are : $perm"
+	echo "The filename $filename is a $filetype "
+	echo "And the permission are : $perm"
 	```
-​
+
 6、
 a、当执行这个程序的时候，程序会让你选择Y或者N;
 
@@ -117,7 +120,7 @@ d、如果用户输入的不是Y/y/N/n之内的字符，就会显示“I don‘t
 
 ??? note "答案"
 
-	```
+	```shell
 	####主要是练习“[ ]”的判断功能####
 	#!/bin/bash
 	#Program:
@@ -132,6 +135,7 @@ d、如果用户输入的不是Y/y/N/n之内的字符，就会显示“I don‘t
 	[ "$yn" == "N" -o "$yn" == "n" ] && echo "Oh,interrupt" && exit 0
 	echo "I don't konw what your choice is " && exit 0
 	```
+
 
 
 7、执行一个带参数的script，执行脚本后，屏幕会显示如下数据：
@@ -177,7 +181,7 @@ $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，
 
 ??? note "答案"
 
-	```
+	```shell
 	#!/bin/bash
 	#Program:
 	for i in `seq 1 255`
@@ -195,7 +199,7 @@ $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，
 
 ??? note "答案"
 
-	```
+	```shell
 	#! /bin/bash
 	logfile=/home/logs/client/access.log
 	d1=`date -d "-1 minute" +%H:%M` d2=`date +%M`
