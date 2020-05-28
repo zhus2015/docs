@@ -1,7 +1,7 @@
 1、Hello World实验
 输出Hello World
 
-??? note "答案"
+??? note "示例"
 
 	```shell
 	#/bin/bash
@@ -9,7 +9,7 @@
 	#这个程序的功能是在终端上显示“Hello World”
 	#History:
 	#2017/03/21 zhus  First release
-
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
 	echo -e "Hello World! \a \n"
@@ -18,16 +18,18 @@
 
 2、用户输入一个first name和last name，程序输出“Your name is：”
 
-??? note "答案"
+??? note "示例"
 
-	```shell
+	```
 	#!/bin/bash
 	#Program:
 	#User inputs his first name and last name, Program show his full name
 	#History:
 	#2017/3/21 zhus First release
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
+	
 	read -p "Please input your first name: " firstname
 	read -p "Please input your last name: " lastname
 	echo -e "Your full name is :$firstname $lastname"
@@ -38,7 +40,7 @@
 
 假设今天的日期2017年3月21日
 即：filename_20170319、filename_20170319、filename_20170319
-??? note "答案"
+??? note "示例"
 
 	```shell
 	###主要练习date命令
@@ -47,9 +49,10 @@
 	# Creates three files,which named by user's input and date command
 	# History:
 	# 2017/03/21 zhus First release
-
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
+	
 	echo -e "I will use 'touch' command create 3 files."
 	read -p "Please input your filename: " fileuser
 	filename=${fileuser:-"filename"}
@@ -67,14 +70,17 @@
 4、数值运算，简单的加减乘除
 
 此案例是乘法运算
-??? note "答案"
+??? note "示例"
+
 	```shell
 	#!/bin/bash
 	#Program:
 	#User input 2 numbers;program owill cross these two numbers;
 	#History:2017/3/22 zhus First release;
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
+	
 	echo -e "You ShOULD input 2 numbers,I will cross them! \n"
 	read -p "first number: " firstnu
 	read -p "second number: " secnu
@@ -84,7 +90,7 @@
 
 5、输入一个文件名，判断这个文件是否存在，是文件还是目录，判断这个文件的权限
 
-??? note "答案"
+??? note "示例"
 
 	```shell
 	###主要练习简单的判断
@@ -94,8 +100,10 @@
 	#1.)exist?  2.)file/directory?  3.)file permissions
 	#History:
 	#2017/3/22 zhus First release
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
+	
 	echo -e "Please input a filename. I will check it's type\n"
 	read -p "Input filename: " filename
 	test -z $filename && echo "You must input a filename " && exit 0
@@ -118,7 +126,7 @@ c、如果用户输入N或n时，就会显示“Oh，interrupt！”；
 
 d、如果用户输入的不是Y/y/N/n之内的字符，就会显示“I don‘t know what your choice is”。
 
-??? note "答案"
+??? note "示例"
 
 	```shell
 	####主要是练习“[ ]”的判断功能####
@@ -127,9 +135,10 @@ d、如果用户输入的不是Y/y/N/n之内的字符，就会显示“I don‘t
 	# This Program shows the user's choice
 	#History:
 	#2017/3/23 zhus First release
-
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
+	
 	read -p "Please input (Y/N) " yn
 	[ "$yn" == "Y" -o "$yn" == "y" ] && echo "OK,continue " && exit 0
 	[ "$yn" == "N" -o "$yn" == "n" ] && echo "Oh,interrupt" && exit 0
@@ -156,7 +165,7 @@ f、第二个参数
 $#  代表后接的参数 “个数”
 $@  代表 “$1” “$2” “$3” “$4” 之意，每个变量都是独立的
 $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，默认为空格键
-??? note "答案"
+??? note "示例"
 
 	```shell
 	#!/bin/bash
@@ -164,10 +173,10 @@ $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，
 	# Program shows the script name.parameters..
 	#Histroy:
 	#2017/3/23 zhus First release
-
+	
 	PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 	export PATH
-
+	
 	echo " The script name is    ==> $0 "
 	echo " Total parameters nuber is ==> $#"
 	[ "$#" -lt 2 ] && echo " The number of parameters is less than 2 . Stop here." && exit 0
@@ -179,11 +188,12 @@ $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，
 
 8、写一个脚本，实现判断192.168.1.0/24网络里，当前在线的有那些，能ping通则认为在线
 
-??? note "答案"
+??? note "示例"
 
 	```shell
 	#!/bin/bash
 	#Program:
+	
 	for i in `seq 1 255`
 	do
 	ping -c 1 192.168.1.$i &>/dev/null
@@ -197,10 +207,11 @@ $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，
 
 9、封IP,找到哪些ip请求量不合法，并且还要每隔一段时间把之前封掉的ip（若不再继续请求了）	给解封。 所以该脚本的关键点在于定一个合适的时间段和阈值
 
-??? note "答案"
+??? note "示例"
 
 	```shell
 	#! /bin/bash
+	
 	logfile=/home/logs/client/access.log
 	d1=`date -d "-1 minute" +%H:%M` d2=`date +%M`
 	ipt=/sbin/iptables ips=/tmp/ips.txt

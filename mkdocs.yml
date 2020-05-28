@@ -38,7 +38,10 @@ nav:
             - Nginx的内置变量: middleware/nginx/nginx_var.md
             - Nginx处理跨域问题: middleware/nginx/nginx_cross_domain.md
     - 开源监控: 
-        - Zabbix安装部署: open_source_monitor/zabbix_install.md
+        - Zabbix:
+            - Zabbix安装部署: open_source_monitor/zabbix/zabbix_install.md
+        - Promethues:
+            - Prometheus安装部署: open_source_monitor/prometheus/prometheus_install.md
     - 日志收集处理:
         - ELK: 
             - ELK安装部署: elk/elk_install.md
