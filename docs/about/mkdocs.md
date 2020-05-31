@@ -6,6 +6,9 @@
 # 安装
 pip install mkdocs
 
+# 安装插件
+pip install mkdocs-material markdown mkdocs-bootstrap
+
 # 创建新的项目
 mkdocs new project
 
