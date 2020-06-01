@@ -10,27 +10,29 @@
 
 将压缩包上传到服务器，解压到指定文件目录
 
-\# tar -zxvf apache-maven-3.6.0-bin.tar.gz -C /usr/local/
-
-\# mv /usr/local/apache-maven-3.6.0 /usr/local/maven-3.6.0
+```shell
+# tar -zxvf apache-maven-3.6.0-bin.tar.gz -C /usr/local/
+# mv /usr/local/apache-maven-3.6.0 /usr/local/maven-3.6.0
+```
 
 **添加环境变量**
 
-\# vim /etc/profile.d/maven.sh 
-
+```shell
+# vim /etc/profile.d/maven.sh
 增加以下内容，保存并退出：
-
 MAVEN_HOME=/usr/local/maven-3.6.0/
-
 PATH=${PATH}:${MAVEN_HOME}/bin
-
 export MAVEN_HOME PATH
+```
+
+
 
 **验证maven**
 
-\# source /etc/profile
-
-\# mavn -v
+```
+# source /etc/profile
+# mvn -v
+```
 
 看到下图界面即为成功
 

@@ -20,37 +20,34 @@ Maven版本：3.6.0
 
 **解压到指定文件夹**
 
-\# tar zxvf jdk-8u191-linux-x64.tar.gz -C /usr/local/
+```shell
+# tar zxvf jdk-8u191-linux-x64.tar.gz -C /usr/local/
+```
 
 **配置环境变量**
 
 由于要增加的环境变量较多，尽量不去改动profile文件
 
-\# vim /etc/profile.d/java.sh
-
+```shell
+# vim /etc/profile.d/java.sh
 在文件末尾增加以下内容:
-
 JAVA_HOME=/usr/local/jdk1.8.0_191/
-
 JRE_HOME=$JAVA_HOME/jre
-
 CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib/rt.jar
-
 PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-
 export JAVA_HOME JRE_HOME CLASS_PATH PATH
+```
 
 **验证环境变量**
 
 新打开一个终端，也可以使用当前终端，先执行source /etc/profile,再执行以  下命令：
 
-\# java -version
-
+```shell
+# java -version
 java version "1.8.0_191"
-
 Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
-
 Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
+```
 
 看到以上信息说明安装成功
 
@@ -62,17 +59,19 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 
 **解压配置Tomcat**
 
-\# tar zxvf apache-tomcat-8.0.52.tar.gz
-
-\# mv apache-tomcat-8.0.52 /usr/local/tomcat
+```shell
+# tar zxvf apache-tomcat-8.0.52.tar.gz
+# mv apache-tomcat-8.0.52 /usr/local/tomcat
+```
 
 **验证启动**
 
  启动tomcat
 
-\# sh /usr/local/tomcat/bin/startup.sh
-
-\# netstat -lntp
+```shell
+# sh /usr/local/tomcat/bin/startup.sh
+# netstat -lntp
+```
 
 ![img](../images/image1.png)
 
@@ -94,9 +93,10 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 
 **重启Tomcat**
 
-\# sh /usr/local/tomcat/shutdown.sh
-
-\# sh /usr/local/tomcat/startup.sh
+```shell
+# sh /usr/local/tomcat/shutdown.sh
+# sh /usr/local/tomcat/startup.sh
+```
 
 **Jenkins初始化访问**
 
@@ -108,7 +108,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 
 如果是没有更改过jenkins的home目录的话，初始化密码文件在/root/.jenkins/secrets/下：
 
-\# more /root/.jenkins/secrets/initialAdminPassword
+```
+# more /root/.jenkins/secrets/initialAdminPassword
+```
 
 查看初始化密码，复制登录
 
