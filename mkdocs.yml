@@ -42,9 +42,18 @@ nav:
             - Zabbix安装部署: open_source_monitor/zabbix/zabbix_install.md
         - Promethues:
             - Prometheus安装部署: open_source_monitor/prometheus/prometheus_install.md
+        - Grafana: 
+            - Grafana简介: open_source_monitor/grafana/grafana_about.md
+            - Grafana安装: open_source_monitor/grafana/grafana_install.md
     - 日志收集处理:
         - ELK: 
             - ELK安装部署: elk/elk_install.md
+    - CI/CD:
+        - Jenkins:
+            - Jenkins安装部署: devops/jenkins/jenkins_install.md
+            - Jenkins通过maven打包程序: devops/jenkins/jenkins_install.md
+            - Jenkins参数化构建: devops/jenkins/jenkins_build_arge.md
+            - Jenkins通过ssh通道部署: devops/jenkins/jenkins_deploy_ssh.md
     - 容器云:
         - Docker:
             - Docker基础: docker/docker_basic.md
