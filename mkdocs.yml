@@ -7,7 +7,7 @@ edit_uri: ''
 theme:
     name: 'material'
     #logo: 'img/logo.png'
-    #favicon: 'img/facio.ico'
+    favicon: 'images/facio.ico'
     language: 'zh'
     highlightjs: true
     feature:
@@ -27,16 +27,19 @@ nav:
             - Shell基础: system_base/shell.md
             - Shell逻辑判断: system_base/shell_logic.md
             - Shell小实验: system_base/shell_test.md
+            
     - 常用服务:
         - FTP: 
             - FTP错误代码: common_services/vsftp_error_code.md
             - FTP安装脚本: common_services/vsftp_install_scripte.md
         - DNS:
-            - Bind9安装配置: common_services/bind9.md 
+            - Bind9安装配置: common_services/bind9.md
+            
     - 中间件: 
         - Nginx:
             - Nginx的内置变量: middleware/nginx/nginx_var.md
             - Nginx处理跨域问题: middleware/nginx/nginx_cross_domain.md
+            
     - 开源监控: 
         - Zabbix:
             - Zabbix安装部署: open_source_monitor/zabbix/zabbix_install.md
@@ -45,15 +48,18 @@ nav:
         - Grafana: 
             - Grafana简介: open_source_monitor/grafana/grafana_about.md
             - Grafana安装: open_source_monitor/grafana/grafana_install.md
+            
     - 日志收集处理:
         - ELK: 
             - ELK安装部署: elk/elk_install.md
+            
     - CI/CD:
         - Jenkins:
             - Jenkins安装部署: devops/jenkins/jenkins_install.md
             - Jenkins通过maven打包程序: devops/jenkins/jenkins_build_java.md
             - Jenkins参数化构建: devops/jenkins/jenkins_build_arge.md
             - Jenkins通过ssh通道部署: devops/jenkins/jenkins_deploy_ssh.md
+            - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
     - 容器云:
         - Docker:
             - Docker基础: docker/docker_basic.md
@@ -62,16 +68,19 @@ nav:
             - 制作运行jar包的镜像: docker/make_jre_jar_images.md
             - 制作tomcat镜像: docker/make_tomcat_images.md
             
-        - K8S:
-            - 二进制安装: 
-                - K8S安装基础组件: k8s/k8s_base_install.md
-                - K8S安装核心组件: k8s/k8s_core_install.md
-                - K8S交付apollo配置中心: k8s/k8s_apollo_install.md
-                - K8S交付Dubbo微服务: k8s/k8s_dubbo_install.md
-                - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md
+        - K8S: 
+            - K8S安装基础组件: k8s/k8s_base_install.md
+            - K8S安装核心组件: k8s/k8s_core_install.md
+            - K8S交付apollo配置中心: k8s/k8s_apollo_install.md
+            - K8S交付Dubbo微服务: k8s/k8s_dubbo_install.md
+            - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md 
+            
+    - 代码文档管理: 
+        - 代码质量管理:
+            - sonarqube安装配置: code_docs/code_quality/sonarqube.md
     - 关于:
          - 联系方式: about/contact.md
-         - MKdocs使用: about/mkdocs.md         
+         - MKdocs使用: about/mkdocs.md
 
 markdown_extensions:
     - admonition
@@ -113,7 +122,7 @@ extra_javascript:
     - 'js/extra.js'
     - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
 
-#copyright: Copyright &copy; 2014-2020 <a href="https://www.fit2cloud.com">杭州飞致云信息科技有限公司</a>, All Rights Reserved. <a href="http://www.beian.miit.gov.cn" target="_blank">京ICP备15023818号</a>
-#google_analytics: ['UA-147297392-6','docs.jumpserver.org']
+#copyright: 
+#google_analytics:
 plugins:
     - search
