@@ -41,7 +41,9 @@ nav:
         - Nginx:
             - Nginx的内置变量: middleware/nginx/nginx_var.md
             - Nginx处理跨域问题: middleware/nginx/nginx_cross_domain.md
-            
+    - 数据库:
+        - Oracle:
+            - Linux下静默安装部署: database/oracle/oracle_install.md
     - 开源监控: 
         - Zabbix:
             - Zabbix安装部署: open_source_monitor/zabbix/zabbix_install.md
@@ -53,7 +55,7 @@ nav:
             
     - 日志收集处理:
         - ELK: 
-            - ELK安装部署: elk/elk_install.md
+            - ELK安装部署: logs/elk/elk_install.md
             
     - CI/CD:
         - Jenkins:
@@ -64,19 +66,19 @@ nav:
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
     - 容器云:
         - Docker:
-            - Docker基础: docker/docker_basic.md
-            - Docker的网络模式: docker/docker_network.md
-            - 私有镜像仓库Harbor: docker/docker_library_harbor.md
-            - 制作jre镜像: docker/make_jre_images.md
-            - 制作运行jar包的镜像: docker/make_jre_jar_images.md
-            - 制作tomcat镜像: docker/make_tomcat_images.md
+            - Docker基础: container_cloud/docker/docker_basic.md
+            - Docker的网络模式: container_cloud/docker/docker_network.md
+            - 私有镜像仓库Harbor: container_cloud/docker/docker_library_harbor.md
+            - 制作jre镜像: container_cloud/docker/make_jre_images.md
+            - 制作运行jar包的镜像: container_cloud/docker/make_jre_jar_images.md
+            - 制作tomcat镜像: container_cloud/docker/make_tomcat_images.md
             
         - K8S: 
-            - K8S安装基础组件: k8s/k8s_base_install.md
-            - K8S安装核心组件: k8s/k8s_core_install.md
-            - K8S交付apollo配置中心: k8s/k8s_apollo_install.md
-            - K8S交付Dubbo微服务: k8s/k8s_dubbo_install.md
-            - K8S交付Dubbo-monitor微服务: k8s/k8s_dubbo_monitor_install.md 
+            - K8S安装基础组件: container_cloud/k8s/k8s_base_install.md
+            - K8S安装核心组件: container_cloud/k8s/k8s_core_install.md
+            - K8S交付apollo配置中心: container_cloud/k8s/k8s_apollo_install.md
+            - K8S交付Dubbo微服务: container_cloud/k8s/k8s_dubbo_install.md
+            - K8S交付Dubbo-monitor微服务: container_cloud/k8s/k8s_dubbo_monitor_install.md 
             
     - 代码文档管理: 
         - 代码质量管理:
