@@ -23,10 +23,12 @@ theme:
 nav:
     - 介绍: index.md
     - 系统基础:
+        - Linux基础:
+            - Centos 7 关闭桌面: system_base/linux/centos7_stop_desktop.md
         - Shell: 
-            - Shell基础: system_base/shell.md
-            - Shell逻辑判断: system_base/shell_logic.md
-            - Shell小实验: system_base/shell_test.md
+            - Shell基础: system_base/shell/shell.md
+            - Shell逻辑判断: system_base/shell/shell_logic.md
+            - Shell小实验: system_base/shell/shell_test.md
             
     - 常用服务:
         - FTP: 
@@ -64,6 +66,7 @@ nav:
         - Docker:
             - Docker基础: docker/docker_basic.md
             - Docker的网络模式: docker/docker_network.md
+            - 私有镜像仓库Harbor: docker/docker_library_harbor.md
             - 制作jre镜像: docker/make_jre_images.md
             - 制作运行jar包的镜像: docker/make_jre_jar_images.md
             - 制作tomcat镜像: docker/make_tomcat_images.md
