@@ -722,7 +722,6 @@ github地址：https://github.com/etcd-io/etcd/releases
        --peer-client-cert-auth \
        --peer-trusted-ca-file ./certs/ca.pem \
        --log-output stdout
-
 ```
 
 
