@@ -10,11 +10,11 @@
 
 首先登陆jenkins，
 
-1、选择->Manage Jenkins
+1、选择->"Manage Jenkins"
 
 ![image-20200604110137731](images/image-20200604110137731.png)
 
-2、然后在接下来啊页面找到Manage Plugins
+2、然后在接下来的页面找到"Manage Plugins"
 
 ![image-20200604110214225](images/image-20200604110214225.png)
 

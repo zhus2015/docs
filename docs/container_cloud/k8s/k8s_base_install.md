@@ -2089,6 +2089,9 @@ spec:
         - containerPort: 80
 EOF
 
+# kubectl apply -f /root/daemon.yaml
+daemonset.extensions/nginx-ds created
+
 # kubectl get pods -o wide
 nginx-ds-74qq8   1/1     Running   0          4m10s   172.10.31.2   home-10-31.host.com   <none>           <none>
 nginx-ds-jhxnt   1/1     Running   0          4m10s   172.10.30.2   home-10-30.host.com   <none>           <none>
