@@ -45,6 +45,16 @@ nav:
     - 数据库:
         - Oracle:
             - Linux下静默安装部署: database/oracle/oracle_install.md
+            
+    - 代码文档管理: 
+        - 代码管理:
+            - gogs: code_docs/code_manage/gogs.md
+            - gitlab: code_docs/code_manage/gitlab.md
+        - 代码质量管理:
+            - sonarqube: code_docs/code_quality/sonarqube.md
+        - 文档管理:
+            - confluce: code_docs/docs_manage/confluence.md
+            
     - 开源监控: 
         - Zabbix:
             - Zabbix安装部署: open_source_monitor/zabbix/zabbix_install.md
@@ -83,9 +93,6 @@ nav:
             - K8S交付Dubbo-monitor微服务: container_cloud/k8s/k8s_dubbo_monitor_install.md
             - kubeadmin安装k8s集群: container_cloud/k8s/k8s_kubeadm_install.md
             
-    - 代码文档管理: 
-        - 代码质量管理:
-            - sonarqube安装配置: code_docs/code_quality/sonarqube.md
     - 关于:
          - 联系方式: about/contact.md
          - MKdocs使用: about/mkdocs.md
