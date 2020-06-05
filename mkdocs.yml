@@ -53,7 +53,7 @@ nav:
         - 代码质量管理:
             - sonarqube: code_docs/code_quality/sonarqube.md
         - 文档管理:
-            - confluce: code_docs/docs_manage/confluence.md
+            - confluence: code_docs/docs_manage/confluence.md
             
     - 开源监控: 
         - Zabbix:
