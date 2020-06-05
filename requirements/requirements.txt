@@ -4,3 +4,5 @@ mdx_gh_links
 markdown
 mkdocs-bootstrap
 mkdocs-bootswatch
+
+mkdocs-mermaid-plugin

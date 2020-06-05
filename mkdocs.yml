@@ -29,6 +29,7 @@ nav:
             - Shell基础: system_base/shell/shell.md
             - Shell逻辑判断: system_base/shell/shell_logic.md
             - Shell小实验: system_base/shell/shell_test.md
+            - expect交互脚本: system_base/shell/expect.md
             
     - 常用服务:
         - FTP: 
@@ -64,15 +65,15 @@ nav:
             - Jenkins参数化构建: devops/jenkins/jenkins_build_arge.md
             - Jenkins通过ssh通道部署: devops/jenkins/jenkins_deploy_ssh.md
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
+            - Jeknins项目构建钉钉通知配置: devops/jenkins/jenkins_message_dingding.md
     - 容器云:
         - Docker:
             - Docker基础: container_cloud/docker/docker_basic.md
             - Docker的网络模式: container_cloud/docker/docker_network.md
-            - 私有镜像仓库Harbor: container_cloud/docker/docker_library_harbor.md
+            - Docker镜像仓库--Harbor: container_cloud/docker/docker_library_harbor.md
             - 制作jre镜像: container_cloud/docker/make_jre_images.md
             - 制作运行jar包的镜像: container_cloud/docker/make_jre_jar_images.md
-            - 制作tomcat镜像: container_cloud/docker/make_tomcat_images.md
-            
+            - 制作tomcat镜像: container_cloud/docker/make_tomcat_images.md          
         - K8S: 
             - K8S安装基础组件: container_cloud/k8s/k8s_base_install.md
             - K8S安装核心组件: container_cloud/k8s/k8s_core_install.md
@@ -88,6 +89,7 @@ nav:
          - MKdocs使用: about/mkdocs.md
 
 markdown_extensions:
+    - markdown.extensions.attr_list
     - admonition
     - codehilite:
         guess_lang: True
@@ -122,10 +124,18 @@ markdown_extensions:
 
 extra_css:
     - css/extra.css
+    - css/simpleLightbox.min.css
+    - css/custom.css
     
 extra_javascript:
     - 'js/extra.js'
+    - 'js/simpleLightbox.js'
+    - 'js/custom.js'
     - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+    - 'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js'
+    - 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'
+    - 'https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js'
+
 
 #copyright: 
 #google_analytics:

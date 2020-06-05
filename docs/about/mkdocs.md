@@ -68,4 +68,14 @@ mkdocs serve
 
 !!! note "内容"
 
-\!!! note ""
+\!!! note "内容"
+
+
+
+```mermaid
+graph TD
+    A --> B
+```
+
+
+
