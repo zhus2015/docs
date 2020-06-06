@@ -6,6 +6,7 @@ edit_uri: ''
 
 theme:
     name: 'material'
+    #name: 'cosmo'
     #logo: 'img/logo.png'
     favicon: 'images/facio.ico'
     language: 'zh'
@@ -25,6 +26,7 @@ nav:
     - 系统基础:
         - Linux基础:
             - Centos 7 关闭桌面: system_base/linux/centos7_stop_desktop.md
+            - 更换软件安装源: system_base/linux/change_soft_source.md
         - Shell: 
             - Shell基础: system_base/shell/shell.md
             - Shell逻辑判断: system_base/shell/shell_logic.md
@@ -37,6 +39,11 @@ nav:
             - FTP安装脚本: common_services/vsftp_install_scripte.md
         - DNS:
             - Bind9安装配置: common_services/bind9.md
+        - Rsync:
+            - Sersync配置文件同步: common_services/sersync.md
+            
+    - 高可用:
+        - Keepalived高可用: HA/keepalived.md
             
     - 中间件: 
         - Nginx:
@@ -92,7 +99,10 @@ nav:
             - K8S交付Dubbo微服务: container_cloud/k8s/k8s_dubbo_install.md
             - K8S交付Dubbo-monitor微服务: container_cloud/k8s/k8s_dubbo_monitor_install.md
             - kubeadmin安装k8s集群: container_cloud/k8s/k8s_kubeadm_install.md
-            
+    - Python:
+        - Python基础: python/python_base/python_list.md
+    - 资源文件: file/sersync2.5.4_64bit_binary_stable_final.tar.gz
+        
     - 关于:
          - 联系方式: about/contact.md
          - MKdocs使用: about/mkdocs.md
