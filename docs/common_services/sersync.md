@@ -58,7 +58,9 @@ nginxrsync:tongbu@123
 
 ## 安装配置sersync
 
-[sersync]: files/sersync2.5.4_64bit_binary_stable_final.tar.gz
+文件下载地址
+
+https://github.com/zhus2015/docs/tree/master/docs/files/sersync2.5.4_64bit_binary_stable_final.tar.gz 
 
 
 
