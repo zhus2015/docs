@@ -44,6 +44,7 @@ nav:
             - Nginx:
                 - Nginx的内置变量: system_base/middleware/nginx/nginx_var.md
                 - Nginx处理跨域问题: system_base/middleware/nginx/nginx_cross_domain.md
+                - Nginx常用配置: system_base/middleware/nginx/nginx_config.md
     - 高可用:
         - LVS简介: HA/lvs.md
         - Keepalived高可用: HA/keepalived.md
