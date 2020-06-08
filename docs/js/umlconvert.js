@@ -1,4 +1,3 @@
-
 (function (document) {
     function convertUML(className, converter, settings) {
         var charts = document.querySelectorAll("pre." + className + ',div.' + className),
@@ -45,24 +44,8 @@
                     el.textContent = '';
                 }
             }
- 
-            if (className != "mermaid")
-            {
-                //flowchart.js sequence-diagram.js
-                diagram = converter.parse(text);
-                diagram.drawSVG(el, settings);
-            }
-            else
-            {
-                //mermaid
-                mermaid.mermaidAPI.initialize(settings);
-                //console.log(mermaid.mermaidAPI.getConfig());
-                var insertSvg = function(svgCode) {
-                    el.innerHTML = svgCode;
-                };
- 
-                mermaid.mermaidAPI.render(className + '-' + i.toString(), text, insertSvg);
-            }
+            diagram = converter.parse(text);
+            diagram.drawSVG(el, settings);
         }
     };
  
@@ -80,6 +63,5 @@
     onReady(function(){
         convertUML('uml-flowchart', flowchart);
         convertUML('uml-sequence-diagram', Diagram, {theme: 'simple'});
-        convertUML('mermaid')
     });
 })(document);
