@@ -108,7 +108,7 @@ nav:
             - K8S交付Dubbo-monitor微服务: devops/k8s/k8s_dubbo_monitor_install.md
             - kubeadmin安装k8s集群: devops/k8s/k8s_kubeadm_install.md
         - ELK: 
-            - ELK安装部署: logs/elk/elk_install.md
+            - ELK安装部署: devops/elk/elk_install.md
             
     - Development:
         - Python:
