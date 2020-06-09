@@ -1,7 +1,8 @@
-# 制作tomcat镜像
+# 基于jre镜像制作Tomcat镜像
 
+!!! warning "注意：这里是基于之前制作的jre镜像"
 
-Dockerfile
+> Dockerfile
 
 ```
 FROM zhus2015/jre8:8u251
@@ -16,7 +17,9 @@ CMD ["/entrypoint.sh"]
 
 ```
 
-entrypoint.sh 
+> entrypoint.sh 
+
+!!! note "这里有些调优的选项，可以根据自己实际情况进行调优，这里的调优不是我做的，我也不知道啥意思"
 
 ```shell
 #!/bin/sh
@@ -34,13 +37,16 @@ sed -i -e "1a\JAVA_OPTS=\"$JAVA_OPTS\"" -e "1a\CATALINA_OPTS=\"$CATALINA_OPTS\""
 cd /opt/tomcat && /opt/tomcat/bin/catalina.sh run 2>&1 >> /opt/tomcat/logs/stdout.log
 ```
 
-jmx_javaagent-0.3.1.jar  
-主要是为了介入Prometheus监控使用，如果不使用Prometheus可以添加此jar包  
+> jmx_javaagent-0.3.1.jar  
+> 主要是为了介入Prometheus监控使用，如果不使用Prometheus可以添加此jar包，注意在Dockerfile中和entrypoint.sh 脚本中删除相关信息  
+
 下载: wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.3.1/jmx_prometheus_javaagent-0.3.1.jar -O jmx_javaagent-0.3.1.jar
 
 
-config.yml  
-jmx监控配置文件，不适用Prometheus监控时可以不添加此文件
+
+> config.yml  
+> jmx监控配置文件，不适用Prometheus监控时可以不添加此文件，注意在Dockerfile中和entrypoint.sh 脚本中删除相关信息  
+
 ```yml
 ---
 rules:
