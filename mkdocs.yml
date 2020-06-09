@@ -54,7 +54,13 @@ nav:
     - 数据库:
         - Oracle:
             - Centos7下静默安装Oracle: database/oracle/oracle_install.md
-            
+        - Mysql:
+            - Mysql安装部署: database/mysql/mysql_install.md
+        - Redis:
+            - Redis安装部署: database/redis/redis_install.md
+        - Mongodb:
+            - Mongodb安装部署: database/mongodb/mongodb_install.md
+ 
     - 代码文档管理: 
         - 代码管理:
             - gogs: code_docs/code_manage/gogs.md

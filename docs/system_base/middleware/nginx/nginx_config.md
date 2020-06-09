@@ -255,7 +255,12 @@ server {
 
 **nginx 301 302跳转的详细说明文档**
 
-server { server_name test.com; rewrite ^/(.*) http://www.test1.com/$1 permanent; }
+```
+server { 
+    server_name test.com; 
+    rewrite ^/(.*) http://www.test1.com/$1 permanent; 
+}
+```
 
 last – 基本上都用这个Flag。
 
