@@ -53,7 +53,7 @@ nav:
 
     - 数据库:
         - Oracle:
-            - Linux下静默安装部署: database/oracle/oracle_install.md
+            - Centos7下静默安装Oracle: database/oracle/oracle_install.md
             
     - 代码文档管理: 
         - 代码管理:

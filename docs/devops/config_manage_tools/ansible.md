@@ -194,3 +194,69 @@ ansible-playbook /etc/ansible/test_touch.yml
       shell: echo "hello"
 ```
 
+
+
+### 循环
+
+> cat /root/xunhuan.yml
+
+```yml
+---
+- hosts: 10.10.10.91
+  user: root
+  tasks:
+   - name: change mod for file
+     file: path=/tmp/{{item}} state=directory
+     with_items:
+       - a
+       - b
+       - c      
+```
+
+![image-20200609082715165](images/image-20200609082715165.png)
+
+
+
+### 条件判断
+
+ansible_default_ipv4.address 这个值是通过ansible 10.10.10.91 -m setup获取而来
+
+```yml
+- hosts: testhost
+  user: root
+  gather_facts: True
+  tasks:
+    - name: Host 10.10.10.100 run this task
+      #shell: touch /tmp/when.txt
+      shell: hostname
+      when: ansible_default_ipv4.address == "10.10.10.91"
+```
+
+执行命令：ansible-playbook -v when.yml
+
+执行结果如下：
+
+![image-20200609085821434](images/image-20200609085821434.png)
+
+when判断参数可以写成变量的形式
+
+```yml
+- hosts: testhost
+  user: root
+  gather_facts: True
+  tasks:
+    - name: Host 10.10.10.100 run this task
+      #shell: touch /tmp/when.txt
+      shell: hostname
+      when: ansible_default_ipv4.address == (webserver91)
+```
+
+执行命令：
+
+```
+ansible-playbook -v when.yml -e "webserver91=10.10.10.92"
+```
+
+执行结果：
+
+![image-20200609090012517](images/image-20200609090012517.png)
