@@ -136,6 +136,7 @@ discovery.seed_hosts: ["elk"]
 
   
 
+
 ### 修改logstash配置
 
 > vim /etc/logstash/logstash.yml

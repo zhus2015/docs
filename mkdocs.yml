@@ -54,6 +54,7 @@ nav:
     - 数据库:
         - Oracle:
             - Centos7下静默安装Oracle: database/oracle/oracle_install.md
+            - Oracle日常操作: database/oracle/oracle_use.md
         - Mysql:
             - Mysql安装部署: database/mysql/mysql_install.md
         - Redis:
@@ -109,6 +110,7 @@ nav:
             - kubeadmin安装k8s集群: devops/k8s/k8s_kubeadm_install.md
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
+            - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
             
     - Development:
         - Python:
