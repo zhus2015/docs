@@ -5,9 +5,9 @@ repo_url: 'https://github.com/zhus2015/docs'
 edit_uri: ''
 
 theme:
-    name: 'material'
-    #name: 'cosmo'
-    #logo: 'img/logo.png'
+    #name: 'material'
+    name: 'Bootstrap'
+    logo: 'images/facio.ico'
     favicon: 'images/facio.ico'
     language: 'zh'
     highlightjs: true
@@ -17,10 +17,15 @@ theme:
         - yaml
         - bash
     #font: false
+    font:
+        text: Roboto
+        code: Roboto Mono
     palette:
-        primary: 'indigo'
-        accent: 'indigo'
-  
+        scheme: default
+        primary: indigo
+        accent: indigo   
+ plugins:
+    - search 
 nav:
     - 介绍: index.md
     - 系统运维基础:
@@ -102,11 +107,15 @@ nav:
             - 制作tomcat镜像: devops/docker/make_tomcat_images.md          
         - K8S: 
             - K8S基础知识: devops/k8s/k8s_base_knowledge.md
-            - K8S安装基础组件: devops/k8s/k8s_base_install.md
-            - K8S安装核心组件: devops/k8s/k8s_core_install.md
+            #- K8S安装基础组件: devops/k8s/k8s_base_install.md
+            - K8S安装部署(基础组件): devops/k8s/k8s_base_install_new.md
+            - K8S安装部署(核心插件): devops/k8s/k8s_core_plug_install.md
+            #- K8S安装核心组件: devops/k8s/k8s_core_install.md
             - K8S交付apollo配置中心: devops/k8s/k8s_apollo_install.md
-            - K8S交付Dubbo微服务: devops/k8s/k8s_dubbo_install.md
+            - K8S交付Dubbo微服务: devops/k8s/k8s_dubbo_install_new.md
             - K8S交付Dubbo-monitor微服务: devops/k8s/k8s_dubbo_monitor_install.md
+            - K8S交付Prometheus监控(1): devops/k8s/k8s_prometheus_install_1.md
+            - K8S交付Prometheus监控(2): devops/k8s/k8s_prometheus_install_2.md
             - kubeadmin安装k8s集群: devops/k8s/k8s_kubeadm_install.md
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
@@ -122,6 +131,12 @@ nav:
          - 联系方式: about/contact.md
          - MKdocs使用: about/mkdocs.md
          - 图: about/test.md
+         
+#社交连接
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/squidfunk
 
 markdown_extensions:
     - markdown.extensions.attr_list
@@ -175,5 +190,3 @@ extra_javascript:
 
 #copyright: 
 #google_analytics:
-plugins:
-    - search
