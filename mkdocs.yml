@@ -21,7 +21,7 @@ theme:
         code: Roboto Mono
     palette:
         scheme: default
-        primary: indigo
+        primary: black
         accent: indigo
         
 plugins:
