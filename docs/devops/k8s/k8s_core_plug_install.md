@@ -90,7 +90,7 @@ mkdir -p /data/logs/flanneld
 
 
 
-#### *5.1.7、*设置flannel的网络配置
+#### 5.1.7、设置flannel的网络配置
 
  此步骤在任意etcd节点上执行，执行一次即可
 
@@ -119,7 +119,7 @@ etcdctl set /coreos.com/network/config '{"Network": "172.7.0.0/16","Backend": {"
 
 
 
-#### *5.1.8、*创建flannel的supervisor配置文件
+#### 5.1.8、创建flannel的supervisor配置文件
 
 > vim /etc/supervisord.d/flanneld.ini 
 
@@ -146,7 +146,7 @@ stdout_events_enabled=false
 
 
 
-#### *5.1.9、*启动验证
+#### 5.1.9、启动验证
 
 ```
 supervisorctl update 
@@ -164,9 +164,9 @@ iptables -P FORWARD ACCEPT
 
 
 
-#### *5.1.10、*优化
+#### 5.1.10、优化
 
-##### *5.1.10.1、*安装iptables
+##### 5.1.10.1、安装iptables
 
 ```
 yum install -y iptables-services
@@ -176,7 +176,7 @@ systemctl enable iptables
 
 
 
-##### *5.1.10.2、*优化iptables规则
+##### 5.1.10.2、优化iptables规则
 
 主要优化postrouting -s 172.7.31.0？24  ! -o docker0 -j MASQUERADE这条规则
 
@@ -232,7 +232,7 @@ docker push harbor.zs.com/public/coredns:v1.6.1
 
 
 
-#### *5.2*.2、准备资源配置清单
+#### 5.2*.2、准备资源配置清单
 
 此步骤在运维主机上操作
 
@@ -425,7 +425,7 @@ spec:
 
 
 
-#### *5.2.3、*创建相关资源
+#### 5.2.3、创建相关资源
 
 !!! tip "此步骤在任意计算节点执行"
 
@@ -438,7 +438,7 @@ kubectl apply -f http://k8s-yaml.zs.com/coredns/svc.yaml
 
 
 
-#### *5.2.4、*检查验证
+#### 5.2.4、检查验证
 
 ```
 kubectl get all -n kube-system
@@ -449,9 +449,9 @@ dig -t A nginx-dp.kube-public.svc.cluster.local. @192.168.0.2 +short
 
 
 
-### *5.3、*K8S的服务暴露插件-Traefik
+### 5.3、K8S的服务暴露插件-Traefik
 
-#### *5.3.1、*准备镜像
+#### 5.3.1、准备镜像
 
 此步骤在运维主机上操作
 
@@ -467,7 +467,7 @@ dig -t A nginx-dp.kube-public.svc.cluster.local. @192.168.0.2 +short
 
 \# docker push harbor.zs.com/public/traefik:v1.7.2
 
-#### *5.3*.3、准备资源配置清单
+#### 5.3*.3、准备资源配置清单
 
 此步骤在运维主机上操作
 
@@ -481,7 +481,7 @@ mkdir /data/k8s-yaml/traefik
 
 
 
-##### *5.3.2.1、*RBAC
+##### 5.3.2.1、RBAC
 
 > vim  /data/k8s-yaml/traefik/rbac.yaml
 
@@ -533,7 +533,7 @@ subjects:
 
 
 
-##### *5.3.2.2、*DemonSet
+##### 5.3.2.2、DemonSet
 
 !!! warning "注意k8s集群调用地址，修改为自己的负载均衡地址"
 
@@ -587,7 +587,7 @@ spec:
 
 
 
-##### *5.3.2.③、*\*Service\
+##### 5.3.2.3、Service
 
 \# cat /data/k8s-yaml/traefik/svc.yaml
 
@@ -612,7 +612,7 @@ spec:
 
 
 
-##### *5.3.2.④、*\*Ingress\
+##### 5.3.2.4、Ingress
 
 \# cat /data/k8s-yaml/traefik/ingress.yaml
 
@@ -638,7 +638,7 @@ spec:
 
 
 
-#### *5.3.3、*创建相关资源
+#### 5.3.3、创建相关资源
 
 !!! tip "在任意计算节点执行"
 
@@ -651,7 +651,7 @@ kubectl apply -f http://k8s-yaml.zs.com/traefik/ingress.yaml
 
 
 
-#### *5.3.4、*配置7层反向代理
+#### 5.3.4、配置7层反向代理
 
 在两台lvs主机上操作
 
@@ -691,13 +691,13 @@ nginx -s reload
 
 
 
-#### *5.3.5、*配置域名解析
+#### 5.3.5、配置域名解析
 
 增加一条A记录，域名为traefik.zs.com，记录值为10.4.7.20
 
 
 
-#### *5.3.6、*访问验证
+#### 5.3.6、访问验证
 
 使用宿主机访问traefik.zs.com验证服务搭建是否正常
 
@@ -707,9 +707,9 @@ nginx -s reload
 
  
 
-### *5.4、*K8S的GUI资源管理插件-Dashboard
+### 5.4、K8S的GUI资源管理插件-Dashboard
 
-#### *5.4.1、*准备镜像
+#### 5.4.1、准备镜像
 
 此步骤在运维主机操作
 
@@ -736,7 +736,7 @@ docker push harbor.zs.com/public/dashboard:v1.10.1
 
 
 
-#### *5.4*.2、准备资源配置清单
+#### 5.4.2、准备资源配置清单
 
 此步骤在运维主机操作
 
@@ -774,7 +774,7 @@ subjects:
 
 
 
-#### *5.4.2.2、*Deployment
+#### 5.4.2.2、Deployment
 
 > vim  /data/k8s-yaml/dashboard/dp.yaml
 
@@ -837,7 +837,7 @@ spec:
 
 
 
-#### *5.4.2.3、*Service
+#### 5.4.2.3、Service
 
 > vim /data/k8s-yaml/dashboard/svc.yaml
 
@@ -885,7 +885,7 @@ spec:
 
 
 
-#### *5.4.3、*创建相关资源
+#### 5.4.3、创建相关资源
 
 此步骤在任意计算节点执行
 
@@ -898,13 +898,13 @@ kubectl apply -f http://k8s-yaml.zs.com/dashboard/ingress.yaml
 
 
 
-#### *5.4.4、*增加DNS解析
+#### 5.4.4、增加DNS解析
 
 增加一条A记录dashboard，解析地址10.4.7.20(集群vip)
 
 
 
-#### *5.4.5、*访问验证
+#### 5.4.5、访问验证
 
 通过宿主机的浏览器访问http://dashboard.zs.com
 
@@ -912,11 +912,11 @@ kubectl apply -f http://k8s-yaml.zs.com/dashboard/ingress.yaml
 
 
 
-#### *5.4.6、*配置dashboard的HTTPS访问
+#### 5.4.6、配置dashboard的HTTPS访问
 
 由于使用http我们无法使用令牌访问，因此我们要对dashboard配置https访问
 
-##### *5.4.6.1、*证书签发
+##### 5.4.6.1、证书签发
 
 !!! tip "此步骤在运维主机上操作"
 
@@ -946,7 +946,7 @@ openssl x509 -req -in dashboard.zs.com.csr -CA ca.pem -CAkey ca-key.pem -CAcreat
 
 
 
-##### *5.4.6.2、*配置反向代理
+##### 5.4.6.2、配置反向代理
 
 此步骤在LVS主机上操作，两台机器的nginx都需要配置
 
@@ -1000,7 +1000,7 @@ server {
 
 
 
-##### *5.4.6.3、*检查配置并重启nginx
+##### 5.4.6.3、检查配置并重启nginx
 
 ```
 nginx -t
@@ -1009,13 +1009,13 @@ nginx -s reload
 
 
 
-#### *5.4.7、*访问验证
+#### 5.4.7、访问验证
 
 通过宿主机访问dashbord.zs.com，可以查看到dashboard的页面
 
 
 
-#### *5.4.8、*获取Dashboard令牌登陆
+#### 5.4.8、获取Dashboard令牌登陆
 
 获取令牌（token）
 
@@ -1025,7 +1025,7 @@ kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | aw
 
  
 
-#### *5.4.9、*创建普通用户认证脚本
+#### 5.4.9、创建普通用户认证脚本
 
 在运维主机上操作，此步骤主要是为了做多用户管理，如无需求可以不操作
 

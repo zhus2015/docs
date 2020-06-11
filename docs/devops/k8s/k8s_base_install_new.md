@@ -956,7 +956,7 @@ cd /opt/etcd
 
 
 
-#### *3.1.6、*创建用户并修改文件权限
+#### 3.1.6、创建用户并修改文件权限
 
 ```
 useradd -s /sbin/nologin -M etcd
@@ -968,7 +968,7 @@ chown -R etcd.etcd /data/logs/etcd-server
 
  
 
-#### *3.1.7、*创建supervisor启动配置
+#### 3.1.7、创建supervisor启动配置
 
 > vim /etc/supervisord.d/etcd-server.ini
 
@@ -996,7 +996,7 @@ stdout_events_enabled=false
 
 
 
-#### *3.1.8、*启动etcd程序
+#### 3.1.8、启动etcd程序
 
 ```
 supervisorctl update
@@ -1014,7 +1014,7 @@ supervisorctl update
 
 
 
-#### *3.1.9、*检查启动情况
+#### 3.1.9、检查启动情况
 
 > netstat -luntp |grep etcd
 
@@ -1030,13 +1030,13 @@ supervisorctl update
 
 ### 3.2、部署kube-apiserver集群
 
-#### *3.2.1、*签发client证书
+#### 3.2.1、签发client证书
 
 此步骤在运维主机HOME7-200上进行操作
 
 此次签发的证书为apiserver与etcd集群通信使用的正式，为client证书
 
-*3.2.1.①、*\*创建生成证书签名请求文件\
+3.2.1.①、\*创建生成证书签名请求文件\
 
  
 
@@ -1080,7 +1080,7 @@ supervisorctl update
 
 }
 
-*3.2.1.②、*\*生成client证书及私钥\
+3.2.1.②、\*生成client证书及私钥\
 
 \# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json | cfssl-json -bare client
 
@@ -1090,7 +1090,7 @@ supervisorctl update
 
 此步骤在运维主机HOME7-200上进行操作
 
-##### *3.2.2.1、*创建生成证书签名请求
+##### 3.2.2.1、创建生成证书签名请求
 
 这里为了以后的扩展多添加了一些IP，注意10.4.7.20这个IP是LVS的VIP
 
@@ -1146,7 +1146,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=serv
 
 ![img](images/wps11.jpg) 
 
-#### *3.2.3、*下载软件包
+#### 3.2.3、下载软件包
 
 这里由于软件包都是托管在国外的服务器上，我们使用虚拟机下载较慢，我选择使用宿主机进行下载，然后进行上传到虚拟机的/opt/src目录下
 
@@ -1162,7 +1162,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=serv
 
 可以下载其他版本，下载方式在release版本中点击连接CHANGELOG-1.15.md.，在新页面中找到Server Binaries项，下载相关平台版本包即可
 
-#### *3.2.4、*解压、删除需要的文件
+#### 3.2.4、解压、删除需要的文件
 
 ```shell
 cd /opt/src
@@ -1178,7 +1178,7 @@ rm -rf /opt/kubernetes/server/bin/*_tag
 
  
 
-#### *3.2.5、*拷贝证书
+#### 3.2.5、拷贝证书
 
 ```shell
 cd /opt/kubernetes/server && mkdir certs && cd certs
@@ -1192,9 +1192,9 @@ scp root@10.4.7.200:/opt/certs/client.pem .
 
 
 
-#### *3.2.6、*创建配置文件
+#### 3.2.6、创建配置文件
 
-##### *3.2.6.1、*创建audit.yaml审计文件
+##### 3.2.6.1、创建audit.yaml审计文件
 
 \# cd /opt/kubernetes/server
 
@@ -1278,7 +1278,7 @@ omitStages:
 
 
 
-##### *3.2.6.2、*创建apiserver启动脚本
+##### 3.2.6.2、创建apiserver启动脚本
 
 ```
 cd /opt/kubernetes/server/bin
@@ -1313,7 +1313,7 @@ cd /opt/kubernetes/server/bin
 
 
 
-#### *3.2.7、*调整权限和目录
+#### 3.2.7、调整权限和目录
 
 > 增加启动权限
 
@@ -1329,7 +1329,7 @@ chmod +x /opt/kubernetes/server/bin/kube-apiserver.sh
 
 
 
-#### *3.2.8、*创建supervisor启动配置文件
+#### 3.2.8、创建supervisor启动配置文件
 
 > vim /etc/supervisord.d/kube-apiserver.ini
 
@@ -1357,7 +1357,7 @@ stdout_events_enabled=false
 
 
 
-#### *3.2.9、*启动服务并检查
+#### 3.2.9、启动服务并检查
 
 ```
 supervisorctl update
@@ -1365,11 +1365,11 @@ supervisorctl update
 
  
 
-### *3.3、*部署4层反向代理
+### 3.3、部署4层反向代理
 
 此步骤在HOME7-21和HOME7-22上执行
 
-#### *3.3.1、*安装nginx和keepalived
+#### 3.3.1、安装nginx和keepalived
 
 ```
 yum install -y nginx keepalived
@@ -1402,7 +1402,7 @@ stream {
 
 
 
-#### *3.3.3、*配置keepalived
+#### 3.3.3、配置keepalived
 
 ##### 3.3.3.1、创建脚本check_port.sh
 
@@ -1440,7 +1440,7 @@ chmod +x /etc/keepalived/check_port.sh
 
  
 
-##### *3.3.3.2、*配置keepalived主
+##### 3.3.3.2、配置keepalived主
 
 这里我将10.4.7.21设置为主服务器
 
@@ -1525,7 +1525,7 @@ vrrp_instance VI_1 {
 
 
 
-##### *3.3.4、*\*启动代理并检查\
+##### 3.3.4、\*启动代理并检查\
 
 ```shell
 systemctl start nginx
@@ -1541,9 +1541,9 @@ ip addr
 
 
 
-### *3.4、*部署controller-manager集群服务
+### 3.4、部署controller-manager集群服务
 
-#### *3.4.1、*创建启动脚本
+#### 3.4.1、创建启动脚本
 
 > vim /opt/kubernetes/server/bin/kube-controller-manager.sh
 
@@ -1562,7 +1562,7 @@ ip addr
 
 
 
-#### *3.4*.2、调整文件权限创建文件目录
+#### 3.4*.2、调整文件权限创建文件目录
 
 ```shell
 chmod +x /opt/kubernetes/server/bin/kube-controller-manager.sh
@@ -1571,7 +1571,7 @@ mkdir -p /data/logs/kubernetes/kube-controller-manager
 
 
 
-#### *3.4.3、*\*创建supervisor启动配置文件\
+#### 3.4.3、\*创建supervisor启动配置文件\
 
 > vim /etc/supervisord.d/kube-conntroller-manager.ini
 
@@ -1604,7 +1604,7 @@ stderr_events_enabled=false
 
 
 
-#### *3.4.4、*启动服务并检查
+#### 3.4.4、启动服务并检查
 
 ```shell
 supervisorctl update 
@@ -1613,9 +1613,9 @@ supervisorctl status
 
 
 
-### *3.5、*部署kube-scheduler集群服务
+### 3.5、部署kube-scheduler集群服务
 
-#### *3.5.1、*创建启动脚本
+#### 3.5.1、创建启动脚本
 
 > vim /opt/kubernetes/server/bin/kube-scheduler.sh
 
@@ -1630,7 +1630,7 @@ supervisorctl status
 
 
 
-#### *3.5*.2、调整文件权限创建目录
+#### 3.5*.2、调整文件权限创建目录
 
 ```
 chmod +x /opt/kubernetes/server/bin/kube-scheduler.sh
@@ -1639,7 +1639,7 @@ mkdir -p /data/logs/kubernetes/kube-scheduler
 
 
 
-#### *3.5.3、*创建supervisor启动配置文件
+#### 3.5.3、创建supervisor启动配置文件
 
 > vim /etc/supervisord.d/kube-scheduler.ini 
 
@@ -1672,7 +1672,7 @@ stderr_events_enabled=false
 
 
 
-#### *3.5.4、*启动服务并检查
+#### 3.5.4、启动服务并检查
 
 ```
 supervisorctl update 
@@ -1681,7 +1681,7 @@ supervisorctl status
 
 
 
-#### *3.6、*检查集群健康状况
+#### 3.6、检查集群健康状况
 
 ```shell
 ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
@@ -1698,13 +1698,13 @@ kubectl get cs
 
 !!! tip "此步骤无特殊声明情况下都在HOME7-31、HOME7-32和HOME7-33上执行"
 
-### *4.1、*部署kubelet集群服务
+### 4.1、部署kubelet集群服务
 
-#### *4.1.1、*签发证书
+#### 4.1.1、签发证书
 
 !!! tip "此步骤在运维主机HOME7-200上进行"
 
-##### *4.1.1.1、*创建自签证书请求文件
+##### 4.1.1.1、创建自签证书请求文件
 
 > vim /opt/certs/kubelet-csr.json
 
@@ -1744,7 +1744,7 @@ kubectl get cs
 
 
 
-##### *4.1.1.2、*生成证书
+##### 4.1.1.2、生成证书
 
 ```shell
 cd /opt/certs 
@@ -1755,7 +1755,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=serv
 
  
 
-##### *4.1*.1.3、复制证书到计算节点
+##### 4.1*.1.3、复制证书到计算节点
 
 ```
 cd /opt/kubernetes/server/bin/certs
@@ -1765,11 +1765,11 @@ scp root@10.4.7.200:/opt/certs/kubelet-key.pem ./
 
 
 
-#### *4.1.3、*创建配置文件
+#### 4.1.3、创建配置文件
 
 在任意计算节点执行，我这里是在HOME7-31上执行的
 
-##### *4.1.3.1、*设置set-cluster
+##### 4.1.3.1、设置set-cluster
 
 创建需要连接的集群信息，可以创建多个k8s集群信息
 
@@ -1787,7 +1787,7 @@ kubectl config set-cluster zsk8s \
 
 
 
-##### *4.1.3.2、*设置set-credentials
+##### 4.1.3.2、设置set-credentials
 
 创建用户账号，即用户登陆使用的客户端私有和证书，可以创建多个证书
 
@@ -1800,7 +1800,7 @@ kubectl config set-credentials k8s-node \
 
 
 
-##### *4.1.3.3、*设置set-context
+##### 4.1.3.3、设置set-context
 
 确定账号与集群的关系
 
@@ -1813,7 +1813,7 @@ kubectl config set-context zsk8s-context \
 
 
 
-##### *4.1.3.4、*设置use-context
+##### 4.1.3.4、设置use-context
 
 设置使用那个context
 
@@ -1823,7 +1823,7 @@ kubectl config use-context zsk8s-context --kubeconfig=kubelet.kubeconfig
 
 注意将生成的文件拷贝到其他两台机器对应的目录下去
 
-##### *4.1.3.5、*创建资源配置清单
+##### 4.1.3.5、创建资源配置清单
 
 \# vim /opt/kubernetes/server/bin/conf/k8s-node.yaml
 
@@ -1844,7 +1844,7 @@ subjects:
 
 
 
-##### *4.1.3.6、*应用资源配置清单
+##### 4.1.3.6、应用资源配置清单
 
 ```
 cd /opt/kubernetes/server/bin/conf/
@@ -1853,7 +1853,7 @@ kubectl create -f k8s-node.yaml
 
 
 
-##### *4.1.3.7、*检查
+##### 4.1.3.7、检查
 
 ```
 kubectl get clusterrolebinding k8s-node
@@ -1861,7 +1861,7 @@ kubectl get clusterrolebinding k8s-node
 
 
 
-##### *4.1.3.8、*复制kubelet.kubeconfig到其他机器
+##### 4.1.3.8、复制kubelet.kubeconfig到其他机器
 
 将生成的kubelet.kubeconfig文件复制到另外两台主机的/opt/kubernetes/server/conf/目录下
 
@@ -1873,19 +1873,19 @@ scp kubelet.kubeconfig root@10.4.7.33:/opt/kubernetes/server/conf/
 
 
 
-#### *4.1.4、*获取基础镜像pause
+#### 4.1.4、获取基础镜像pause
 
 此步骤在运维主机HOME7-200上执行
 
 我们启动需要基础镜像pause，这里我先将pause镜像放到私有仓库，加快获取速度
 
-##### *4.1.4.1、获取镜像
+##### 4.1.4.1、获取镜像
 
 \# docker pull kubernetes/pause
 
 
 
-##### *4.1.4.2、*为镜像打私有tag
+##### 4.1.4.2、为镜像打私有tag
 
 \# docker images | grep pause
 
@@ -1893,7 +1893,7 @@ scp kubelet.kubeconfig root@10.4.7.33:/opt/kubernetes/server/conf/
 
 
 
-##### *4.1.4.3、*推送到私有仓库
+##### 4.1.4.3、推送到私有仓库
 
 \# docker login harbor.zs.com
 
@@ -1901,11 +1901,11 @@ scp kubelet.kubeconfig root@10.4.7.33:/opt/kubernetes/server/conf/
 
 
 
-##### *4.1.4.4、*验证是否推送成功
+##### 4.1.4.4、验证是否推送成功
 
 可以通过web页面确认镜像推送成功
 
-#### *4.1.5、*创建kubelet启动脚本
+#### 4.1.5、创建kubelet启动脚本
 
 !!! warning "注意修改主机名称"
 
@@ -1935,7 +1935,7 @@ scp kubelet.kubeconfig root@10.4.7.33:/opt/kubernetes/server/conf/
 
 
 
-#### *4.1.6、*调整文件权限及创建目录
+#### 4.1.6、调整文件权限及创建目录
 
 ```
 chmod +x /opt/kubernetes/server/bin/kubelet.sh
@@ -1944,7 +1944,7 @@ mkdir -p /data/logs/kubernetes/kube-kubelet  /data/kubelet
 
 
 
-#### *4.1.7、*创建supervisor启动配置文件
+#### 4.1.7、创建supervisor启动配置文件
 
 > vim /etc/supervisord.d/kube-kubelet.ini 
 
@@ -1977,7 +1977,7 @@ stderr_events_enabled=false
 
 
 
-#### *4.1.8、*启动服务并检查
+#### 4.1.8、启动服务并检查
 
 ```shell
 supervisorctl update
@@ -1986,7 +1986,7 @@ supervisorctl status
 
 
 
-#### *4.1.9、*检查节点运行情况
+#### 4.1.9、检查节点运行情况
 
 任意计算节点执行即可
 
@@ -2000,11 +2000,11 @@ kubectl get nodes
 
 ### 4.2、部署kube-proxy集群服务
 
-#### *4.2.1、*证书签发
+#### 4.2.1、证书签发
 
 !!! tip "此步骤在运维主机HOME7-200上进行"
 
-##### *4.2.1.1、*创建自签证书请求文件
+##### 4.2.1.1、创建自签证书请求文件
 
 > vim /opt/certs/kube-proxy.json
 
@@ -2030,7 +2030,7 @@ kubectl get nodes
 
 
 
-##### *4.2.1.2、*生成证书
+##### 4.2.1.2、生成证书
 
 ```
 cd /opt/certs
@@ -2049,9 +2049,9 @@ scp -r root@10.4.7.200:/opt/certs/kube-proxy-client.pem ./
 
  
 
-#### *4.2.3、*创建配置文件
+#### 4.2.3、创建配置文件
 
-##### *4.2.3.1、*设置set-cluster
+##### 4.2.3.1、设置set-cluster
 
 在任意计算节点上执行即可
 
@@ -2068,7 +2068,7 @@ cd /opt/kubernetes/server/conf
 
 
 
-##### *4.2.3.2、*设置set-credentials
+##### 4.2.3.2、设置set-credentials
 
 ```
  kubectl config set-credentials kube-proxy \
@@ -2080,7 +2080,7 @@ cd /opt/kubernetes/server/conf
 
 
 
-##### *4.2.3.3、*设置set-context
+##### 4.2.3.3、设置set-context
 
 ```
  kubectl config set-context zsk8s-context \
@@ -2091,7 +2091,7 @@ cd /opt/kubernetes/server/conf
 
 
 
-##### *4.2.3.4、*设置use-context
+##### 4.2.3.4、设置use-context
 
 ```
  kubectl config use-context zsk8s-context --kubeconfig=kube-proxy.kubeconfig
@@ -2099,7 +2099,7 @@ cd /opt/kubernetes/server/conf
 
 
 
-##### *4.2.3.5、*复制kubelet-proxy.kubeconfig到其他机器
+##### 4.2.3.5、复制kubelet-proxy.kubeconfig到其他机器
 
 将生成的kubelet-proxy.kubeconfig文件复制到另外两台主机的/opt/kubernetes/server/conf/目录下:
 
@@ -2111,7 +2111,7 @@ scp kubelet.kubeconfig root@10.4.7.33:/opt/kubernetes/server/conf/
 
 
 
-#### *4.2.4、*开启IPVS模块
+#### 4.2.4、开启IPVS模块
 
 ##### 4.2.4.1、检查模块是否开启
 
@@ -2154,7 +2154,7 @@ lsmod | grep ip_vs
 
 
 
-#### *4.2.5、*添加kube-proxy启动脚本
+#### 4.2.5、添加kube-proxy启动脚本
 
 > vim /opt/kubernetes/server/bin/kube-proxy.sh
 
@@ -2170,7 +2170,7 @@ lsmod | grep ip_vs
 
 
 
-#### *4.2.6、*调整脚本权限及创建文件夹
+#### 4.2.6、调整脚本权限及创建文件夹
 
 ```
 chmod +x /opt/kubernetes/server/bin/kube-proxy.sh
@@ -2179,7 +2179,7 @@ mkdir -p /data/logs/kubernetes/kube-proxy
 
 
 
-#### *4.2.7、*创建supervisor启动配置文件
+#### 4.2.7、创建supervisor启动配置文件
 
 > vim /etc/supervisord.d/kube-proxy.ini
 
@@ -2221,7 +2221,7 @@ supervisorctl status
 
 
 
-#### *4.2.9、*安装ipvsadm模块
+#### 4.2.9、安装ipvsadm模块
 
 ```
 yum install ipvsadm -y
@@ -2232,7 +2232,7 @@ ipvsadm -Ln
 
 
 
-### *4.3、*验证集群
+### 4.3、验证集群
 
 创建一个nginx-daemo资源清单
 
