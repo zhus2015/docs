@@ -5,8 +5,8 @@ repo_url: 'https://github.com/zhus2015/docs'
 edit_uri: ''
 
 theme:
-    #name: 'material'
-    name: 'Bootstrap'
+    name: 'material'
+    #name: 'Bootstrap'
     logo: 'images/facio.ico'
     favicon: 'images/facio.ico'
     language: 'zh'
@@ -16,16 +16,19 @@ theme:
     hljs_languages:
         - yaml
         - bash
-    #font: false
     font:
         text: Roboto
         code: Roboto Mono
     palette:
         scheme: default
         primary: indigo
-        accent: indigo   
- plugins:
-    - search 
+        accent: indigo
+        
+plugins:
+    - search
+#copyright: 
+#google_analytics:
+
 nav:
     - 介绍: index.md
     - 系统运维基础:
@@ -132,12 +135,6 @@ nav:
          - MKdocs使用: about/mkdocs.md
          - 图: about/test.md
          
-#社交连接
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/squidfunk
-
 markdown_extensions:
     - markdown.extensions.attr_list
     - admonition
@@ -188,5 +185,4 @@ extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js
 
 
-#copyright: 
-#google_analytics:
+
