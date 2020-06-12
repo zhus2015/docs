@@ -16,7 +16,7 @@
 
 ### 安装部署数据库
 
-部署到10.10.10.20服务器上，这里使用的是mariadb，版本要在5.6版本以上，使用mysql同理
+部署到10.4.7.10服务器上，这里使用的是mariadb，版本要在5.6版本以上，使用mysql同理
 
 #### 配置yum源
 
@@ -122,7 +122,7 @@ default-character-set = utf8mb4
 数据库操作
 
 ```sql
-> update ApolloConfigDB.ServerConfig set ServerConfig.Value="http://config.od.com/eureka" where ServerConfig.Key="eureka.service.url";
+> update ApolloConfigDB.ServerConfig set ServerConfig.Value="http://config.zs.com/eureka" where ServerConfig.Key="eureka.service.url";
 ```
 
 
@@ -131,16 +131,16 @@ default-character-set = utf8mb4
 
 添加config域名和mysql域名解析,
 
-config解析地址为10.10.10.25
+config解析地址为10.4.7.20
 
-mysql解析地址为10.10.10.20
+mysql解析地址为10.4.7.10
 
 ```shell
-# vi /var/named/od.com.zone
+# vi /var/named/zs.com.zone
 # systemctl restart named
 
-# dig -t A config.od.com @10.10.10.20 +short
-# dig -t A mysql.od.com @10.10.10.20 +short
+# dig -t A config.zs.com @10.4.7.10 +short
+# dig -t A mysql.zs.com @10.4.7.10 +short
 ```
 
 
@@ -173,10 +173,10 @@ mysql解析地址为10.10.10.20
 ```
 # cd /data/dockerfile/apollo-configservice/
 # vi application-github.properties
-修改mysql的连接地址为:mysql.od.com:3306
+修改mysql的连接地址为:mysql.zs.com:3306
 username = apolloconfig
 password = 123456
-如果不想使用域名，可以直接使用10.10.10.20宿主机的域名
+如果不想使用域名，可以直接使用10.4.7.10宿主机的域名
 ```
 
 
@@ -265,7 +265,7 @@ tail -f /dev/null
 > /data/dockerfile/apollo-configservice/Dockerfile
 
 ```
-FROM harbor.od.com/base/jre8:8u112
+FROM harbor.zs.com/base/jre8:8u112
 
 ENV VERSION 1.5.1
 
@@ -284,8 +284,8 @@ CMD ["/apollo-configservice/scripts/startup.sh"]
 #### 构建并推送到私有仓库
 
 ```
-# docker build . -t harbor.od.com/infra/apollo-configservice:v1.5.1
-# docker push harbor.od.com/infra/apollo-configservice:v1.5.1
+# docker build . -t harbor.zs.com/infra/apollo-configservice:v1.5.1
+# docker push harbor.zs.com/infra/apollo-configservice:v1.5.1
 ```
 
 
@@ -315,10 +315,10 @@ metadata:
 data:
   application-github.properties: |
     # DataSource
-    spring.datasource.url = jdbc:mysql://mysql.od.com:3306/ApolloConfigDB?characterEncoding=utf8
+    spring.datasource.url = jdbc:mysql://mysql.zs.com:3306/ApolloConfigDB?characterEncoding=utf8
     spring.datasource.username = apolloconfig
     spring.datasource.password = 123456
-    eureka.service.url = http://config.od.com/eureka
+    eureka.service.url = http://config.zs.com/eureka
   app.properties: |
     appId=100003171
 ```
@@ -354,7 +354,7 @@ spec:
           name: apollo-configservice-cm
       containers:
       - name: apollo-configservice
-        image: harbor.od.com/infra/apollo-configservice:v1.5.1
+        image: harbor.zs.com/infra/apollo-configservice:v1.5.1
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -415,7 +415,7 @@ metadata:
   namespace: infra
 spec:
   rules:
-  - host: config.od.com
+  - host: config.zs.com
     http:
       paths:
       - path: /
@@ -431,10 +431,10 @@ spec:
 > 在任意计算节点执行
 
 ```shell
-# kubectl create -f http://k8s-yaml.od.com/apollo-configservice/cm.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-configservice/dp.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-configservice/svc.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-configservice/ingress.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-configservice/cm.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-configservice/dp.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-configservice/svc.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-configservice/ingress.yaml
 ```
 
 
@@ -445,7 +445,7 @@ spec:
 # kubectl get pod -n infra
 ```
 
-通过浏览器访问config.od.com
+通过浏览器访问config.zs.com
 
 
 
@@ -478,10 +478,10 @@ spec:
 ```
 # cd /data/dockerfile/apollo-adminservice/
 # vi application-github.properties
-修改mysql的连接地址为:mysql.od.com:3306
+修改mysql的连接地址为:mysql.zs.com:3306
 username = apolloconfig
 password = 123456
-如果不想使用域名，可以直接使用10.10.10.20宿主机的域名,建议使用域名
+如果不想使用域名，可以直接使用10.4.7.10宿主机的域名,建议使用域名
 ```
 
 
@@ -584,8 +584,8 @@ CMD ["/apollo-adminservice/scripts/startup.sh"]
 #### 构建并推送到私有仓库
 
 ```shell
-# docker build . -t harbor.od.com/infra/apollo-adminservice:v1.5.1
-# docker push harbor.od.com/infra/apollo-adminservice:v1.5.1
+# docker build . -t harbor.zs.com/infra/apollo-adminservice:v1.5.1
+# docker push harbor.zs.com/infra/apollo-adminservice:v1.5.1
 ```
 
 
@@ -612,10 +612,10 @@ metadata:
 data:
   application-github.properties: |
     # DataSource
-    spring.datasource.url = jdbc:mysql://mysql.od.com:3306/ApolloConfigDB?characterEncoding=utf8
+    spring.datasource.url = jdbc:mysql://mysql.zs.com:3306/ApolloConfigDB?characterEncoding=utf8
     spring.datasource.username = apolloconfig
     spring.datasource.password = 123456
-    eureka.service.url = http://config.od.com/eureka
+    eureka.service.url = http://config.zs.com/eureka
   app.properties: |
     appId=100003172
 ```
@@ -651,7 +651,7 @@ spec:
           name: apollo-adminservice-cm
       containers:
       - name: apollo-adminservice
-        image: harbor.od.com/infra/apollo-adminservice:v1.5.1
+        image: harbor.zs.com/infra/apollo-adminservice:v1.5.1
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -684,8 +684,8 @@ spec:
 > 在任意计算节点执行
 
 ```shell
-# kubectl create -f http://k8s-yaml.od.com/apollo-adminservice/cm.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-adminservice/dp.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-adminservice/cm.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-adminservice/dp.yaml
 ```
 
 
@@ -752,10 +752,10 @@ spec:
 
 # vi application-github.properties
 
-修改mysql的连接地址为:mysql.od.com:3306
+修改mysql的连接地址为:mysql.zs.com:3306
 username = apolloportal
 password = 123456
-如果不想使用域名，可以直接使用10.10.10.20宿主机的域名
+如果不想使用域名，可以直接使用10.4.7.10宿主机的域名
 ```
 
 
@@ -861,8 +861,8 @@ CMD ["/apollo-portal/scripts/startup.sh"]
 
 ```shell
 # cd /data/dockerfile/apollo-portal
-# docker build . -t harbor.od.com/infra/apollo-portal:v1.5.1
-# docker push harbor.od.com/infra/apollo-portal:v1.5.1
+# docker build . -t harbor.zs.com/infra/apollo-portal:v1.5.1
+# docker push harbor.zs.com/infra/apollo-portal:v1.5.1
 ```
 
 
@@ -891,13 +891,13 @@ metadata:
 data:
   application-github.properties: |
     # DataSource
-    spring.datasource.url = jdbc:mysql://mysql.od.com:3306/ApolloPortalDB?characterEncoding=utf8
+    spring.datasource.url = jdbc:mysql://mysql.zs.com:3306/ApolloPortalDB?characterEncoding=utf8
     spring.datasource.username = apolloportal
     spring.datasource.password = 123456
   app.properties: |
     appId=100003173
   apollo-env.properties: |
-    dev.meta=http://config.od.com
+    dev.meta=http://config.zs.com
 ```
 
 
@@ -931,7 +931,7 @@ spec:
           name: apollo-portal-cm
       containers:
       - name: apollo-portal
-        image: harbor.od.com/infra/apollo-portal:v1.5.1
+        image: harbor.zs.com/infra/apollo-portal:v1.5.1
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -992,7 +992,7 @@ metadata:
   namespace: infra
 spec:
   rules:
-  - host: portal.od.com
+  - host: portal.zs.com
     http:
       paths:
       - path: /
@@ -1008,23 +1008,23 @@ spec:
 **此步骤在任意运算节点执行**
 
 ```shell
-# kubectl create -f http://k8s-yaml.od.com/apollo-portal/cm.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-portal/dp.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-portal/svc.yaml
-# kubectl create -f http://k8s-yaml.od.com/apollo-portal/ingress.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-portal/cm.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-portal/dp.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-portal/svc.yaml
+# kubectl create -f http://k8s-yaml.zs.com/apollo-portal/ingress.yaml
 ```
 
 
 
 ### 增加域名解析
 
-将portal解析到10.10.10.25 vip上
+将portal解析到10.4.7.20 vip上
 
 
 
 ## 访问验证
 
-访问portal.od.com
+访问portal.zs.com
 
 默认用户名：apollo
 
