@@ -42,6 +42,7 @@ nav:
             - expect交互脚本: system_base/shell/expect.md      
         - 常用服务:
             - FTP: 
+                - FTP安装部署: system_base/common_services/vsftp_install.md
                 - FTP错误代码: system_base/common_services/vsftp_error_code.md
                 - FTP安装脚本: system_base/common_services/vsftp_install_scripte.md
             - DNS:

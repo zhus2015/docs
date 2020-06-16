@@ -376,7 +376,7 @@ mkdir -p /opt/certs
 
 > vim /opt/certs/ca-csr.json
 
-```
+```json
 {
   "CN": "zs.com",
   "hosts": [
