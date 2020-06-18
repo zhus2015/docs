@@ -1571,7 +1571,7 @@ mkdir -p /data/logs/kubernetes/kube-controller-manager
 
 
 
-#### 3.4.3、\*创建supervisor启动配置文件\
+#### 3.4.3、\*创建supervisor启动配置文件
 
 > vim /etc/supervisord.d/kube-conntroller-manager.ini
 

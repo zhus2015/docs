@@ -180,5 +180,7 @@ put filename：上传文件
 mput *.txt：批量上传文件
 cd  dirname：切换目录
 lcd dirname：切换本地目录
+ls:显示远程文件列表
+delete filename：删除远程文件
 ```
 

@@ -15,7 +15,7 @@ theme:
         tabs: true
     hljs_languages:
         - yaml
-        - bash
+        - django
     font:
         text: Roboto
         code: Roboto Mono
@@ -42,9 +42,9 @@ nav:
             - expect交互脚本: system_base/shell/expect.md      
         - 常用服务:
             - FTP: 
-                - FTP安装部署: system_base/common_services/vsftp_install.md
-                - FTP错误代码: system_base/common_services/vsftp_error_code.md
-                - FTP安装脚本: system_base/common_services/vsftp_install_scripte.md
+                - FTP安装部署: system_base/common_services/ftp_install.md
+                - FTP错误代码: system_base/common_services/ftp_error_code.md
+                - FTP相关脚本: system_base/common_services/ftp_scripte.md
             - DNS:
                 - Bind9安装配置: system_base/common_services/bind9.md
             - Rsync:
@@ -125,9 +125,14 @@ nav:
             - ELK安装部署: devops/elk/elk_install.md
             - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
             
-    - Development:
+    - 开发学习:
         - Python:
-            - Python基础: Development/python/python_base/python_list.md
+            - Python基础: 
+                - 基础语法: Development/python/python_base/python_basic_grammar.md
+                - 数据类型: Development/python/python_base/python_data_type.md
+                - 列表操作: Development/python/python_base/python_list.md
+                - 文件操作: Development/python/python_base/python_file.md
+                - 字符操作: Development/python/python_base/python_string.md
             
     - 资源文件: file/sersync2.5.4_64bit_binary_stable_final.tar.gz
         
@@ -179,11 +184,11 @@ extra_javascript:
     - 'js/simpleLightbox.js'
     - 'js/custom.js'
     - js/umlconvert.js
-    - https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js
-    - https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js
-    - https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js
-    - https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js
-    - https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js
+    #- https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js
+    #- https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js
+    #- https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js
+    #- https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js
+    #- https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js
 
 
 

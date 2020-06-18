@@ -1,8 +1,12 @@
 
 
+# FTP相关脚本
+
 !!! warning "请自行测试过后使用"
 
-!!! node "此脚本是搬运而来，如有侵权请联系删除"
+!!! node "部分脚本是搬运而来，如有侵权请联系删除"
+
+## 安装脚本
 
 ```shell
 #!/bin/bash
@@ -57,5 +61,62 @@ EOF
 chmod -R 777 $c
 systemctl restart ftpd
 echo "vsftpd config finsh"
+```
+
+
+
+## 上传脚本
+
+```shell
+#!/bin/bash
+# 主要是用FTP上传文件
+set -e 
+#set -x
+
+FTP_DIR=/data/ftpfile
+FTP_TMP=/tmp/ftp.tmp
+FTP_LOG=/tmp/ftp.log
+FTP_HOST=10.10.10.10
+FTP_PORT=21
+FTP_USER="test"
+FPT_PASS="test"
+
+function FtpUpload()
+{   
+   FTP_TMP=/tmp/ftp.tmp
+   echo "\
+   open $FTP_HOST $FTP_PORT
+   user $FTP_USER $FPT_PASS
+   prom
+   bin
+   "  >$FTP_TMP
+
+   for file in `ls $FTP_DIR`
+     do
+       echo "\
+       lcd $FTP_DIR
+       put $file
+       " >>$FTP_TMP
+     done
+   echo "bye" $FTP_TMP
+   cat $FTP_TMP |ftp -n 2 >>$FTP_LOG
+}
+
+#删除已上传的文件
+function DelFile()
+{
+   for line in `grep "put" $FTP_TMP |sed 's/put//g'`
+   do
+     rm -rf $FTP_DIR/$line
+   done
+}
+
+#这里写了一个main函数来执行
+Main()
+{
+  FtpUpload
+  DelFile
+}
+Main
 ```
 
