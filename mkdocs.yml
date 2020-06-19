@@ -70,6 +70,7 @@ nav:
             - Redis安装部署: database/redis/redis_install.md
         - Mongodb:
             - Mongodb安装部署: database/mongodb/mongodb_install.md
+            - Mongodb日常使用: database/mongodb/mongodb_use.md
  
     - 代码文档管理: 
         - 代码管理:

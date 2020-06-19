@@ -1,5 +1,7 @@
 # Oracle日常操作
 
+## 表空间相关操作
+
 查看数据库快大小(11g默认大小8192)
 
 select value from v$parameter where name='db_block_size'
@@ -29,7 +31,7 @@ create bigfile tablespace
 
 
 
-**查看表空间使用情况**
+### **查看表空间使用情况**
 
 > 方法一
 
@@ -70,7 +72,7 @@ WHERE
 
 > 查看表空间物理文件的名称及大小
 
-```
+```sql
 SELECT
 	tablespace_name,
 	file_id,
@@ -84,9 +86,9 @@ ORDER BY
 
 
 
-**创建表空间**
+### 创建表空间
 
-```
+```sql
 create tablespace HA
 datafile '/data/app/oracle/oradata/orcl/HA.pbf' 
 size 2048m
@@ -98,47 +100,47 @@ extent management local;
 
 
 
-**删除表空间和文件**
+### 删除表空间和文件
 
-```
+```sql
 DROP TABLESPACE HA INCLUDING CONTENTS AND DATAFILES; 
 ```
 
 
 
-**改变表空间状态**
+### 改变表空间状态
 
 > 使表空间脱机
 
-```
+```sql
 ALTER TABLESPACE HA OFFLINE;
 ```
 
 > 使表空间联机
 
-```
+```sql
 ALTER TABLESPACE HA ONLINE;
 ```
 
 > 使数据文件脱机 
 
-```
+```sql
 ALTER DATABASE DATAFILE 3 OFFLINE; 
 ```
 
 > 使数据文件联机 
 
-```
+```sql
 ALTER DATABASE DATAFILE 3 ONLINE; 
 ```
 
 
 
-**扩展表空间**
+### 扩展表空间
 
 查询表空间名称及其数据文件
 
-```
+```sql
 select tablespace_name, file_id, file_name,  
 round(bytes/(1024*1024),0) total_space 
 from dba_data_files 
@@ -149,21 +151,45 @@ order by tablespace_name;
 
 > 增加数据文件
 
-```
+```sql
 ALTER TABLESPACE HA ADD DATAFILE '/data/app/oracle/oradata/orcl/HA1.pbf' SIZE 1024M;
 ```
 
 > 扩展源数据文件
 
-```
+```sql
 ALTER DATABASE DATAFILE '/data/app/oracle/oradata/orcl/HA.pbf' RESIZE 4196M;
 ```
 
 > 设定数据文件自动扩展  
 
-```
+```sql
 ALTER DATABASE DATAFILE '/data/app/oracle/oradata/orcl/HA1.pbf'
 AUTOEXTEND ON NEXT 100M 
 MAXSIZE 10000M; 
+```
+
+
+
+## 数据导入导出
+
+### 导出
+
+exp 用户/密码@实例名  file=输出文件位置 log=输出日志
+
+注意如果密码有特殊符号的情况最好手动输入密码，避免有转义造成问题。
+
+```shell
+exp test/test@ORCL file=./test.dmp log=./test.log
+```
+
+
+
+### 导入
+
+imp 用户名/密码@实例名 file=导入的dmp文件路径 full=y
+
+```shell
+imp test/test@ORCL file=./test.dmp full=y
 ```
 
