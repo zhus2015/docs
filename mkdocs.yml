@@ -74,8 +74,9 @@ nav:
  
     - 代码文档管理: 
         - 代码管理:
-            - gogs: code_docs/code_manage/gogs.md
-            - gitlab: code_docs/code_manage/gitlab.md
+            - SVN: code_docs/code_manage/svn.md
+            - Gogs: code_docs/code_manage/gogs.md
+            - Gitlab: code_docs/code_manage/gitlab.md
         - 代码质量管理:
             - sonarqube: code_docs/code_quality/sonarqube.md
         - 文档管理:
@@ -122,6 +123,10 @@ nav:
             - K8S交付Prometheus监控(1): devops/k8s/k8s_prometheus_install_1.md
             - K8S交付Prometheus监控(2): devops/k8s/k8s_prometheus_install_2.md
             - kubeadmin安装k8s集群: devops/k8s/k8s_kubeadm_install.md
+            - CKA资料:
+                - devops/k8s/cka/CKA真题分享.md
+                - devops/k8s/cka/2019考试真题.md
+                - devops/k8s/cka/20190714考试真题.md
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
             - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
