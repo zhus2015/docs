@@ -131,10 +131,11 @@ nav:
             - K8S交付Prometheus监控(1): Kubernetes/deploy/k8s_prometheus_install_1.md
             - K8S交付Prometheus监控(2): Kubernetes/deploy/k8s_prometheus_install_2.md
             - kubeadmin安装k8s集群: Kubernetes/deploy/k8s_kubeadm_install.md
+        
         - CKA资料:
-            - devops/k8s/cka/CKA真题分享.md
-            - devops/k8s/cka/2019考试真题.md
-            - devops/k8s/cka/20190714考试真题.md
+            - Kubernetes/cka/CKA真题分享.md
+            - Kubernetes/cka/2019考试真题.md
+            - Kubernetes/cka/20190714考试真题.md
 
             
     - 开发学习:
