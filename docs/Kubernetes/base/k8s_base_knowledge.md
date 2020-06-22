@@ -1,6 +1,8 @@
 # K8S基础知识
 
-部分资料参考：Kubernetes权威指南第四版
+!!! tip "部分资料参考：Kubernetes权威指南第四版"
+
+
 
 ## k8s的组成
 
@@ -101,7 +103,7 @@ Cluster IP：Service的IP地址，此为虚拟IP地址。
 
 3.显示出来的InternalIP就是NodeIP
 
-![image-20200605151757780](images/image-20200605151757780.png)
+![image-20200605151757780](../images/image-20200605151757780.png)
 
 
 
@@ -119,7 +121,7 @@ pod和集群外通信，要借助于node ip
 
 1.kubectl get pods
 
-![image-20200605151909999](images/image-20200605151909999.png)
+![image-20200605151909999](../images/image-20200605151909999.png)
 
 2.kubectl describe pod podName
 
@@ -133,7 +135,7 @@ Service的IP地址，此为虚拟IP地址。外部网络无法ping通，只有ku
 
 kubectl -n 命名空间 get Service即可看到ClusterIP
 
-![image-20200605151716542](images/image-20200605151716542.png)
+![image-20200605151716542](../images/image-20200605151716542.png)
 
 Cluster IP是一个虚拟的IP，但更像是一个伪造的IP网络，原因有以下几点
 
@@ -150,104 +152,4 @@ Cluster IP只能结合Service Port组成一个具体的通信端口，单独的C
 service地址和pod地址在不同网段，service地址为虚拟地址，不配在pod上或主机上，外部访问时，先到Node节点网络，再转到service网络，最后代理给pod网络。
 
 
-
-## Pode调度
-
-### Deployment或RC:全自动调度
-
-nginx-deployment.yaml
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      name: nginx-deployment
-  template:
-    metadata:
-      labels:
-        app: nginx-deployment
-        name: nginx-deployment
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.7.9
-        ports:
-        - containerPort: 80
-```
-
-![image-20200618153935702](images/image-20200618153935702.png)
-
-这种调度方式用户无法干预，完全是通过Master和Scheduler经过一系列算法计算得出
-
-
-
-### NodeSelector：定向调度
-
-此种调度是通过Node的标签和Pod的nodeSelector属性相匹配，来达到调度的目的
-
-1、首先通过kubectl label命令给目标Node打上标签
-
-```shell
-kubectl label nodes k8s-node1 zone=north
-```
-
-可以通过`kubectl get node --show-labels`查看node的标签
-
-2、修改nginx-deployment.yaml文件
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      name: nginx-deployment
-  template:
-    metadata:
-      labels:
-        app: nginx-deployment
-        name: nginx-deployment
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.7.9
-        ports:
-        - containerPort: 80
-      nodeSelector:
-        zone: north
-```
-
-kuberctl apply -f nginx-deployment.yaml
-
-3、应用资源配置就会发现，所有的pod都调度到了一个node节点上
-
-![image-20200618155554643](images/image-20200618155554643.png)
-
-
-
-Node预定义标签：
-
-- Kubernetes.io/hostname
-- beta.kubernetes.io/os（从1.14版本开始更新为稳定版，到1.18版本删除）
-- beta.kubernetes.io/arch（从1.14版本开始更新为稳定版，到1.18版本删除）
-- kubernetes.io/os（从1.14版本开始启用）
-- kubernetes.io/arch（从1.14版本开始启用）
-
-### NodeAffinity：Node亲和性调度
-
- NodeAffinity意为Node亲和性的调度策略，是用于替换NodeSelector的全新调度策略。目前有两种节点亲和性表达。
-
-- RequiredDuringSchedulingIgnoredDuringExcution：必须满足指定的规则才可以调度Pod到Node上（功能与nodeSelector很像，但是使用的是不同的语法），相当于硬限制
-
-- PreferredDuringSchedulingIgnoredDuringExecution：强调优先满足指定规则，调度器会尝试调度Pod到Node上，但并不强求，相当于软限制。多个优先级规则还可以设置权重值，以定义执行的先后顺序。
-
-  
 

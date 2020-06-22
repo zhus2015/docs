@@ -104,32 +104,38 @@ nav:
             - Jenkins通过ssh通道部署: devops/jenkins/jenkins_deploy_ssh.md
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
             - Jeknins项目构建钉钉通知配置: devops/jenkins/jenkins_message_dingding.md
-        - Docker:
-            - Docker基础: devops/docker/docker_basic.md
-            - Docker的网络模式: devops/docker/docker_network.md
-            - Docker镜像仓库--Harbor: devops/docker/docker_library_harbor.md
-            - 制作jre镜像: devops/docker/make_jre_images.md
-            - 制作运行jar包的镜像: devops/docker/make_jre_jar_images.md
-            - 制作tomcat镜像: devops/docker/make_tomcat_images.md          
-        - K8S: 
-            - K8S基础知识: devops/k8s/k8s_base_knowledge.md
-            #- K8S安装基础组件: devops/k8s/k8s_base_install.md
-            - K8S安装部署(基础组件): devops/k8s/k8s_base_install_new.md
-            - K8S安装部署(核心插件): devops/k8s/k8s_core_plug_install.md
-            #- K8S安装核心组件: devops/k8s/k8s_core_install.md
-            - K8S交付apollo配置中心: devops/k8s/k8s_apollo_install.md
-            - K8S交付Dubbo微服务: devops/k8s/k8s_dubbo_install_new.md
-            - K8S交付Dubbo-monitor微服务: devops/k8s/k8s_dubbo_monitor_install.md
-            - K8S交付Prometheus监控(1): devops/k8s/k8s_prometheus_install_1.md
-            - K8S交付Prometheus监控(2): devops/k8s/k8s_prometheus_install_2.md
-            - kubeadmin安装k8s集群: devops/k8s/k8s_kubeadm_install.md
-            - CKA资料:
-                - devops/k8s/cka/CKA真题分享.md
-                - devops/k8s/cka/2019考试真题.md
-                - devops/k8s/cka/20190714考试真题.md
+            
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
             - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
+            
+    - Docker:
+        - Docker基础: devops/docker/docker_basic.md
+        - Docker的网络模式: devops/docker/docker_network.md
+        - Docker镜像仓库--Harbor: devops/docker/docker_library_harbor.md
+        - 制作jre镜像: devops/docker/make_jre_images.md
+        - 制作运行jar包的镜像: devops/docker/make_jre_jar_images.md
+        - 制作tomcat镜像: devops/docker/make_tomcat_images.md
+        
+    - Kubernetes:
+        - K8S基础知识: 
+            - 简介: Kubernetes/base/k8s_base_knowledge.md
+            - Pod调度: Kubernetes/base/k8s_pod_schedule.md
+            
+        - K8S安装部署:  
+            - K8S安装部署(基础组件): Kubernetes/deploy/k8s_base_install_new.md
+            - K8S安装部署(核心插件): Kubernetes/deploy/k8s_core_plug_install.md
+            - K8S交付apollo配置中心: Kubernetes/deploy/k8s_apollo_install.md
+            - K8S交付Dubbo微服务: Kubernetes/deploy/k8s_dubbo_install_new.md
+            - K8S交付Dubbo-monitor微服务: Kubernetes/deploy/k8s_dubbo_monitor_install.md
+            - K8S交付Prometheus监控(1): Kubernetes/deploy/k8s_prometheus_install_1.md
+            - K8S交付Prometheus监控(2): Kubernetes/deploy/k8s_prometheus_install_2.md
+            - kubeadmin安装k8s集群: Kubernetes/deploy/k8s_kubeadm_install.md
+        - CKA资料:
+            - devops/k8s/cka/CKA真题分享.md
+            - devops/k8s/cka/2019考试真题.md
+            - devops/k8s/cka/20190714考试真题.md
+
             
     - 开发学习:
         - Python:

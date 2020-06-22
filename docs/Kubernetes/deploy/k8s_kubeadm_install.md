@@ -173,7 +173,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
 ```
 
-![image-20200605104334415](images/image-20200605104334415.png)
+![image-20200605104334415](../images/image-20200605104334415.png)
 
 ## 部署node节点
 
@@ -184,7 +184,7 @@ kubeadm join 10.10.10.10:6443 --token 0et5h5.8qheqfbgklfmd6yj \
     --discovery-token-ca-cert-hash sha256:8e0a3a651da53442966febc2eee384767702aef9dbb5cd0976720dbc2f43e9d0
 ```
 
-![image-20200605104310938](images/image-20200605104310938.png)
+![image-20200605104310938](../images/image-20200605104310938.png)
 
 ## 检查集群运行状态
 
@@ -194,7 +194,7 @@ kubeadm join 10.10.10.10:6443 --token 0et5h5.8qheqfbgklfmd6yj \
 kubectl get nodes
 ```
 
-![image-20200605104248555](images/image-20200605104248555.png)
+![image-20200605104248555](../images/image-20200605104248555.png)
 
 ```
 kubectl get pod,svc -n kube-system
@@ -202,7 +202,7 @@ kubectl get pod,svc -n kube-system
 
 确认所有服务都的状态都在Running状态
 
-![image-20200605152435227](images/image-20200605152435227.png)
+![image-20200605152435227](../images/image-20200605152435227.png)
 
 到这里我们的K8S集群就基本部署完成了，接下来可以根据自己的需求进行部署dashboard、ingress等插件
 

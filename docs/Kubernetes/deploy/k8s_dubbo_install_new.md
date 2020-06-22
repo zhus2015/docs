@@ -214,7 +214,7 @@ docker build . -t harbor.zs.com/infra/jenkins:v2.222.3
 
 在harbor中创建名称为infra的私有仓库
 
-![img](images/wps3-1591854503751.jpg) 
+![img](../images/wps3-1591854503751.jpg) 
 
  
 
@@ -562,7 +562,7 @@ chmod u+x /data/dockerfile/jre8/entrypoint.sh
 
 在harbor中创建一个公开的bash仓库
 
-![img](images/wps4-1591854503752.jpg) 
+![img](../images/wps4-1591854503752.jpg) 
 
  
 

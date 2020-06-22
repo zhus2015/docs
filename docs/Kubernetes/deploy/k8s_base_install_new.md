@@ -342,7 +342,7 @@ systemctl enable named
 dig -t A HOME7-21.host.com @10.4.7.10 +short
 ```
 
-![img](images/wps1.jpg) 
+![img](../images/wps1.jpg) 
 
  
 
@@ -423,7 +423,7 @@ cd /opt/certs
 cfssl gencert -initca ca-csr.json | cfssl-json -bare ca
 ```
 
-![img](images/wps2.jpg) 
+![img](../images/wps2.jpg) 
 
 
 
@@ -663,7 +663,7 @@ docker push harbor.zs.com/public/nginx:v1.7.9
 
 ??? warning "此时你会发现推送失败，原因是我们需要登录harbor仓库才能推送镜像"
 
-![img](images/wps3.jpg) 
+![img](../images/wps3.jpg) 
 
  
 
@@ -675,17 +675,17 @@ docker login harbo.zs.com
 
 登录成功如下图，这时我们就可以推送镜像了
 
-![img](images/wps4.jpg) 
+![img](../images/wps4.jpg) 
 
 ```
 docker push harbor.zs.com/public/nginx:v1.7.9
 ```
 
-![img](images/wps5.jpg) 
+![img](../images/wps5.jpg) 
 
 可以从上图看到已经推送成功，在harbor的web页面也能看到相关镜像
 
-![img](images/wps6.jpg) 
+![img](../images/wps6.jpg) 
 
 
 
@@ -875,7 +875,7 @@ cd /opt/cert
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=peer etcd-peer-csr.json | cfssl-json -bare etcd-peer
 ```
 
-![img](images/wps7.jpg) 
+![img](../images/wps7.jpg) 
 
  
 
@@ -1018,11 +1018,11 @@ supervisorctl update
 
 > netstat -luntp |grep etcd
 
-![img](images/wps8.jpg) 
+![img](../images/wps8.jpg) 
 
 > /opt/etcd/etcdctl cluster-health
 
-![img](images/wps9.jpg) 
+![img](../images/wps9.jpg) 
 
 到此etcd集群安装完毕
 
@@ -1084,7 +1084,7 @@ supervisorctl update
 
 \# cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client client-csr.json | cfssl-json -bare client
 
-![img](images/wps10.jpg) 
+![img](../images/wps10.jpg) 
 
 #### 3.2.2、签发apiserver证书
 
@@ -1144,7 +1144,7 @@ supervisorctl update
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server apiserver-csr.json | cfssl-json -bare server
 ```
 
-![img](images/wps11.jpg) 
+![img](../images/wps11.jpg) 
 
 #### 3.2.3、下载软件包
 
@@ -1535,7 +1535,7 @@ systemctl enable keepalived
 ip addr
 ```
 
-![img](images/wps12.jpg) 
+![img](../images/wps12.jpg) 
 
 可以通过停止主节点上的nginx来测试vip是否漂移，这里有一个问题，就是systemctl stop keepalived时会出现子进程无法停止的问题，可以将 /usr/lib/systemd/system/keepalived.service 中的KillMode=process注释掉
 
@@ -1688,7 +1688,7 @@ ln -s /opt/kubernetes/server/bin/kubectl /usr/bin/kubectl
 kubectl get cs
 ```
 
-![img](images/wps13.jpg) 
+![img](../images/wps13.jpg) 
 
  
 
@@ -1751,7 +1751,7 @@ cd /opt/certs
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server kubelet-csr.json | cfssl-json -bare kubelet
 ```
 
-![img](images/wps14.jpg) 
+![img](../images/wps14.jpg) 
 
  
 
@@ -1994,7 +1994,7 @@ supervisorctl status
 kubectl get nodes
 ```
 
-![img](images/wps15.jpg) 
+![img](../images/wps15.jpg) 
 
 
 
@@ -2037,7 +2037,7 @@ cd /opt/certs
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=client kube-proxy.json | cfssl-json -bare kube-proxy-client
 ```
 
-![img](images/wps16.jpg) 
+![img](../images/wps16.jpg) 
 
 ##### 4.2.1.3、复制证书到计算节点
 
@@ -2150,7 +2150,7 @@ lsmod | grep ip_vs
 
 开启后执行结果如下图
 
-![img](images/wps17.jpg) 
+![img](../images/wps17.jpg) 
 
 
 
@@ -2228,7 +2228,7 @@ yum install ipvsadm -y
 ipvsadm -Ln
 ```
 
-![img](images/wps18.jpg) 
+![img](../images/wps18.jpg) 
 
 
 

@@ -29,7 +29,7 @@ Prometheus和Heapster(Heapster是K8S的一个子项目，用于获取集群的�
 
  
 
-![img](images/wps5-1591857419676.jpg) 
+![img](../images/wps5-1591857419676.jpg) 
 
  
 
@@ -269,7 +269,7 @@ kubectl apply -f http://k8s-yaml.zs.com/kube-state-metrics/dp.yaml
 kubectl get pod -n kube-system -o wide
 ```
 
-![img](images/wps6-1591857419677.jpg) 
+![img](../images/wps6-1591857419677.jpg) 
 
 
 
@@ -368,7 +368,7 @@ kubectl get pod -n kube-system -o wide
 
 我这里有3台机器因此这里启动了3个pod
 
-![img](images/wps7-1591857419677.jpg) 
+![img](../images/wps7-1591857419677.jpg) 
 
  
 
@@ -497,7 +497,7 @@ kubectl apply -f http://k8s-yaml.zs.com/cadvisor/ds.yaml
 # kubectl get pod -n kube-system -o wide
 ```
 
-![img](images/wps8-1591857419677.jpg)
+![img](../images/wps8-1591857419677.jpg)
 
 
 
@@ -681,6 +681,6 @@ kubectl apply -f http://k8s-yaml.zs.com/blackbox-exporter/ingress.yaml
 
 访问blackbox.zs.com
 
-![img](images/wps9-1591857419677.jpg) 
+![img](../images/wps9-1591857419677.jpg) 
 
  

@@ -701,7 +701,7 @@ nginx -s reload
 
 使用宿主机访问traefik.zs.com验证服务搭建是否正常
 
-![img](images/wps19.jpg) 
+![img](../images/wps19.jpg) 
 
  
 
@@ -908,7 +908,7 @@ kubectl apply -f http://k8s-yaml.zs.com/dashboard/ingress.yaml
 
 通过宿主机的浏览器访问http://dashboard.zs.com
 
-![img](images/wps20.jpg) 
+![img](../images/wps20.jpg) 
 
 
 

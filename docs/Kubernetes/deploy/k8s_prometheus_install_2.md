@@ -427,11 +427,11 @@ kubectl apply -f http://k8s-yaml.zs.com/prometheus-server/ingress.yaml
 
 通过浏览器访问promethues.zs.com
 
-![img](images/wps10-1591857419677.jpg) 
+![img](../images/wps10-1591857419677.jpg) 
 
  
 
-![img](images/wps11-1591857419677.jpg) 
+![img](../images/wps11-1591857419677.jpg) 
 
 
 
@@ -451,13 +451,13 @@ kubectl apply -f http://k8s-yaml.zs.com/prometheus-server/ingress.yaml
 }
 ```
 
-![img](images/wps12-1591857419677.jpg) 
+![img](../images/wps12-1591857419677.jpg) 
 
  
 
 等pod重启后，可以从Prometheus的web页面上看到
 
-![img](images/wps13-1591857419677.jpg) 
+![img](../images/wps13-1591857419677.jpg) 
 
 ### 6.9.2、blackbox纳入
 
@@ -476,17 +476,17 @@ kubectl apply -f http://k8s-yaml.zs.com/prometheus-server/ingress.yaml
 }
 ```
 
-![img](images/wps14-1591857419677.jpg) 
+![img](../images/wps14-1591857419677.jpg) 
 
 可以通过Prometheus的web页面查看到下述页面
 
  
 
-![img](images/wps15-1591857419677.jpg) 
+![img](../images/wps15-1591857419677.jpg) 
 
 通过blackbox.zs.com页面可以看到新加入服务信息
 
-![img](images/wps16-1591857419678.jpg) 
+![img](../images/wps16-1591857419678.jpg) 
 
 也可以增加以下http资源，方法与tcp增加相同
 
@@ -694,7 +694,7 @@ kubectl apply -f http://k8s-yaml.zs.com/grafana/ingress.yaml
 kubectl get pod -n infra
 ```
 
-![img](images/wps17-1591857419678.jpg) 
+![img](../images/wps17-1591857419678.jpg) 
 
 访问web页面grafana.zs.com，默认用户名密码admin/admin
 
@@ -722,17 +722,17 @@ grafana-cli plugins install natel-discrete-panel
 
 选择prometheus，把3个证书添加进来
 
-![img](images/wps18-1591857419678.jpg) 
+![img](../images/wps18-1591857419678.jpg) 
 
 #### 7.6.3、配置集群
 
 找到刚才安装的kubernetes插件，启用然后新建cluster
 
-![img](images/wps19-1591857419678.jpg) 
+![img](../images/wps19-1591857419678.jpg) 
 
-![img](images/wps20-1591857419678.jpg) 
+![img](../images/wps20-1591857419678.jpg) 
 
-![img](images/wps21.jpg) 
+![img](../images/wps21.jpg) 
 
  
 
@@ -1055,7 +1055,7 @@ curl -X POST http://prometheus.zs.com/-/reload
 
 使用浏览器访问：http://prometheus.zs.com/alerts
 
-![img](images/wps22.jpg) 
+![img](../images/wps22.jpg) 
 
 ### 8.7、告警测试
 
