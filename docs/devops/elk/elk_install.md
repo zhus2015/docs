@@ -2,7 +2,7 @@
 
 官方文档地址：https://www.elastic.co/cn/what-is/elasticsearch
 
-
+一个x-pack使用连接：https://www.azurew.com/elk/3750.html?tdsourcetag=s_pctim_aiomsg
 
 ## 关于
 
@@ -135,6 +135,7 @@ discovery.seed_hosts: ["elk"]
 	```
 
   
+
 
 
 ### 修改logstash配置

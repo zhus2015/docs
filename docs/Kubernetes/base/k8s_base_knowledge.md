@@ -1,4 +1,4 @@
-# K8S基础知识
+# K8S基础概述
 
 !!! tip "部分资料参考：Kubernetes权威指南第四版"
 
@@ -79,77 +79,76 @@ Kubernetes主要以下几个核心组件组成：
 
   
 
-## kubernetes集群中三种IP地址区别
-
-Kubernetes集群里有三种IP地址，分别如下：
-
-Node IP：Node节点的IP地址，即物理网卡的IP地址。
-
-Pod IP：Pod的IP地址，即docker容器的IP地址，此为虚拟IP地址。
-
-Cluster IP：Service的IP地址，此为虚拟IP地址。
+## Label
 
 
 
-### Node IP
-
-可以是物理机的IP（也可能是虚拟机IP）。每个Service都会在Node节点上开通一个端口，外部可以通过NodeIP:NodePort即可访问Service里的Pod,和我们访问服务器部署的项目一样，IP:端口/项目名
-
-在kubernetes查询Node IP
-
-1.kubectl get nodes
-
-2.kubectl describe node nodeName
-
-3.显示出来的InternalIP就是NodeIP
-
-![image-20200605151757780](../images/image-20200605151757780.png)
 
 
+## Replication Controller
 
-### Pod IP
+简称RC,RC是Kubernetes系统中的核心概念之一，简单来说，它其实定义了 
 
-Pod IP是每个Pod的IP地址，他是Docker Engine根据docker网桥的IP地址段进行分配的，通常是一个虚拟的二层网络
+一个期望的场景，即声明某种Pod的副本数量在任意时刻都符合某个预期值，所以RC的定义包括如下几个部分。 
 
-同Service下的pod可以直接根据PodIP相互通信
+- Pod期待的副本数量。 
 
-不同Service下的pod在集群间pod通信要借助于 cluster ip
+- 用于筛选目标Pod的Label Selector。 
 
-pod和集群外通信，要借助于node ip
+- 当Pod的副本数量小于预期数量时，用于创建新Pod的Pod模板（template）
 
-在kubernetes查询Pod IP
+下面是一个完整的RC定义的例子，即确保拥有tier=frontend标签的这个Pod（运行Tomcat容器）在整个Kubernetes集群中始终只有一个副本：
 
-1.kubectl get pods
+```yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    tier: frontend
+  template:
+    metadata:
+      labels:
+        app: app-demo
+        tier: frontend
+    spec:
+      containers:
+      - name: tomcat-demo
+        image: tomcat
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        ports:
+        - containerPort: 80
+```
 
-![image-20200605151909999](../images/image-20200605151909999.png)
+在我们定义了一个RC并将其提交到Kubernetes集群中后，Master上的Controller Manager组件就得到通知，定期巡检系统中当前存活的目标Pod，并确保目标Pod实例的数量刚好等于此RC的期望值，如果有过多的Pod副本在运行，系统就会停掉一些Pod，否则系统会再自动创建一些 Pod。可以说，通过RC，Kubernetes实现了用户应用集群的高可用性，并且大大减少了系统管理员在传统IT环境中需要完成的许多手工运维工作（如主机监控脚本、应用监控脚本、故障恢复脚本等）。
 
-2.kubectl describe pod podName
-
-
-
-### Cluster IP
-
-Service的IP地址，此为虚拟IP地址。外部网络无法ping通，只有kubernetes集群内部访问使用。
-
-在kubernetes查询Cluster IP
-
-kubectl -n 命名空间 get Service即可看到ClusterIP
-
-![image-20200605151716542](../images/image-20200605151716542.png)
-
-Cluster IP是一个虚拟的IP，但更像是一个伪造的IP网络，原因有以下几点
-
-Cluster IP仅仅作用于Kubernetes Service这个对象，并由Kubernetes管理和分配P地址
-
-Cluster IP无法被ping，他没有一个“实体网络对象”来响应
-
-Cluster IP只能结合Service Port组成一个具体的通信端口，单独的Cluster IP不具备通信的基础，并且他们属于Kubernetes集群这样一个封闭的空间。
-
-在不同Service下的pod节点在集群间相互访问可以通过Cluster IP
-
-三种IP网络间的通信
-
-service地址和pod地址在不同网段，service地址为虚拟地址，不配在pod上或主机上，外部访问时，先到Node节点网络，再转到service网络，最后代理给pod网络。
+需要注意的是，删除RC并不会影响通过该RC已创建好的Pod。为了删除所有Pod，可以设置replicas的值为0，然后更新该RC。另外，kubectl提供了stop和delete命令来一次性删除RC和RC控制的全部Pod。
 
 
 
+## Deployment
+
+Deployment是Kubernetes在1.2版本中引入的新概念，用于更好地解 决Pod的编排问题。为此，Deployment在内部使用了Replica Set来实现目的，无论从Deployment的作用与目的、YAML定义，还是从它的具体命令行操作来看，我们都可以把它看作RC的一次升级，两者的相似度超 过90%。
+
+Deployment相对于RC的一个最大升级是我们可以随时知道当前Pod“部署”的进度。实际上由于一个Pod的创建、调度、绑定节点及在目 标Node上启动对应的容器这一完整过程需要一定的时间，所以我们期待系统启动N个Pod副本的目标状态，实际上是一个连续变化的“部署过 程”导致的最终状态。 
+
+Deployment的典型使用场景有以下几个。 
+
+- 创建一个Deployment对象来生成对应的Replica Set并完成Pod副本的创建。 
+
+- 检查Deployment的状态来看部署动作是否完成（Pod副本数量是否达到预期的值）。 
+
+- 更新Deployment以创建新的Pod（比如镜像升级）。◎ 如果当前Deployment不稳定，则回滚到一个早先的Deployment版本。
+
+- 暂停Deployment以便于一次性修改多个PodTemplateSpec的配置项，之后再恢复Deployment，进行新的发布。 
+
+- 扩展Deployment以应对高负载。 
+
+- 查看Deployment的状态，以此作为发布是否成功的指标。 
+
+- 清理不再需要的旧版本ReplicaSets。 

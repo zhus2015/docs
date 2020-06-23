@@ -120,6 +120,7 @@ nav:
     - Kubernetes:
         - K8S基础知识: 
             - 简介: Kubernetes/base/k8s_base_knowledge.md
+            - 三种IP: Kubernetes/base/k8s_base_ip.md
             - Pod调度: Kubernetes/base/k8s_pod_schedule.md
             
         - K8S安装部署:  
