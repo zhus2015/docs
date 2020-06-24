@@ -149,7 +149,9 @@ nav:
                 - 字符操作: Development/python/python_base/python_string.md
             
     - 资源文件: file/sersync2.5.4_64bit_binary_stable_final.tar.gz
-        
+     
+    - 开源软件: open_source/open_source.md
+    
     - 关于:
          - 联系方式: about/contact.md
          - MKdocs使用: about/mkdocs.md
