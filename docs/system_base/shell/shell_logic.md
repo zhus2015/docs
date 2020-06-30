@@ -8,7 +8,7 @@ ge 大于等于
 
 gt 大于
 
-ne 不等于
+ne 不等于	
 
 eq 等于
 
@@ -181,3 +181,93 @@ esac
 exit 0
 ```
 
+
+
+## 三、break、continue和exit
+
+break常用于跳出循环使用，一般加数字参数表示跳出当前循环，也可以增加数字参数表示跳出几层循环体
+
+break 用来结束所有循环，循环语句不再有执行的机会；
+
+continue 用来结束本次循环，直接跳到下一次循环，如果循环条件成立，还会继续循环；
+
+exit用来退出当前进程，任何语句不再有执行的机会。
+
+
+
+### break
+
+#### 跳出单循环
+
+```shell
+#!/bin/bash
+sum=0
+while read n
+do
+  if((n>0))
+  then
+    ((sum+=n))
+  else
+    break
+  fi
+done
+echo "sum=$sum"
+```
+
+
+
+#### 跳出双层循环
+
+```shell
+#!/bin/bash
+i=0
+while ((++i))
+do
+  if((i>4))
+  then
+    break
+  fi
+  j=0;
+  while ((++j))
+  do
+    if((j>4)); then
+      break  
+    fi
+   printf "%-4d" $((i*j))
+  done
+  printf "\n"
+done
+```
+
+
+
+### continue
+
+
+
+
+
+
+
+### exit
+
+exit 命令可以接受一个整数值作为参数，代表退出状态。如果不指定，默认状态值是 0。
+
+一般情况下，退出状态为 0 表示成功，退出状态为非 0 表示执行失败（出错）了。
+
+exit 退出状态只能是一个介于 0~255 之间的整数，其中只有 0 表示成功，其它值都表示失败。
+
+Shell执行出错时，可以根据退出状态来判断具体出现了什么错误，比如打开一个文件时，我们可以指定 1 表示文件不存在，2 表示文件没有读取权限，3 表示文件类型不对。
+
+示例脚本：exit.sh
+
+```shell
+#!/bin/bash
+echo "befor exit"
+exit 1
+echo "after exit"
+```
+
+执行结果如下：
+
+![image-20200630105324213](../images/image-20200630105324213.png)

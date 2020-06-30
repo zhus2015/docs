@@ -35,6 +35,8 @@ nav:
         - Linux基础:
             - Centos 7 关闭桌面: system_base/linux/centos7_stop_desktop.md
             - 更换软件安装源: system_base/linux/change_soft_source.md
+            - 定时任务使用配置: system_base/linux/linux_crontab.md
+            - 系统网络配置: system_base/linux/linux_network_setting.md
         - Shell: 
             - Shell基础: system_base/shell/shell.md
             - Shell逻辑判断: system_base/shell/shell_logic.md
@@ -131,7 +133,11 @@ nav:
             - K8S交付Dubbo-monitor微服务: Kubernetes/deploy/k8s_dubbo_monitor_install.md
             - K8S交付Prometheus监控(1): Kubernetes/deploy/k8s_prometheus_install_1.md
             - K8S交付Prometheus监控(2): Kubernetes/deploy/k8s_prometheus_install_2.md
+            - K8S使用ELK收集日志: Kubernetes/deploy/k8s_elk_install.md
             - kubeadmin安装k8s集群: Kubernetes/deploy/k8s_kubeadm_install.md
+        
+        - K8s进阶:
+            - K8S包管理工具-Helm: Kubernetes/advanced/k8s_helm.md
         
         - CKA资料:
             - Kubernetes/cka/CKA真题分享.md
