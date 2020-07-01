@@ -1,4 +1,4 @@
-# kubeadm安装部署k8s
+#  kubeadm安装部署k8s
 
 官方文档：https://kubernetes.io/zh/docs/setup/independent/create-cluster-kubeadm/
 
@@ -133,8 +133,8 @@ docker --version
 
 ## 安装kubernetes组件
 
-```
-yum install -y kubelet-1.15.0 kubeadm-1.15.0 kubectl-1.15.0
+```shell
+yum install -y kubelet-1.15.11 kubeadm-1.15.11 kubectl-1.15.11
 systemctl enable kubelet
 ```
 
