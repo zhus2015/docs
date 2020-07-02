@@ -138,6 +138,7 @@ nav:
         
         - K8s进阶:
             - K8S包管理工具-Helm: Kubernetes/advanced/k8s_helm.md
+            - K8S证书更新: Kubernetes/advanced/k8s_kubeadm_ca_update.md
         
         - CKA资料:
             - Kubernetes/cka/CKA真题分享.md
