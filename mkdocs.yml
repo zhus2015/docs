@@ -101,11 +101,12 @@ nav:
                         
         - Jenkins:
             - Jenkins安装部署: devops/jenkins/jenkins_install.md
-            - Jenkins通过maven打包程序: devops/jenkins/jenkins_build_java.md
             - Jenkins参数化构建: devops/jenkins/jenkins_build_arge.md
+            - Jenkins通过maven打包程序: devops/jenkins/jenkins_build_java.md
             - Jenkins通过ssh通道部署: devops/jenkins/jenkins_deploy_ssh.md
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
             - Jeknins项目构建钉钉通知配置: devops/jenkins/jenkins_message_dingding.md
+            - Jenkins打包APK: devops/jenkins/jenkins_build_apk.md
             
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
