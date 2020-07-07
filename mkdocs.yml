@@ -135,7 +135,7 @@ nav:
             - K8S交付Prometheus监控(1): Kubernetes/deploy/k8s_prometheus_install_1.md
             - K8S交付Prometheus监控(2): Kubernetes/deploy/k8s_prometheus_install_2.md
             - K8S使用ELK收集日志: Kubernetes/deploy/k8s_elk_install.md
-            - kubeadmin安装k8s集群: Kubernetes/deploy/k8s_kubeadm_install.md
+            - Kubeadmin安装k8s集群: Kubernetes/deploy/k8s_kubeadm_install.md
         
         - K8s进阶:
             - K8S包管理工具-Helm: Kubernetes/advanced/k8s_helm.md
@@ -145,7 +145,6 @@ nav:
             - Kubernetes/cka/CKA真题分享.md
             - Kubernetes/cka/2019考试真题.md
             - Kubernetes/cka/20190714考试真题.md
-
             
     - 开发学习:
         - Python:
@@ -155,8 +154,6 @@ nav:
                 - 列表操作: Development/python/python_base/python_list.md
                 - 文件操作: Development/python/python_base/python_file.md
                 - 字符操作: Development/python/python_base/python_string.md
-            
-    - 资源文件: file/sersync2.5.4_64bit_binary_stable_final.tar.gz
      
     - 开源软件: open_source/open_source.md
     
