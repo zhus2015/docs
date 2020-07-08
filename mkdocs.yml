@@ -100,13 +100,14 @@ nav:
             - SaltStack: devops/config_manage_tools/saltstack.md
                         
         - Jenkins:
-            - Jenkins安装部署: devops/jenkins/jenkins_install.md
-            - Jenkins参数化构建: devops/jenkins/jenkins_build_arge.md
-            - Jenkins通过maven打包程序: devops/jenkins/jenkins_build_java.md
-            - Jenkins通过ssh通道部署: devops/jenkins/jenkins_deploy_ssh.md
+            - Jenkins 安装部署: devops/jenkins/jenkins_install.md
+            - Jenkins 参数化构建: devops/jenkins/jenkins_build_arge.md
+            - Jenkins Maven打包程序: devops/jenkins/jenkins_build_java.md
+            - Jenkins SSH通道部署程序: devops/jenkins/jenkins_deploy_ssh.md
+            - Jenkins Webhook触发构建: devops/jenkins/jenkins_webhook_build.md
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
-            - Jeknins项目构建钉钉通知配置: devops/jenkins/jenkins_message_dingding.md
-            - Jenkins打包APK: devops/jenkins/jenkins_build_apk.md
+            - Jeknins 配置钉钉通知: devops/jenkins/jenkins_message_dingding.md
+            - Jenkins 打包APK: devops/jenkins/jenkins_build_apk.md
             
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
@@ -205,11 +206,3 @@ extra_javascript:
     - 'js/simpleLightbox.js'
     - 'js/custom.js'
     - js/umlconvert.js
-    #- https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js
-    #- https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js
-    #- https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js
-    #- https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js
-    #- https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js
-
-
-

@@ -2,7 +2,9 @@
 
 **安装必要插件**
 
-安装方法参考第一篇文档，安装插件名称：Publish Over SSH
+安装方法参考其他资料，安装插件名称：Publish Over SSH
+
+
 
 **配置SSH参数**
 

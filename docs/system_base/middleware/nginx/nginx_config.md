@@ -227,7 +227,17 @@ nginx在项目中大多数情况下会作为反向代理使用，例如nginx后�
 
 **404自动跳转到首页**
 
-server {   location / {    error_page 404 = @ops-coffee;   }   location @ops-coffee {    rewrite .* / permanent;   } }
+```
+server {   
+	location / {    
+		error_page 404 = @ops-coffee;   
+	}
+    
+	location @ops-coffee {    
+		rewrite .* / permanent;   
+	} 
+}
+```
 
 网站出现404页面不是特别友好，我们可以通过上边的配置在出现404之后给自动跳转到首页去。
 
