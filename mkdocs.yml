@@ -39,7 +39,6 @@ nav:
             - 系统网络配置: system_base/linux/linux_network_setting.md
         - Shell: 
             - Shell基础: system_base/shell/shell.md
-            - Shell逻辑判断: system_base/shell/shell_logic.md
             - Shell小实验: system_base/shell/shell_test.md
             - expect交互脚本: system_base/shell/expect.md      
         - 常用服务:
