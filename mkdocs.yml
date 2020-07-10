@@ -42,6 +42,7 @@ nav:
             - Shell基础: system_base/shell/shell.md
             - Shell小实验: system_base/shell/shell_test.md
             - expect交互脚本: system_base/shell/expect.md
+            - 正则匹配: system_base/shell/regular_expression.md
         - 常用服务:
             - FTP: 
                 - FTP安装部署: system_base/common_services/ftp_install.md
