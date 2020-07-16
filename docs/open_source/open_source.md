@@ -24,7 +24,7 @@ GitHub地址：https://github.com/KubeOperator/KubeOperator
 
 
 
-### CODU开源运维平台
+### CoDo开源运维平台
 
 官网地址：https://opendevops.cn/
 
