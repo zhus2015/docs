@@ -14,7 +14,7 @@ keepalived工作模式：抢占式和非抢占式
 
 实验图：
 
-![](images/image-20200606091857028.png)
+![](../images/image-20200606091857028.png) 
 
 ## 实验准备
 
@@ -283,7 +283,7 @@ fi
 
 这里先将nginx的默认页面做一个修改，为了方便辨别，两台机器分别增加一行IP显示
 
-![image-20200606101824024](images/image-20200606101824024.png)
+![image-20200606101824024](../images/image-20200606101824024.png) 
 
 
 
@@ -295,19 +295,19 @@ systemctl start keepalived
 
 启动后可以在10.10.10.91服务器上看到VIP已经启动了
 
-![image-20200606102233300](images/image-20200606102233300.png)
+![image-20200606102233300](../images/image-20200606102233300.png) 
 
 这时访问VIP，可以看到现在显示的也是10.10.10.91服务器的ip
 
-![image-20200606101958805](images/image-20200606101958805.png)
+![image-20200606101958805](../images/image-20200606101958805.png) 
 
 停掉91服务器上的keepalived，可以看到VIP很快就漂移到了10.10.10.92服务器上,注意这里可能存在keepalived进程无法全部停止的情况，可以尝试将文件“/usr/lib/systemd/system/keepalived.service”中的“KillMode=process”注释，然后使用"systemctl daemon-reload"重新加载启动文件后再尝试重启keepalived服务
 
-![image-20200606102412351](images/image-20200606102412351.png)
+![image-20200606102412351](../images/image-20200606102412351.png) 
 
 此时再通过浏览器访问VIP地址，可以看到显示的已经变化了，这时我们再将91服务器山的keepalived启动，会发现VIP又会重新回到91服务器上
 
-![image-20200606102442342](images/image-20200606102442342.png)
+![image-20200606102442342](../images/image-20200606102442342.png) 
 
 
 

@@ -2,8 +2,6 @@
 
 
 
-
-
 ## 实验环境
 
 | IP           | 用途             |      |
@@ -26,7 +24,7 @@ ansiable是居于ssh通道传输数据的，因此需要先做ssh免密通信
 ssh-keygen
 ```
 
-![image-20200608094720138](images/image-20200608094720138.png)
+![image-20200608094720138](images/image-20200608094720138.png) 
 
 
 
@@ -37,7 +35,7 @@ ssh-copy-id -i /root/.ssh/id_rsa.pub root@10.10.10.91
 ssh-copy-id -i /root/.ssh/id_rsa.pub root@10.10.10.92
 ```
 
-![image-20200608095101892](images/image-20200608095101892.png)
+![image-20200608095101892](images/image-20200608095101892.png) 
 
 
 
@@ -50,7 +48,7 @@ ssh root@10.10.10.92
 
 
 
-![image-20200608095201279](images/image-20200608095201279.png)
+![image-20200608095201279](images/image-20200608095201279.png) 
 
 
 
@@ -84,9 +82,9 @@ ansible testhost -m command -a 'w'
 
 这里的testhost是我们开始再配置文件中定义的主机组，也可以写成一个主机列表的形式
 
-![image-20200608100350276](images/image-20200608100350276.png)
+![image-20200608100350276](images/image-20200608100350276.png) 
 
-![image-20200608134950154](images/image-20200608134950154.png)
+![image-20200608134950154](images/image-20200608134950154.png) 
 
 ## Ansible的几种简单语法
 
@@ -213,7 +211,7 @@ ansible-playbook /etc/ansible/test_touch.yml
        - c      
 ```
 
-![image-20200609082715165](images/image-20200609082715165.png)
+![image-20200609082715165](images/image-20200609082715165.png) 
 
 
 

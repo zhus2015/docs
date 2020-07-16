@@ -81,4 +81,5 @@ systemctl start httpd
 
 通过浏览器访问：http://ip/svn ，输入密码即可看到类似下图页面
 
-![image-20200620142947210](../../system_base/common_services/images/image-20200620142947210.png)
+![image-20200620142947210](../images/image-20200620142947210.png) 
+

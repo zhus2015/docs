@@ -57,11 +57,10 @@ nav:
                 - Nginx的内置变量: system_base/middleware/nginx/nginx_var.md
                 - Nginx处理跨域问题: system_base/middleware/nginx/nginx_cross_domain.md
                 - Nginx常用配置: system_base/middleware/nginx/nginx_config.md
-    - 高可用:
-        - LVS简介: HA/lvs.md
-        - Keepalived高可用: HA/keepalived.md
-        - Haproxy: HA/haproxy.md
-            
+        - 高可用:
+            - LVS简介: system_base/high_availability/lvs.md
+            - Keepalived高可用: system_base/high_availability/keepalived.md
+            - Haproxy: system_base/high_availability/haproxy.md           
 
     - 数据库:
         - Oracle:
@@ -85,14 +84,16 @@ nav:
         - 文档管理:
             - confluence: code_docs/docs_manage/confluence.md
             
-    - 开源监控: 
-        - Zabbix:
-            - Zabbix安装部署: open_source_monitor/zabbix/zabbix_install.md
-        - Promethues:
-            - Prometheus安装部署: open_source_monitor/prometheus/prometheus_install.md
-        - Grafana: 
-            - Grafana简介: open_source_monitor/grafana/grafana_about.md
-            - Grafana安装: open_source_monitor/grafana/grafana_install.md           
+    - 开源软件: 
+        - 常用开源软件地址: open_source/open_source.md           
+        - 开源监控: 
+            - Zabbix:
+                - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
+            - Promethues:
+                - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
+            - Grafana: 
+                - Grafana简介: open_source/open_source_monitor/grafana/grafana_about.md
+                - Grafana安装: open_source/open_source_monitor/grafana/grafana_install.md           
  
     - Devops:
         - 配置管理工具:
@@ -156,8 +157,6 @@ nav:
                 - 列表操作: Development/python/python_base/python_list.md
                 - 文件操作: Development/python/python_base/python_file.md
                 - 字符操作: Development/python/python_base/python_string.md
-     
-    - 开源软件: open_source/open_source.md
     
     - 关于:
          - 联系方式: about/contact.md

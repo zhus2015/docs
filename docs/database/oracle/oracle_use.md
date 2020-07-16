@@ -19,13 +19,13 @@ select value from v$parameter where name='db_block_size'
 
 2、扩大db_block_size
 
-![img](images/clipboard.png)
+![img](../images/clipboard.png) 
 
 3、创建bigfile表空间
 
 create bigfile tablespace 
 
-![img](images/clipboard.png)
+![img](../images/clipboard.png) 
 
 需要注意的是使用bigfile表空间，它只能支持一个数据文件。也就是说这个文件的最大大小就是表空间最大大小，你不可能通过增加数据文件来扩大该表空间的大小。
 

@@ -21,3 +21,11 @@ GitHub地址：https://github.com/metersphere/metersphere
 官网地址：https://kubeoperator.io/
 
 GitHub地址：https://github.com/KubeOperator/KubeOperator
+
+
+
+### CODU开源运维平台
+
+官网地址：https://opendevops.cn/
+
+GitHub地址：https://github.com/opendevops-cn/opendevops
