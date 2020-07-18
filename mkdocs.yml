@@ -37,7 +37,8 @@ nav:
             - 更换软件安装源: system_base/linux/change_soft_source.md
             - 定时任务使用配置: system_base/linux/linux_crontab.md
             - 系统网络配置: system_base/linux/linux_network_setting.md
-            - sytemctl进程管理: system_base/linux/centos7_systemctl_setting.md
+            - Sytemctl进程管理: system_base/linux/centos7_systemctl_setting.md
+            - Firewalld使用: system_base/linux/centos7_firewalld_use.md
         - Shell: 
             - Shell基础: system_base/shell/shell.md
             - Shell小实验: system_base/shell/shell_test.md
@@ -54,6 +55,7 @@ nav:
                 - Sersync配置文件同步: system_base/common_services/sersync.md
         - 中间件: 
             - Nginx:
+                - Nginx简介: system_base/middleware/nginx/nginx_about.md
                 - Nginx的内置变量: system_base/middleware/nginx/nginx_var.md
                 - Nginx处理跨域问题: system_base/middleware/nginx/nginx_cross_domain.md
                 - Nginx常用配置: system_base/middleware/nginx/nginx_config.md
@@ -83,6 +85,8 @@ nav:
         - Mongodb:
             - Mongodb安装部署: database/mongodb/mongodb_install.md
             - Mongodb日常使用: database/mongodb/mongodb_use.md
+        - Sqlserver:
+            - Sqlserver安装部署: database/sqlserver/sqlserver_install.md
  
 
     - 开源软件: 
@@ -108,9 +112,10 @@ nav:
             - Jenkins Maven打包程序: devops/jenkins/jenkins_build_java.md
             - Jenkins SSH通道部署程序: devops/jenkins/jenkins_deploy_ssh.md
             - Jenkins Webhook触发构建: devops/jenkins/jenkins_webhook_build.md
-            - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
             - Jeknins 配置钉钉通知: devops/jenkins/jenkins_message_dingding.md
             - Jenkins 打包APK: devops/jenkins/jenkins_build_apk.md
+            - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
+            - Jenkins 内置变量说明: devops/jenkins/jenkins_inlay_arge.md
             
         - ELK: 
             - ELK安装部署: devops/elk/elk_install.md
@@ -144,6 +149,9 @@ nav:
         - K8s进阶:
             - K8S包管理工具-Helm: Kubernetes/advanced/k8s_helm.md
             - K8S证书更新: Kubernetes/advanced/k8s_kubeadm_ca_update.md
+        
+        - K8S YAML文件实例:
+            - 测试YAML: Kubernetes/yaml/测试.md
         
         - CKA资料:
             - Kubernetes/cka/CKA真题分享.md
