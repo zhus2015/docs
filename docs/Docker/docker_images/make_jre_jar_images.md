@@ -39,3 +39,40 @@ exec java -jar ${M_OPTS} ${C_OPTS} ${JAR_BALL}
 rules:
   - pattern: '.*'
 ```
+
+
+
+制作镜像
+
+```
+ docker build -t zhus2015/jre:jre1.8 .
+```
+
+
+
+如果是想要运行jar包时可以在启动是指定参数进行运行即可，这里写了一个小例子
+
+Dockerfile如下：   jar包是我找的一个公司的eureka注册中心程序，没有什么依赖，直接启动即可使用，而且有页面可以验证，自己可以去网上找相关资料
+
+```shell
+FROM zhus2015/base/jre8:8u251
+ADD eureka.jar /opt/project_dir
+```
+
+
+
+制作镜像
+
+```
+docker build -t 10.10.10.103/police/eureka:v0.1 .
+```
+
+
+
+运行镜像
+
+```
+docker run -d -it -p 9001:9001 -e JAR_BALL=eureka.jar 10.10.10.103/police/eureka:v0.1
+```
+
+这里给脚本传了一个参数JAR_BALL，就是jar包的名字，也可以传入指定的运行参数比方说指定内存大小之类的

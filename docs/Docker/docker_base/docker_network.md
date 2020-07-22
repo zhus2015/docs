@@ -12,7 +12,7 @@ none：无网络模式
 
 简介:桥接模式是docker 的默认网络设置，当Docker服务启动时，会在主机上创建一个名为docker0的虚拟网桥，并选择一个和宿主机不同的IP地址和子网分配给docker0网桥
 
-![img](images/clipboard.png)
+![img](../images/clipboard.png) 
 
 网络模式选择桥接模式的容器，就会连接上docker0这个网桥，在通过nat的转换，通过宿主机的网卡，连接外网，就能达到上外网的目的。
 
@@ -20,7 +20,7 @@ none：无网络模式
 
 host 模式：该模式下容器是不会拥有自己的ip地址，而是使用宿主机的ip地址和端口。这种模式的好处就是网络性能比桥接模式的好。缺点就是会占用宿主机的端口，网络的隔离性不太好
 
-![img](images/clipboard.png)
+![img](../images/clipboard.png) 
 
 **none模式**
 

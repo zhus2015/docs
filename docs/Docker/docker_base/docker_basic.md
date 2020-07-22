@@ -10,7 +10,9 @@ Docker 包括三个基本概念
 
 先理解了这三个概念，就理解了 Docker 的整个生命周期。
 
-## **1、docker安装与启动**
+
+
+## **1、Docker安装与启动**
 
 > 安装docker
 
@@ -32,7 +34,11 @@ yum install docker-ce
 systemctl start docker
 ```
 
+
+
 ## **2、镜像的获取与容器的使用**
+
+### 镜像查看
 
 > 搜索镜像 在docker index中搜索image
 
@@ -61,7 +67,7 @@ docker images -a
 > 删除一个或多个image
 
 ```
-  docker rmi  <image ID>： 
+docker rmi  <image ID>： 
 ```
 
 > 使用镜像创建容器
@@ -73,10 +79,10 @@ docker run -i -t sauloal/ubuntu14.04
 > 创建一个容器，让其中运行 bash 应用，退出后容器关闭
 
 ```
- docker run -i -t sauloal/ubuntu14.04 /bin/bash #   
+docker run -i -t sauloal/ubuntu14.04 /bin/bash
 ```
 
-查看容器
+### 查看容器
 
 > 列出当前所有正在运行的container
 
@@ -146,6 +152,8 @@ docker rm <container...>
 docker rm `docker ps -a -q` 
 docker ps -a -q | xargs docker rm
 ```
+
+
 
 ## 3、持久化容器与镜像
 
