@@ -2,7 +2,9 @@
 
 官方文档：https://kubernetes.io/zh/docs/setup/independent/create-cluster-kubeadm/
 
-**注意注意：使用kubeadm部署的k8s集群证书的有效期只有1年，一定要注意提前更换**
+**注意注意：使用kubeadm部署的k8s集群证书的有效期只有1年，ca证书有效期是10年，一定要注意提前更换**
+
+证书更换参考文档[Kubeadm部署集群证书更新](../advanced/k8s_kubeadm_ca_update.md)
 
 
 
@@ -134,7 +136,7 @@ docker --version
 ## 安装kubernetes组件
 
 ```shell
-yum install -y kubelet-1.15.11 kubeadm-1.15.11 kubectl-1.15.11
+yum install -y kubelet-1.15.10 kubeadm-1.15.10 kubectl-1.15.10
 systemctl enable kubelet
 ```
 
@@ -175,6 +177,10 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be008450
 
 ![image-20200605104334415](../images/image-20200605104334415.png)
 
+由于这里的镜像是国外的，可能会出现下载失败，或者下载缓慢的问题，可以将yml文件下载下来修改为国内镜像使用。
+
+
+
 ## 部署node节点
 
 在初始化master节点是会生成加入master节点集群的token，此token有效期为1小时，如果失效了需要手动生成新的token
@@ -205,4 +211,51 @@ kubectl get pod,svc -n kube-system
 ![image-20200605152435227](../images/image-20200605152435227.png)
 
 到这里我们的K8S集群就基本部署完成了，接下来可以根据自己的需求进行部署dashboard、ingress等插件
+
+
+
+## 部署Dashboard控制台
+
+这里我们是测试环境，没有域名之类的访问方式，这里我们将dashboard修改为nodeport的方式进行访问
+
+先下载doashboard的文件，地址：https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.3/aio/deploy/recommended.yaml
+
+将service的类型修改为NodePort，并设置nodePort端口30001，修改后的Service部分内容如下：
+
+```yml
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: kubernetes-dashboard
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  type: NodePort
+  ports:
+    - port: 443
+      targetPort: 8443
+      nodePort: 30001
+  selector:
+    k8s-app: kubernetes-dashboard
+```
+
+
+
+然后使用kubectl apply -f recommended.yaml 创建资源即可
+
+
+
+创建service account并绑定默认cluster-admin管理员集群角色：
+
+```shell
+# 创建用户
+$ kubectl create serviceaccount dashboard-admin -n kube-system
+# 用户授权
+$ kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin
+# 获取用户Token
+$ kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk '/dashboard-admin/{print $1}')
+```
 
