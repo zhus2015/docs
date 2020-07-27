@@ -1,4 +1,8 @@
-# kubernetes集群中三种IP地址区别
+# kubernetes集群中三种IP地址
+
+!!! tip "部分资料参考：Kubernetes权威指南第四版"
+
+
 
 Kubernetes集群里有三种IP地址，分别如下：
 

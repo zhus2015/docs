@@ -137,8 +137,10 @@ nav:
     - Kubernetes:
         - K8S基础知识: 
             - 简介: Kubernetes/base/k8s_base_knowledge.md
+            - K8S命令: Kubernetes/base/k8s_cmd.md
             - 三种IP: Kubernetes/base/k8s_base_ip.md
             - Pod调度: Kubernetes/base/k8s_pod_schedule.md
+            - K8S存储知识: Kubernetes/base/k8s_storage.md
             
         - K8S安装部署:  
             - K8S安装部署(基础组件): Kubernetes/deploy/k8s_base_install_new.md
