@@ -38,7 +38,7 @@ systemctl start docker
 
 ## **2、镜像的获取与容器的使用**
 
-### 镜像查看
+### 2.1、镜像查看
 
 > 搜索镜像 在docker index中搜索image
 
@@ -82,7 +82,7 @@ docker run -i -t sauloal/ubuntu14.04
 docker run -i -t sauloal/ubuntu14.04 /bin/bash
 ```
 
-### 查看容器
+### 2.2、查看容器
 
 > 列出当前所有正在运行的container
 
@@ -148,9 +148,40 @@ docker rm <container...>
 
 > 删除所有的container
 
+```shell
+$ docker rm `docker ps -a -q` 
+$ docker ps -a -q | xargs docker rm
 ```
-docker rm `docker ps -a -q` 
-docker ps -a -q | xargs docker rm
+
+### 2.3、创建一个容器
+
+- -d 后台运行
+
+#### 端口映射
+
+- **-P :**是容器内部端口**随机**映射到主机的高端口。
+- **-p :** 是容器内部端口绑定到**指定**的主机端口。
+
+> 随机将容器的端口映射
+
+```shell
+$ docker run -d -P tomcat:v8.5.51
+```
+
+> 指定端口映射
+
+```shell
+$ docker run -d -p 8080:8080 tomcat:v8.5.51
+```
+
+
+
+#### 文件挂载
+
+-v <host>:<container>:[rw|ro]
+
+```shell
+$ docker run -d -p 8080:8080 -v /data/tomcat_logs:/opt/tomcat/logs tomcat:v8.5.51
 ```
 
 
