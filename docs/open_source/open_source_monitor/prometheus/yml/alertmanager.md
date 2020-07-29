@@ -1,0 +1,24 @@
+# alertmanager.yml
+
+```yml
+global:
+  resolve_timeout: 5m
+route:
+  group_by: ['cqh']
+  group_wait: 10s #组报警等待时间
+  group_interval: 10s #组报警间隔时间
+  repeat_interval: 1m #重复报警间隔时间
+  receiver: 'web.hook'
+receivers:
+  - name: 'web.hook'
+    webhook_configs:
+      - url: 'http://10.10.10.103:8888/open/test'
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
+
+```
+
