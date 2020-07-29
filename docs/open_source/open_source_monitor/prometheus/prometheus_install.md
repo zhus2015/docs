@@ -10,6 +10,8 @@
 
 ## Prometheus server 
 
+
+
 ```shell
 docker run --name=prometheus -d \
 -p 9090:9090 \
@@ -69,6 +71,7 @@ docker run -d \
 ```
 docker run -d -p 9093:9093 \
 --name alertmanager \
+-v "/etc/localtime:/etc/localtime" \
 -v /etc/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml \
 prom/alertmanager
 ```
@@ -84,3 +87,20 @@ alerting:
         - targets: ["10.10.10.103:9093"]
 ```
 
+
+
+## Grafana
+
+```shell
+$ mkdir -p /data/grafana 
+$ docker run -d  -p 3000:3000 \
+--name=grafana \
+--network=host  \
+-v "/etc/localtime:/etc/localtime" \
+-v /data/grafana:/var/lib/grafana \
+grafana/grafana
+```
+
+这里不使用--network=host 可能grafana会出现无法联网的情况
+
+ -v /data/grafana:/var/lib/grafana 是为了持久化数据
