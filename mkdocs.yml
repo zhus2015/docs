@@ -39,6 +39,7 @@ nav:
             - 系统网络配置: system_base/linux/linux_network_setting.md
             - Sytemctl进程管理: system_base/linux/centos7_systemctl_setting.md
             - Firewalld使用: system_base/linux/centos7_firewalld_use.md
+            - 系统内核优化: system_base/linux/system_optimization.md
         - Shell: 
             - Shell基础: system_base/shell/shell.md
             - Shell小实验: system_base/shell/shell_test.md
@@ -97,6 +98,12 @@ nav:
                 - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
             - Promethues:
                 - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
+                - YML配置文件:
+                    - prometheus: open_source/open_source_monitor/prometheus/yml/prometheus.md
+                    - alertmanager: open_source/open_source_monitor/prometheus/yml/alertmanager.md
+                    - node-exporter-alert-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-alert-rules.md
+                    - node-exporter-record-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-record-rules.md
+                    - rules: open_source/open_source_monitor/prometheus/yml/rules.md
             - Grafana: 
                 - Grafana简介: open_source/open_source_monitor/grafana/grafana_about.md
                 - Grafana安装: open_source/open_source_monitor/grafana/grafana_install.md           

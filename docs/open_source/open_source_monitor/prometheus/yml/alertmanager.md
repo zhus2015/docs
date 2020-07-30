@@ -1,5 +1,7 @@
 # alertmanager.yml
 
+!!! tip "文档来源于网络"
+
 ```yml
 global:
   resolve_timeout: 5m
