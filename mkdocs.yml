@@ -96,6 +96,7 @@ nav:
         - 开源监控: 
             - Zabbix:
                 - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
+                - Zabbix监控脚本: open_source/open_source_monitor/zabbix/monitoring_script.md
             - Promethues:
                 - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
                 - YML配置文件:

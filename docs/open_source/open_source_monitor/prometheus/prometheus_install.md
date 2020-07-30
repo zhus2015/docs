@@ -156,3 +156,17 @@ grafana/grafana
 这里不使用--network=host 可能grafana会出现无法联网的情况
 
  -v /data/grafana:/var/lib/grafana 是为了持久化数据
+
+
+
+
+
+```
+cat <<EOF | curl --data-binary @- http://10.10.10.103:9091/metrics/job/cqh/instance/test
+muscle_metric{label="gym"} 8800
+bench_press 100
+dead_lift 180
+deep_squal 160
+EOF
+```
+
