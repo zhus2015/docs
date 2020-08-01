@@ -54,6 +54,12 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 
 
 
+### 开放范围端口
+
+firewall-cmd --zone=public --add-port=8000-9000/tcp --permanent 
+
+
+
 ### 查看指定端口开放信息
 
 firewall-cmd --zone=public --query-port=8080/tcp
