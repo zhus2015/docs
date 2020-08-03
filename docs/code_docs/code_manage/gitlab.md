@@ -1,10 +1,12 @@
 # 强大的代码管理工具Gitlab
 
-!!! node "文档还在准备中"
+!!! node "文档还在努力完善中"
 
 ## 关于
 
 ## 安装部署
+
+gitlab有两种部署方式，一种是脚本部署，另一种是docker部署
 
 ```shell
 sudo yum install -y curl policycoreutils-python openssh-server

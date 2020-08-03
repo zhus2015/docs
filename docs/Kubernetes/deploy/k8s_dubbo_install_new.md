@@ -544,7 +544,7 @@ wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0
 
 ```shell
 #!/bin/sh
-M_OPTS="-Duser.timezone=Asia/Shanghai -javaagent:/opt/prom/jmx_javaagent-0.3.1.jar=$(hostname -i):${M_PORT:"12346"}:/opt/prom/config.yml"
+M_OPTS="-Duser.timezone=Asia/Shanghai -javaagent:/opt/prom/jmx_javaagent-0.3.1.jar=$(hostname -i):${M_PORT:-"12346"}:/opt/prom/config.yml"
 C_OPTS=${C_OPTS}
 JAR_BALL=${JAR_BALL}
 exec java -jar ${M_OPTS} ${C_OPTS} ${JAR_BALL}
