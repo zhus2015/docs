@@ -70,6 +70,7 @@ nav:
             - SVN: code_docs/code_manage/svn.md
             - Gogs: code_docs/code_manage/gogs.md
             - Gitlab: code_docs/code_manage/gitlab.md
+            - Gitlab管理员密码修改: code_docs/code_manage/gitlab_change_password.md
         - 代码质量管理:
             - sonarqube: code_docs/code_quality/sonarqube.md
         - 文档管理:
