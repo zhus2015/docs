@@ -211,26 +211,28 @@ $*  代表“ “$1”c“$2”c“$3”c“$4”  ”,其中c为分割字符，
 
 ??? note "示例"
 
-	```shell
-	#! /bin/bash
-	
-	logfile=/home/logs/client/access.log
-	d1=`date -d "-1 minute" +%H:%M` d2=`date +%M`
-	ipt=/sbin/iptables ips=/tmp/ips.txt
-	block() {
-	grep "$d1:" $logfile|awk '{print $1}' |sort -n |uniq -c |sort -n >$ips
-	for ip in `awk '$1>50 {print $2}' $ips`; do
-	$ipt -I INPUT -p tcp --dport 80 -s $ip -j REJECT
-	echo "`date +%F-%T` $ip" >> /tmp/badip.txt
-	done
-	}
-	unblock()
-	{
-	for i in `$ipt -nvL --line-numbers |grep '0.0.0.0/0'|awk '$2<15 {print $1}'|sort -nr`; do
-	$ipt -D INPUT $i   	done   	$ipt -Z } 	if [ $d2 == "00" ] || [ $d2 == "30" ]; then
-	unblock
-	block
-	else
-	block
-	fi
-	```
+~~~sh
+```shell
+#! /bin/bash
+
+logfile=/home/logs/client/access.log
+d1=`date -d "-1 minute" +%H:%M` d2=`date +%M`
+ipt=/sbin/iptables ips=/tmp/ips.txt
+block() {
+grep "$d1:" $logfile|awk '{print $1}' |sort -n |uniq -c |sort -n >$ips
+for ip in `awk '$1>50 {print $2}' $ips`; do
+$ipt -I INPUT -p tcp --dport 80 -s $ip -j REJECT
+echo "`date +%F-%T` $ip" >> /tmp/badip.txt
+done
+}
+unblock()
+{
+for i in `$ipt -nvL --line-numbers |grep '0.0.0.0/0'|awk '$2<15 {print $1}'|sort -nr`; do
+$ipt -D INPUT $i   	done   	$ipt -Z } 	if [ $d2 == "00" ] || [ $d2 == "30" ]; then
+unblock
+block
+else
+block
+fi
+```
+~~~
