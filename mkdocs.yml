@@ -37,6 +37,7 @@ nav:
             - 更换软件安装源: system_base/linux/change_soft_source.md
             - 定时任务使用配置: system_base/linux/linux_crontab.md
             - 系统网络配置: system_base/linux/linux_network_setting.md
+            - 磁盘扩容: system_base/linux/disk_capacity.md
             - Sytemctl进程管理: system_base/linux/centos7_systemctl_setting.md
             - Firewalld使用: system_base/linux/centos7_firewalld_use.md
             - 系统内核优化: system_base/linux/system_optimization.md
