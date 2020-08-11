@@ -70,6 +70,7 @@ nav:
             - SVN: code_docs/code_manage/svn.md
             - Gogs: code_docs/code_manage/gogs.md
             - Gitlab: code_docs/code_manage/gitlab.md
+            - Gitlab管理员密码修改: code_docs/code_manage/gitlab_change_password.md
         - 代码质量管理:
             - sonarqube: code_docs/code_quality/sonarqube.md
         - 文档管理:
@@ -80,6 +81,7 @@ nav:
             - Centos7下静默安装Oracle: database/oracle/oracle_install.md
             - Oracle日常操作: database/oracle/oracle_use.md
             - Oracle远程连接: database/oracle/oracle_connet.md
+            - Oracle更改字符集: database/oracle/change_character encoding.md
         - Mysql:
             - Mysql安装部署: database/mysql/mysql_install.md
         - Redis:
@@ -134,6 +136,7 @@ nav:
         - Docker基础:
             - Docker基础知识: Docker/docker_base/docker_basic.md
             - Docker的网络模式: Docker/docker_base/docker_network.md
+            - Docker Compose: Docker/docker_base/docker_compose.md
         - Docker镜像仓库:
             - Docker镜像仓库--Harbor: Docker/docker_library/docker_library_harbor.md
             - Docker镜像仓库--Harbor: Docker/docker_library/harbor_miss_password.md
