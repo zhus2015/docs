@@ -19,7 +19,11 @@ Docker 包括三个基本概念
 配置阿里云源：
 
 ```sh
+<<<<<<< HEAD
 wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  \
+=======
+wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo \
+>>>>>>> eb5822ffc12fec42271bc2ddf440f2e487c3aeab
 -O /etc/yum.repos.d/docker-ce.repo
 yum makacache fast
 ```
