@@ -1,4 +1,12 @@
+## Docker安装ELK集群
 
+这里使用docker-compose管理elk集群，因此需要安装docker-compose，请自行参考相关文档
+
+
+
+## elasticsearch
+
+这里使用的是hub.docker.com上的镜像，原因是官方镜像太慢了
 
 ```yml
 version: '2.2'
@@ -13,7 +21,7 @@ services:
     networks:
       - es72net
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.2.0
+    image: kibana:7.2.0
     container_name: kibana72
     environment:
       #- I18N_LOCALE=zh-CN
@@ -23,10 +31,12 @@ services:
       - elasticsearch.hosts=es72_01:9200,es72_02:9200,es72_03:9200
     ports:
       - "5601:5601"
+    volumes:
+      - /etc/localtime:/etc/localtime
     networks:
       - es72net
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    image: elasticsearch:7.2.0
     container_name: es72_01
     environment:
       - cluster.name=geektime
@@ -42,12 +52,13 @@ services:
         hard: -1
     volumes:
       - es72data1:/usr/share/elasticsearch/data
+      - /etc/localtime:/etc/localtime
     ports:
       - 9200:9200
     networks:
       - es72net
   elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    image: elasticsearch:7.2.0
     container_name: es72_02
     environment:
       - cluster.name=geektime
@@ -63,10 +74,11 @@ services:
         hard: -1
     volumes:
       - es72data2:/usr/share/elasticsearch/data
+      - /etc/localtime:/etc/localtime
     networks:
       - es72net
   elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    image: elasticsearch:7.2.0
     container_name: es72_03
     environment:
       - cluster.name=geektime
@@ -82,9 +94,9 @@ services:
         hard: -1
     volumes:
       - es72data3:/usr/share/elasticsearch/data
+      - /etc/localtime:/etc/localtime
     networks:
       - es72net
-
 
 volumes:
   es72data1:
@@ -97,12 +109,13 @@ volumes:
 networks:
   es72net:
     driver: bridge
-
 ```
 
 
 
 
+
+## logstash
 
 ```yml
 version: '2.2'
@@ -115,12 +128,11 @@ services:
       memlock:
         soft: -1
         hard: -1
-    environment:
-      TZ: Asia/Shanghai
     volumes:
       - /data/es-logstash/logstash.conf:/usr/share/logstash/config/logstash.conf
       - /data/movielens:/data/movielens
-
+      - /etc/localtime:/etc/localtime
+      
 networks:
   default:
     external:

@@ -130,7 +130,9 @@ nav:
             - Jenkins 内置变量说明: devops/jenkins/jenkins_inlay_arge.md
             
         - ELK: 
+            - ELK基础知识: devops/elk/elk_basic.md
             - ELK安装部署: devops/elk/elk_install.md
+            - ELK使用Docker安装: devops/elk/elk_install_docker.md
             - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
             
     - Docker:
