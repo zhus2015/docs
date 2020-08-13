@@ -6,10 +6,6 @@
 yum install docker-compose -y
 ```
 
-
-
-
-
 ## 使用
 
 ```sh
