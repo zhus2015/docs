@@ -134,6 +134,8 @@ nav:
             - ELK安装部署: devops/elk/elk_install.md
             - ELK使用Docker安装: devops/elk/elk_install_docker.md
             - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
+            - ELK数据安全: devops/elk/elk_security.md
+            - ELK集群运维: devops/elk/elk_operation.md
             
     - Docker:
         - Docker基础:
