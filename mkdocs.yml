@@ -1,4 +1,7 @@
-site_name: zhus Docs
+site_name: 'zhus Docs'
+site_url: 'https://loding.top'
+site_description: 'ZhuS Docs'
+site_author: 'loding'
 
 #repo_name: 'Github Star'
 repo_url: 'https://github.com/zhus2015/docs'
@@ -16,6 +19,7 @@ theme:
     hljs_languages:
         - yaml
         - django
+        - rust
     font:
         text: Roboto
         code: Roboto Mono
@@ -65,7 +69,7 @@ nav:
             - LVS简介: system_base/high_availability/lvs.md
             - Keepalived高可用: system_base/high_availability/keepalived.md
             - Haproxy: system_base/high_availability/haproxy.md  
-            
+        - Xshell使用: system_base/xshell.md
     - 代码文档管理: 
         - 代码管理:
             - SVN: code_docs/code_manage/svn.md
