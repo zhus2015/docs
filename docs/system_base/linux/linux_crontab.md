@@ -1,9 +1,5 @@
 # Crontab定时任务
 
-一个在线转换的网站：https://tool.lu/crontab/
-
-
-
 常用命令：
 
 crontab -e ：编辑定时任务文件
