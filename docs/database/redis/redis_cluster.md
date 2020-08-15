@@ -1,8 +1,10 @@
 # Redis集群
 
-!!! Tip “文档内容来源 https://blog.csdn.net/miss1181248983/article/details/90056960，如有侵权请联系删除”
+!!! Tip "文档内容来源 https://blog.csdn.net/miss1181248983/article/details/90056960，如有侵权请联系删除"
 
 Redis官网：https://redis.io/
+
+Redis全版本下载地址：http://download.redis.io/releases/
 
 Redis集群有三种模式：
 
@@ -23,9 +25,6 @@ Redis集群有三种模式：
 -  master挂了以后，不影响slave的读，但redis不再提供写服务，master重启后redis将重新对外提供写服务
 - master挂了以后，不会在slave节点中重新选一个master
 
-
-
-<<<<<<< HEAD
 ## Sentinel模式
 
 > Sentine模式特点
@@ -87,19 +86,19 @@ Redis：5.0.9
 
 #### 安装redis
 
-> 所有redis使用二进制的方式部署，这里仅用一台机器的操作为例
+> 所有redis使用二进制的方式部署，这里仅用一台机器的操作为例，详细步骤不做赘述
 >
 > 这里我提前将redis的二进制软件包放到了/usr/local/src目录下
 
 ```sh
 [root@localhost src]# cd /usr/loca/src
 [root@localhost src]# tar zxvf redis-5.0.9.tar.gz
-[root@localhost src]# yum install -y gcc jemalloc jemalloc-devel tcl
-[root@localhost src]# cd redis-5.0.9/deps
+[root@localhost src]# mv redis-5.0.9 /usr/local/redis
+[root@localhost src]# yum install -y gcc tcl
+[root@localhost src]# cd /usr/local/redis/deps
 [root@localhost deps]# make hiredis jemalloc linenoise lua
 [root@localhost deps]# cd ..
-[root@localhost redis-5.0.9]# make PREFIX=/usr/local/redis install
-[root@localhost src]# mv redis-5.0.9 /usr/local/redis
+[root@localhost redis]# make install PREFIX=/usr/local/redis 
 ```
 
 
@@ -111,108 +110,242 @@ Redis：5.0.9
 ```sh
 [root@localhost src]# cd /usr/local/redis
 [root@localhost redis]# mkdir cluster
-[root@localhost redis]# cp redis.conf cluster/redis_6341.conf
-[root@localhost redis]# cp redis.conf cluster/redis_16341.conf
-[root@localhost redis]# mkdir -p /data/redis/cluster/{redis_6341,redis_16341}
-[root@localhost redis]# vi cluster/redis_6341.conf
+[root@localhost redis]# cp redis.conf cluster/redis_6000.conf
+[root@localhost redis]# cp redis.conf cluster/redis_6001.conf
+[root@localhost redis]# mkdir -p /data/redis/data/{redis_6000,redis_6001}
+[root@localhost redis]# mkdir -p /data/redis/logs
+[root@localhost redis]# vi cluster/redis_6000.conf
 bind 10.4.7.41
-port 6341
+port 6000
 daemonize yes
-pidfile "/var/run/redis_6341.pid"
-logfile "/usr/local/redis/cluster/redis_6341.log"
-dir "/data/redis/cluster/redis_6341"
+pidfile "/var/run/redis_6000.pid"
+logfile "/data/redis/logs/redis_6000.log"
+dir "/data/redis/data/redis_6000"
 masterauth 123456
 requirepass 123456
 appendonly yes
 cluster-enabled yes
-cluster-config-file nodes_6341.conf
+cluster-config-file nodes_6000.conf
 
-[root@localhost redis]# vi cluster/redis_16341.conf
+[root@localhost redis]# vi cluster/redis_6001.conf
 bind 10.4.7.41
-port 16341
+port 6001
 daemonize yes
-pidfile "/var/run/redis_16341.pid"
-logfile "/usr/local/redis/cluster/redis_16341.log"
-dir "/data/redis/cluster/redis_16341"
+pidfile "/var/run/redis_6001.pid"
+logfile "/usr/local/redis/cluster/redis_6001.log"
+dir "/data/redis/cluster/redis_6001"
 masterauth 123456
 requirepass 123456
 appendonly yes
 cluster-enabled yes
-cluster-config-file nodes_16341.conf
+cluster-config-file nodes_6001.conf
 ```
 
 
 
 > 10.4.7.42
 
-```
+```sh
 [root@localhost src]# cd /usr/local/redis
 [root@localhost redis]# mkdir cluster
-[root@localhost redis]# cp redis.conf cluster/redis_6342.conf
-[root@localhost redis]# cp redis.conf cluster/redis_16342.conf
-[root@localhost redis]# mkdir -p /data/redis/cluster/{redis_6342,redis_16342}
-[root@localhost redis]# vi cluster/redis_6341.conf
+[root@localhost redis]# cp redis.conf cluster/redis_6000.conf
+[root@localhost redis]# cp redis.conf cluster/redis_6001.conf
+[root@localhost redis]# mkdir -p /data/redis/data/{redis_6000,redis_6001}
+[root@localhost redis]# mkdir -p /data/redis/logs
+[root@localhost redis]# vi cluster/redis_6000.conf
 bind 10.4.7.42
-port 6342
+port 6000
 daemonize yes
-pidfile "/var/run/redis_6342.pid"
-logfile "/usr/local/redis/cluster/redis_6342.log"
-dir "/data/redis/cluster/redis_6342"
+pidfile "/var/run/redis_6000.pid"
+logfile "/data/redis/logs/redis_6000.log"
+dir "/data/redis/data/redis_6000"
 masterauth 123456
 requirepass 123456
 appendonly yes
 cluster-enabled yes
-cluster-config-file nodes_6342.conf
+cluster-config-file nodes_6000.conf
 
-[root@localhost redis]# vi cluster/redis_16342.conf
+[root@localhost redis]# vi cluster/redis_6001.conf
 bind 10.4.7.42
-port 16342
+port 6001
 daemonize yes
-pidfile "/var/run/redis_16342.pid"
-logfile "/usr/local/redis/cluster/redis_16342.log"
-dir "/data/redis/cluster/redis_16342"
+pidfile "/var/run/redis_6001.pid"
+logfile "/usr/local/redis/cluster/redis_6001.log"
+dir "/data/redis/cluster/redis_6001"
 masterauth 123456
 requirepass 123456
 appendonly yes
 cluster-enabled yes
-cluster-config-file nodes_16342.conf
+cluster-config-file nodes_6001.conf
 ```
 
 > 10.4.7.43
 
-```
+```sh
 [root@localhost src]# cd /usr/local/redis
 [root@localhost redis]# mkdir cluster
-[root@localhost redis]# cp redis.conf cluster/redis_6343.conf
-[root@localhost redis]# cp redis.conf cluster/redis_16343.conf
-[root@localhost redis]# mkdir -p /data/redis/cluster/{redis_6342,redis_16343}
-[root@localhost redis]# vi cluster/redis_6343.conf
+[root@localhost redis]# cp redis.conf cluster/redis_6000.conf
+[root@localhost redis]# cp redis.conf cluster/redis_6001.conf
+[root@localhost redis]# mkdir -p /data/redis/data/{redis_6000,redis_6001}
+[root@localhost redis]# mkdir -p /data/redis/logs
+[root@localhost redis]# vi cluster/redis_6000.conf
 bind 10.4.7.43
-port 6343
+port 6000
 daemonize yes
-pidfile "/var/run/redis_6343.pid"
-logfile "/usr/local/redis/cluster/redis_6343.log"
-dir "/data/redis/cluster/redis_6343"
+pidfile "/var/run/redis_6000.pid"
+logfile "/data/redis/logs/redis_6000.log"
+dir "/data/redis/data/redis_6000"
 masterauth 123456
 requirepass 123456
 appendonly yes
 cluster-enabled yes
-cluster-config-file nodes_6343.conf
+cluster-config-file nodes_6000.conf
 
-[root@localhost redis]# vi cluster/redis_16343.conf
+[root@localhost redis]# vi cluster/redis_6001.conf
 bind 10.4.7.43
-port 16343
+port 6001
 daemonize yes
-pidfile "/var/run/redis_16343.pid"
-logfile "/usr/local/redis/cluster/redis_16343.log"
-dir "/data/redis/cluster/redis_16343"
+pidfile "/var/run/redis_6001.pid"
+logfile "/usr/local/redis/cluster/redis_6001.log"
+dir "/data/redis/cluster/redis_6001"
 masterauth 123456
 requirepass 123456
 appendonly yes
 cluster-enabled yes
-cluster-config-file nodes_16343.conf
+cluster-config-file nodes_6001.conf
 ```
 
 #### 启动redis
 
->>>>>>> 36dfe313efebd8df138c23d773faad8c4dd3c899
+> 10.4.7.41
+
+```sh
+[root@localhost redis]# ./bin/redis-server ./cluster/redis_6000.conf
+[root@localhost redis]# ./bin/redis-server ./cluster/redis_6001.conf
+```
+
+> 10.4.7.42
+
+```sh
+[root@localhost redis]# ./bin/redis-server ./cluster/redis_6000.conf
+[root@localhost redis]# ./bin/redis-server ./cluster/redis_6001.conf
+```
+
+> 10.4.7.43
+
+```sh
+[root@localhost redis]# ./bin/redis-server ./cluster/redis_6000.conf
+[root@localhost redis]# ./bin/redis-server ./cluster/redis_6001.conf
+```
+
+
+
+#### 集群创建
+
+```sh
+[root@localhost redis]# ./bin/redis-cli -a 123456 --cluster create 10.4.7.41:6000 10.4.7.41:6001 10.4.7.42:6000 10.4.7.42:6001 10.4.7.43:6000 10.4.7.43:6001 --cluster-replicas 1
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+>>> Performing hash slots allocation on 6 nodes...
+Master[0] -> Slots 0 - 5460
+Master[1] -> Slots 5461 - 10922
+Master[2] -> Slots 10923 - 16383
+Adding replica 10.4.7.42:6001 to 10.4.7.41:6000
+Adding replica 10.4.7.43:6001 to 10.4.7.42:6000
+Adding replica 10.4.7.41:6001 to 10.4.7.43:6000
+M: 27b4b1e72ec83b47c45f6a54f4e5029d54ab52fc 10.4.7.41:6000
+   slots:[0-5460] (5461 slots) master
+S: 2579f7e50448218ecb5d8ab2d1ab42683212c084 10.4.7.41:6001
+   replicates c0d1c39f868af00bd49a7b166519f12fbc0abdb3
+M: 5698cd7e6d20276add4ed6a0d3c11e29ae781d8c 10.4.7.42:6000
+   slots:[5461-10922] (5462 slots) master
+S: 9aee1d6d7b789674f2aeb38da56bdb6c8f8bbfb8 10.4.7.42:6001
+   replicates 27b4b1e72ec83b47c45f6a54f4e5029d54ab52fc
+M: c0d1c39f868af00bd49a7b166519f12fbc0abdb3 10.4.7.43:6000
+   slots:[10923-16383] (5461 slots) master
+S: 932af8fad5124d3339578fc3398289f3269134dc 10.4.7.43:6001
+   replicates 5698cd7e6d20276add4ed6a0d3c11e29ae781d8c
+Can I set the above configuration? (type 'yes' to accept): yes  #输入yes接受配置
+>>> Nodes configuration updated
+>>> Assign a different config epoch to each node
+>>> Sending CLUSTER MEET messages to join the cluster
+Waiting for the cluster to join
+.....
+>>> Performing Cluster Check (using node 10.4.7.41:6000)
+M: 27b4b1e72ec83b47c45f6a54f4e5029d54ab52fc 10.4.7.41:6000
+   slots:[0-5460] (5461 slots) master
+   1 additional replica(s)
+S: 932af8fad5124d3339578fc3398289f3269134dc 10.4.7.43:6001
+   slots: (0 slots) slave
+   replicates 5698cd7e6d20276add4ed6a0d3c11e29ae781d8c
+M: 5698cd7e6d20276add4ed6a0d3c11e29ae781d8c 10.4.7.42:6000
+   slots:[5461-10922] (5462 slots) master
+   1 additional replica(s)
+S: 2579f7e50448218ecb5d8ab2d1ab42683212c084 10.4.7.41:6001
+   slots: (0 slots) slave
+   replicates c0d1c39f868af00bd49a7b166519f12fbc0abdb3
+S: 9aee1d6d7b789674f2aeb38da56bdb6c8f8bbfb8 10.4.7.42:6001
+   slots: (0 slots) slave
+   replicates 27b4b1e72ec83b47c45f6a54f4e5029d54ab52fc
+M: c0d1c39f868af00bd49a7b166519f12fbc0abdb3 10.4.7.43:6000
+   slots:[10923-16383] (5461 slots) master
+   1 additional replica(s)
+[OK] All nodes agree about slots configuration.
+>>> Check for open slots...
+>>> Check slots coverage...
+[OK] All 16384 slots covered.
+```
+
+
+
+这里我们可以看到集群中各节点的主从关系
+
+![image-20200815105904425](../images/image-20200815105904425.png) 
+
+
+
+> 相关目录下也生成了我们的集群配置文件
+
+```
+[root@localhost redis]# ls -al /data/redis/data/redis_6000/
+total 4
+drwxr-xr-x 2 root root  50 Aug 15 10:46 .
+drwxr-xr-x 6 root root  79 Aug 15 10:47 ..
+-rw-r--r-- 1 root root   0 Aug 15 10:46 appendonly.aof
+-rw-r--r-- 1 root root 781 Aug 15 10:55 node_6000.conf
+```
+
+
+
+#### 集群检查
+
+登录集群查看相关信息
+
+```sh
+[root@localhost redis]# ./bin/redis-cli -c -h 10.4.7.41 -p 6000 -a 123456
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+10.4.7.41:6000> CLUSTER INFO
+cluster_state:ok
+cluster_slots_assigned:16384
+cluster_slots_ok:16384
+cluster_slots_pfail:0
+cluster_slots_fail:0
+cluster_known_nodes:6
+cluster_size:3
+cluster_current_epoch:6
+cluster_my_epoch:1
+cluster_stats_messages_ping_sent:277
+cluster_stats_messages_pong_sent:283
+cluster_stats_messages_sent:560
+cluster_stats_messages_ping_received:278
+cluster_stats_messages_pong_received:277
+cluster_stats_messages_meet_received:5
+cluster_stats_messages_received:560
+10.4.7.41:6000> CLUSTER NODES
+27b4b1e72ec83b47c45f6a54f4e5029d54ab52fc 10.4.7.41:6000@16000 myself,master - 0 1597460440000 1 connected 0-5460
+932af8fad5124d3339578fc3398289f3269134dc 10.4.7.43:6001@16001 slave 5698cd7e6d20276add4ed6a0d3c11e29ae781d8c 0 1597460441296 6 connected
+5698cd7e6d20276add4ed6a0d3c11e29ae781d8c 10.4.7.42:6000@16000 master - 0 1597460440289 3 connected 5461-10922
+2579f7e50448218ecb5d8ab2d1ab42683212c084 10.4.7.41:6001@16001 slave c0d1c39f868af00bd49a7b166519f12fbc0abdb3 0 1597460439280 5 connected
+9aee1d6d7b789674f2aeb38da56bdb6c8f8bbfb8 10.4.7.42:6001@16001 slave 27b4b1e72ec83b47c45f6a54f4e5029d54ab52fc 0 1597460438276 4 connected
+c0d1c39f868af00bd49a7b166519f12fbc0abdb3 10.4.7.43:6000@16000 master - 0 1597460441000 5 connected 10923-16383
+```
+
