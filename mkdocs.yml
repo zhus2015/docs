@@ -45,6 +45,7 @@ nav:
             - Sytemctl进程管理: system_base/linux/centos7_systemctl_setting.md
             - Firewalld使用: system_base/linux/centos7_firewalld_use.md
             - 系统内核优化: system_base/linux/system_optimization.md
+            - RPM打包: system_base/linux/package_rpm.md
         - Shell: 
             - Shell基础: system_base/shell/shell.md
             - Shell小实验: system_base/shell/shell_test.md
