@@ -1,6 +1,6 @@
 # Redis集群模式
 
-!!! Tip "文档内容来源 https://blog.csdn.net/miss1181248983/article/details/90056960，如有侵权请联系删除"
+!!! Tip "文档内容参考来源：https://blog.csdn.net/miss1181248983/article/details/90056960，如有侵权请联系删除"
 
 Redis官网：https://redis.io/
 
