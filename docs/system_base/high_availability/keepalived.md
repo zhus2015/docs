@@ -186,7 +186,7 @@ vrrp_script chk_nginx {
 }
 
 vrrp_instance VI_1 {
-    state BACKUP    #
+    state BACKUP     #
     interface ens33  #vip 绑定的网卡名称
     virtual_router_id 10
     priority 100            #优先级，master优先级高于backup;
@@ -231,7 +231,7 @@ vrrp_script chk_nginx {
 }
 
 vrrp_instance VI_1 {
-    state BACKUP    #角色是BACKUP
+    state BACKUP     #角色是BACKUP
     interface ens33  #vip 绑定的网卡名称
     virtual_router_id 10
     priority 90            #优先级，master优先级高于backup;
