@@ -47,7 +47,7 @@ type 在7.0开始，一个index只能有一个type
     - 所有的节点信息
     - 所有的索引和其他相关的Mapping与Setting信息
     - 分片的路由信息
-  - 任意节点都能修改信息会导致数据的不一致性
+  - 任意节点都能修改信息会导致数据的不一致性，因此只能由master节点修改集群信息
 
 ### Data Node && Coordinating Node
 
@@ -69,13 +69,13 @@ type 在7.0开始，一个index只能有一个type
 
 - 生产环境中，应该设置单一的角色的节点
 
-  | 节点类型          | 配置参数    | 默认值                                                  |
-  | ----------------- | ----------- | ------------------------------------------------------- |
-  | master eligible   | node.master | true                                                    |
-  | data              | node.data   | true                                                    |
-  | ingest            | node.ingest | true                                                    |
-  | coordinating only | 无          | 每个节点默认都素hicoordinating节点。设置其他类型为false |
-  | machine learning  | node.ml     | true（需enable x-pack）                                 |
+  | 节点类型          | 配置参数    | 默认值                                                |
+  | ----------------- | ----------- | ----------------------------------------------------- |
+  | master eligible   | node.master | true                                                  |
+  | data              | node.data   | true                                                  |
+  | ingest            | node.ingest | true                                                  |
+  | coordinating only | 无          | 每个节点默认都是coordinating节点。设置其他类型为false |
+  | machine learning  | node.ml     | true（需enable x-pack）                               |
 
 
 

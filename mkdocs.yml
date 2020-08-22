@@ -70,6 +70,7 @@ nav:
             - LVS简介: system_base/high_availability/lvs.md
             - Keepalived高可用: system_base/high_availability/keepalived.md
             - Haproxy: system_base/high_availability/haproxy.md  
+            - DNS轮询: system_base/high_availability/DNS轮询.md
         - Xshell使用: system_base/xshell.md
     - 代码文档管理: 
         - 代码管理:
@@ -93,6 +94,7 @@ nav:
         - Redis:
             - Redis安装部署: database/redis/redis_install.md
             - Redis集群模式: database/redis/redis_cluster.md
+            - Redis集群Codis: database/redis/redis_codis.md
         - Mongodb:
             - Mongodb安装部署: database/mongodb/mongodb_install.md
             - Mongodb日常使用: database/mongodb/mongodb_use.md

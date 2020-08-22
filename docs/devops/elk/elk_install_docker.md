@@ -137,6 +137,5 @@ networks:
   default:
     external:
       name: es72_es72net
-
 ```
 
