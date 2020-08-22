@@ -8,8 +8,6 @@ LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚�
 
 lp_vs：linux内核功能模块，工作在内核，依赖该内核模块实现负载均衡功能。
 
-lp_vs：linux内核功能模块，工作在内核，依赖该内核模块实现负载均衡功能。
-
 ipvsadm：应用层程序，可与lp_vs通信实现对负载均衡的管理和控制。
 
 
@@ -81,3 +79,267 @@ A：（1+1）/1=2   B：（1+2）/2=3/2   C：（1+3）/3=4/3   就把请求交�
 ### 最少队列调度(NQ)
 
 最少队列调度（Never Queue 简称'NQ'）算法，无需队列。如果有realserver的连接数等于0就直接分配过去，不需要在进行SED运算
+
+
+
+## LVS+Keepalived实现DR模式
+
+本文参考来源：https://blog.csdn.net/lupengfei1009/article/details/86514445
+
+### 实验环境
+
+|    IP     |  操作系统  | 配置 |        用途        |
+| :-------: | :--------: | :--: | :----------------: |
+| 10.4.7.40 | Centos 7.7 | VIP  |   虚拟IP（VIP）    |
+| 10.4.7.41 | Centos 7.7 | 2C2G | Keepavlied  Master |
+| 10.4.7.42 | Centos 7.7 | 2C2G | Keepavlied  Slave  |
+| 10.4.7.43 | Centos 7.7 | 2C2G |      nginx-1       |
+| 10.4.7.44 | Centos 7.7 | 2C2G |      nginx-2       |
+
+可以根据自己的电脑配置进行配置的缩减，也可以将keepalive和nginx安装在一台机器上，这样使用两台机器就可以完成实验
+
+### 实验准备
+
+关闭所有机器的防火墙和Selinux(生产环境不建议这样操作)
+
+```sh
+systemctl stop firewalld
+systemctl disable firewalld
+setenforce 0
+sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+```
+
+
+
+### 安装ipvsadm
+
+在10.4.7.41和10.4.7.42服务器上安装
+
+```
+yum install ipvsadm -y
+```
+
+
+
+### 安装nginx服务
+
+在10.4.7.43和10.4.7.44服务器上安装nginx服务
+
+```sh
+yum install epel-release -y
+yum install nginx -y
+systemctl start nginx
+systecmtl enable nginx
+```
+
+我们为了区分两台服务器分别在每台默认服务器的默认页面增加一个区分的标记
+
+nginx默认页面文件路径：/usr/share/nginx/html/index.html
+
+- 10.4.7.43
+
+![image-20200822112352822](../image/image-20200822112352822.png) 
+
+- 10.4.7.44
+
+![image-20200822112429496](../image/image-20200822112429496.png) 
+
+
+
+### 配置realserver脚本文件
+
+在10.4.7.43和10.4.7.44服务器上进行操作配置
+
+> vi /etc/init.d/realserver
+
+```sh
+#虚拟的vip 根据自己的实际情况定义
+SNS_VIP=10.4.7.40
+/etc/rc.d/init.d/functions
+case "$1" in
+start)
+       ifconfig lo:0 $SNS_VIP netmask 255.255.255.255 broadcast $SNS_VIP
+       /sbin/route add -host $SNS_VIP dev lo:0
+       echo "1" >/proc/sys/net/ipv4/conf/lo/arp_ignore
+       echo "2" >/proc/sys/net/ipv4/conf/lo/arp_announce
+       echo "1" >/proc/sys/net/ipv4/conf/all/arp_ignore
+       echo "2" >/proc/sys/net/ipv4/conf/all/arp_announce
+       sysctl -p >/dev/null 2>&1
+       echo "RealServer Start OK"
+       ;;
+stop)
+       ifconfig lo:0 down
+       route del $SNS_VIP >/dev/null 2>&1
+       echo "0" >/proc/sys/net/ipv4/conf/lo/arp_ignore
+       echo "0" >/proc/sys/net/ipv4/conf/lo/arp_announce
+       echo "0" >/proc/sys/net/ipv4/conf/all/arp_ignore
+       echo "0" >/proc/sys/net/ipv4/conf/all/arp_announce
+       echo "RealServer Stoped"
+       ;;
+*)
+       echo "Usage: $0 {start|stop}"
+       exit 1
+esac
+exit 0
+```
+
+> 对脚本增加执行权限
+
+```sh
+chmod +x /etc/init.d/realserver
+chmod +x /etc/rc.d/init.d/functions
+```
+
+> 执行脚本
+
+```sh
+service realserver start 
+```
+
+!!! waring "脚本执行提示没有ifconifg和/sbin/route命令的需要安装net-tools工具包"
+
+执行后看到下图界面说明操作成功了
+
+![image-20200822110248786](..\images\image-20200822110248786.png)
+
+### 安装配置Keepalived
+
+在10.4.7.41和10.4.7.42服务器上安装并配置keepalived服务
+
+#### 安装
+
+```sh
+yum install keepalived -y
+```
+
+#### 配置
+
+正常情况下生产环境会配置为非抢占模式，因为VIP漂移属于生产事故，是不允许VIP随意进行漂移的
+
+> 10.4.7.41
+
+```sh
+vi /etc/keepalived/keepalived.conf
+vrrp_instance VI_1 {
+    state MASTER            #指定Keepalived的角色，MASTER为主，BACKUP为备 记得大写
+    interface ens33         #网卡id 不同的电脑网卡id会有区别 可以使用:ip a查看
+    virtual_router_id 51    #虚拟路由编号，主备要一致
+    priority 100            #定义优先级，数字越大，优先级越高，主DR必须大于备用DR
+    advert_int 1            #检查间隔，默认为1s
+    authentication {        #这里配置的密码最多为8位，主备要一致，否则无法正常通讯
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        10.4.7.40          #定义虚拟IP(VIP)为10.4.7.40，可多设，每行一个   
+    }
+}
+# 定义对外提供服务的LVS的VIP以及port
+virtual_server 10.4.7.40 80 {
+    delay_loop 5          # 设置健康检查时间，单位是秒
+    lb_algo rr            # 设置负载调度的算法为wlc
+    lb_kind DR            # 设置LVS实现负载的机制，有NAT、TUN、DR三个模式
+    nat_mask 255.255.255.0
+    persistence_timeout 0
+    protocol TCP
+    real_server 10.4.6.43 80 {  # 指定real server1的IP地址    
+        weight 10              # 配置节点权值，数字越大权重越高  
+        TCP_CHECK {
+        connect_timeout 10
+        nb_get_retry 3
+        delay_before_retry 3
+        connect_port 80
+        }
+    }
+    real_server 10.4.7.44 80 {  # 指定real server2的IP地址    
+        weight 10              # 配置节点权值，数字越大权重越高    
+        TCP_CHECK {
+        connect_timeout 10
+        nb_get_retry 3
+        delay_before_retry 3
+        connect_port 80
+        }
+     }
+}
+```
+
+> 10.4.7.42
+
+```sh
+vi /etc/keepalived/keepalived.conf
+vrrp_instance VI_1 {
+    state MASTER            #指定Keepalived的角色，MASTER为主，BACKUP为备 记得大写
+    interface ens33         #网卡id 不同的电脑网卡id会有区别 可以使用:ip a查看
+    virtual_router_id 51    #虚拟路由编号，主备要一致
+    priority 100            #定义优先级，数字越大，优先级越高，主DR必须大于备用DR
+    advert_int 1            #检查间隔，默认为1s
+    authentication {        #这里配置的密码最多为8位，主备要一致，否则无法正常通讯
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        10.4.7.40          #定义虚拟IP(VIP)为10.4.7.40，可多设，每行一个   
+    }
+}
+# 定义对外提供服务的LVS的VIP以及port
+virtual_server 10.4.7.40 80 {
+    delay_loop 5          # 设置健康检查时间，单位是秒
+    lb_algo rr            # 设置负载调度的算法为wlc
+    lb_kind DR            # 设置LVS实现负载的机制，有NAT、TUN、DR三个模式
+    nat_mask 255.255.255.0
+    persistence_timeout 0
+    protocol TCP
+    real_server 10.4.6.43 80 {  # 指定real server1的IP地址    
+        weight 10              # 配置节点权值，数字越大权重越高  
+        TCP_CHECK {
+        connect_timeout 10
+        nb_get_retry 3
+        delay_before_retry 3
+        connect_port 80
+        }
+    }
+    real_server 10.4.7.44 80 {  # 指定real server2的IP地址    
+        weight 10              # 配置节点权值，数字越大权重越高    
+        TCP_CHECK {
+        connect_timeout 10
+        nb_get_retry 3
+        delay_before_retry 3
+        connect_port 80
+        }
+     }
+}
+```
+
+
+
+#### 启动
+
+```sh
+systemctl start keepalived
+```
+
+![image-20200822111403291](..\images\image-20200822111403291.png)
+
+启动后可以在Keepalived的Master服务器上看到VIP，Backup服务器上没有VIP，说明服务正常
+
+![image-20200822111623154](..\image\image-20200822111623154.png)
+
+### 测试
+
+#### 访问测试
+
+通过浏览器访问VIP，可以看到页面，通过不停的强制刷新页面可以看到访问地址在不停变化，如果Chrom浏览器无法看到此变化的，可以更换火狐浏览器，使用Ctrl+F5不停的刷新页面
+
+![image-20200822113856682](../image/image-20200822113856682.png)
+
+
+
+同时我们在10.4.7.41服务器上也可以通过ipvsadm相关命令看到分发的信息
+
+![image-20200822114104202](../image/image-20200822114104202.png) 
+
+#### 脑裂测试
+
+注意yum安装的keepalived使用systemctl restart keepalived的时候会出现进程无法杀死的情况，可以注释启动脚本/usr/lib/systemd/system/keepalived.service中的KillMode=process配置项，然后使用systemctl daemon-reload重载服务即可
+
+脑裂测试这里不做详细的描述
