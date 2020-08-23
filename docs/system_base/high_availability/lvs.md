@@ -242,7 +242,7 @@ virtual_server 10.4.7.40 80 {
     nat_mask 255.255.255.0
     persistence_timeout 0
     protocol TCP
-    real_server 10.4.6.43 80 {  # 指定real server1的IP地址    
+    real_server 10.4.7.43 80 {  # 指定real server1的IP地址    
         weight 10              # 配置节点权值，数字越大权重越高  
         TCP_CHECK {
         connect_timeout 10
@@ -268,10 +268,10 @@ virtual_server 10.4.7.40 80 {
 ```sh
 vi /etc/keepalived/keepalived.conf
 vrrp_instance VI_1 {
-    state MASTER            #指定Keepalived的角色，MASTER为主，BACKUP为备 记得大写
+    state BACKUP            #指定Keepalived的角色，MASTER为主，BACKUP为备 记得大写
     interface ens33         #网卡id 不同的电脑网卡id会有区别 可以使用:ip a查看
     virtual_router_id 51    #虚拟路由编号，主备要一致
-    priority 100            #定义优先级，数字越大，优先级越高，主DR必须大于备用DR
+    priority 50            #定义优先级，数字越大，优先级越高，主DR必须大于备用DR
     advert_int 1            #检查间隔，默认为1s
     authentication {        #这里配置的密码最多为8位，主备要一致，否则无法正常通讯
         auth_type PASS
@@ -289,7 +289,7 @@ virtual_server 10.4.7.40 80 {
     nat_mask 255.255.255.0
     persistence_timeout 0
     protocol TCP
-    real_server 10.4.6.43 80 {  # 指定real server1的IP地址    
+    real_server 10.4.7.43 80 {  # 指定real server1的IP地址    
         weight 10              # 配置节点权值，数字越大权重越高  
         TCP_CHECK {
         connect_timeout 10
@@ -328,7 +328,7 @@ systemctl start keepalived
 
 #### 访问测试
 
-通过浏览器访问VIP，可以看到页面，通过不停的强制刷新页面可以看到访问地址在不停变化，如果Chrom浏览器无法看到此变化的，可以更换火狐浏览器，使用Ctrl+F5不停的刷新页面
+通过浏览器访问VIP，可以看到页面，通过不停的强制刷新页面可以看到访问地址在不停变化，如果使用Chrom浏览器无法看到此变化的，可以更换火狐浏览器或者使用Chrome的无痕浏览模式，使用Ctrl+F5不停的刷新页面
 
 ![image-20200822113856682](../image/image-20200822113856682.png)
 
