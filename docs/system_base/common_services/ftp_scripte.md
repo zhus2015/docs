@@ -59,7 +59,7 @@ anon_other_write_enable=YES
 EOF
 
 chmod -R 777 $c
-systemctl restart ftpd
+systemctl restart vsftpd
 echo "vsftpd config finsh"
 ```
 
