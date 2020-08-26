@@ -138,11 +138,11 @@ nginx默认页面文件路径：/usr/share/nginx/html/index.html
 
 - 10.4.7.43
 
-![image-20200822112352822](../image/image-20200822112352822.png) 
+![image-20200822112352822](../images/image-20200822112352822.png) 
 
 - 10.4.7.44
 
-![image-20200822112429496](../image/image-20200822112429496.png) 
+![image-20200822112429496](../images/image-20200822112429496.png) 
 
 
 
@@ -200,7 +200,7 @@ service realserver start
 
 执行后看到下图界面说明操作成功了
 
-![image-20200822110248786](..\images\image-20200822110248786.png)
+![image-20200822110248786](../images/image-20200822110248786.png)
 
 ### 安装配置Keepalived
 
@@ -318,11 +318,11 @@ virtual_server 10.4.7.40 80 {
 systemctl start keepalived
 ```
 
-![image-20200822111403291](..\images\image-20200822111403291.png)
+![image-20200822111403291](../images/image-20200822111403291.png)
 
 启动后可以在Keepalived的Master服务器上看到VIP，Backup服务器上没有VIP，说明服务正常
 
-![image-20200822111623154](..\image\image-20200822111623154.png)
+![image-20200822111623154](../images/image-20200822111623154.png)
 
 ### 测试
 
@@ -330,13 +330,13 @@ systemctl start keepalived
 
 通过浏览器访问VIP，可以看到页面，通过不停的强制刷新页面可以看到访问地址在不停变化，如果使用Chrom浏览器无法看到此变化的，可以更换火狐浏览器或者使用Chrome的无痕浏览模式，使用Ctrl+F5不停的刷新页面
 
-![image-20200822113856682](../image/image-20200822113856682.png)
+![image-20200822113856682](../images/image-20200822113856682.png)
 
 
 
 同时我们在10.4.7.41服务器上也可以通过ipvsadm相关命令看到分发的信息
 
-![image-20200822114104202](../image/image-20200822114104202.png) 
+![image-20200822114104202](../images/image-20200822114104202.png) 
 
 #### 脑裂测试
 
