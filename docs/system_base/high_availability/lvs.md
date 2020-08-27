@@ -4,6 +4,20 @@ LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚�
 
 其可用性=可用时间/（可用时间+故障恢复时间），通常用百分比来表示；99.9%表示一年的故障时间少于8小时；99.99%表示一年的故障时间少于53分钟；99.999%表示一年的故障时间小于5分钟。
 
+## 名词定义
+
+- DS(Director Server)：负责调度集群的主机；也简称调度器、分发器
+
+- VIP(Director Virtual IP)： 向外提供服务的IP；通常此IP绑定域名
+
+- DIP(Director IP)：与内部主机RIP通信的IP，在Director主机上
+
+- RIP(Real Server IP)：内部真正提供服务的主机
+
+- CIP(Client IP)：客户端IP
+
+
+
 ## 核心组件：
 
 lp_vs：linux内核功能模块，工作在内核，依赖该内核模块实现负载均衡功能。
@@ -174,6 +188,7 @@ stop)
        echo "0" >/proc/sys/net/ipv4/conf/lo/arp_announce
        echo "0" >/proc/sys/net/ipv4/conf/all/arp_ignore
        echo "0" >/proc/sys/net/ipv4/conf/all/arp_announce
+       sysctl -p >/dev/null 2>&1
        echo "RealServer Stoped"
        ;;
 *)
@@ -343,3 +358,15 @@ systemctl start keepalived
 注意yum安装的keepalived使用systemctl restart keepalived的时候会出现进程无法杀死的情况，可以注释启动脚本/usr/lib/systemd/system/keepalived.service中的KillMode=process配置项，然后使用systemctl daemon-reload重载服务即可
 
 脑裂测试这里不做详细的描述
+
+
+
+### LVS FTP负载均衡
+
+使用lvs做FTP负载均衡的时候，上传会占用LVS大量的流量，可以考虑使用下面的操作进行处理
+
+iptables -t nat -A PREROUTING -p tcp --dport $pasv_min_port:$pasv_max_port -j DNAT --to-destination $vip
+
+注意设置FTP的pasv_address为RS地址
+
+方法来源： https://blog.csdn.net/weixin_34318272/article/details/91660644 
