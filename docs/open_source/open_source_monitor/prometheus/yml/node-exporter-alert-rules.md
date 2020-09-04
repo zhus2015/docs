@@ -23,7 +23,6 @@ groups:
         type: "aliyun_meta_ecs_info"
 
 
-
     - alert: node-exporter-cpu-high 
       expr:  node_exporter:cpu:total:percent > 80
       for: 3m

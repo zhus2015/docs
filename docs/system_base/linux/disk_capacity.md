@@ -82,9 +82,6 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 ```sh
 [root@localhost ~]# vgextend vg00 /dev/sdb 
-  Physical volume '/dev/sdb' is already in volume group 'vg00'
-  Unable to add physical volume '/dev/sdb' to volume group 'vg00'
-  /dev/sdb: physical volume not initialized.
 [root@localhost ~]# vgdisplay 
   --- Volume group ---
   VG Name               vg00
@@ -168,3 +165,19 @@ tmpfs                    182M     0  182M   0% /run/user/0
 /dev/mapper/vg00-data    9.8G   23M  9.3G   1% /data
 ```
 
+注意磁盘格式为xfs时，使用xfs_growfs命令进行重置磁盘大小
+
+
+
+
+
+EXSI扩容记录
+
+```
+pvresize /dev/sdb
+pvresize /dev/sdb
+lvextend -l  +100%FREE /dev/vg_group/lv_data  	  
+xfs_growfs  /dev/mapper/vg_group-lv_data
+```
+
+没看错，就是执行了两次pvresize ，没有执行vgextend就实现了扩容，使用xfs_growfs是因为原来的磁盘都是xfs格式的
