@@ -20,6 +20,8 @@ yum install rsync -y
 
 ## 配置rysnc
 
+此步骤在10.10.10.92服务器上操作
+
 > /etc/rsyncd.conf
 
 ```
@@ -40,7 +42,7 @@ uid = root
 gid = root
 comment = nginxrsync
 read only = false
-ayth users = nginxrsync
+auth users = nginxrsync
 hosts allow = 10.10.10.91
 ```
 

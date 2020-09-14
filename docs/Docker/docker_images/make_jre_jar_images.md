@@ -27,12 +27,12 @@ exec java -jar ${M_OPTS} ${C_OPTS} ${JAR_BALL}
 ```
 
 > jmx_javaagent-0.3.1.jar  
-> 主要是为了介入Prometheus监控使用，如果不使用Prometheus可以添加此jar包，注意在Dockerfile中和entrypoint.sh 脚本中删除相关信息  
+> 主要是为了介入Prometheus监控使用，如果不使用Prometheus可以不添加此jar包，注意在Dockerfile中和entrypoint.sh 脚本中删除相关信息  
 >
 > 下载: wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.3.1/jmx_prometheus_javaagent-0.3.1.jar -O jmx_javaagent-0.3.1.jar
 
 > config.yml  
-> jmx监控配置文件，不适用Prometheus监控时可以不添加此文件，注意在Dockerfile中和entrypoint.sh 脚本中删除相关信息  
+> jmx监控配置文件，不使用Prometheus监控时可以不添加此文件，注意在Dockerfile中和entrypoint.sh 脚本中删除相关信息  
 
 ```yml
 ---
