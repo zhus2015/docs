@@ -59,7 +59,7 @@ systemctl start nginx
 
 ### 配置logstash
 
-之前搭建的时候我们为logstash增加了一个配合，现在要进行修改使用，当然也可以新增一个配置文件，这里我选择新增一个配置
+之前搭建的时候我们为logstash增加了一个配置，现在要进行修改使用，当然也可以新增一个配置文件，这里我选择新增一个配置
 
 > vim /etc/logstash/conf.d/nginx_logs.conf
 
@@ -206,7 +206,7 @@ systemctl start filebeat
 
 选择"Discover"，按照图示选择对应过滤器，这时我们就看到了我们的nginx日志，可以尝试刷新页面尝试，看是否可以看到最新的日志，会有一点时间延迟
 
-![image-20200610150747710](images/image-20200610150747710.png)
+![image-20200610150747710](images/image-20200610150747710.png) 
 
 
 
