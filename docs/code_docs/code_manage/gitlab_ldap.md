@@ -75,4 +75,4 @@ Checking LDAP ... Finished
 
 打开gitlab登录页面，可以看到新出现了LDAP认证方式，这时我们使用LDAP用户登录即可。
 
-![image-20200924221824245](../image/image-20200924221824245.png)
+![image-20200924221824245](../images/image-20200924221824245.png)

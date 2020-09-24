@@ -78,6 +78,7 @@ nav:
             - Gogs: code_docs/code_manage/gogs.md
             - Gitlab: code_docs/code_manage/gitlab.md
             - Gitlab管理员密码修改: code_docs/code_manage/gitlab_change_password.md
+            - Gitlab LDAP认证配置: code_docs/code_manage/gitlab_ldap.md
         - 代码质量管理:
             - sonarqube: code_docs/code_quality/sonarqube.md
         - 文档管理:
@@ -102,23 +103,22 @@ nav:
             - Sqlserver安装部署: database/sqlserver/sqlserver_install.md
  
 
-    - 开源软件: 
+    - 监控: 
         - 常用开源软件地址: open_source/open_source.md           
-        - 开源监控: 
-            - Zabbix:
-                - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
-                - Zabbix监控脚本: open_source/open_source_monitor/zabbix/monitoring_script.md
-            - Promethues:
-                - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
-                - YML配置文件:
-                    - prometheus: open_source/open_source_monitor/prometheus/yml/prometheus.md
-                    - alertmanager: open_source/open_source_monitor/prometheus/yml/alertmanager.md
-                    - node-exporter-alert-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-alert-rules.md
-                    - node-exporter-record-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-record-rules.md
-                    - rules: open_source/open_source_monitor/prometheus/yml/rules.md
-            - Grafana: 
-                - Grafana简介: open_source/open_source_monitor/grafana/grafana_about.md
-                - Grafana安装: open_source/open_source_monitor/grafana/grafana_install.md           
+        - Zabbix:
+            - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
+             - Zabbix监控脚本: open_source/open_source_monitor/zabbix/monitoring_script.md
+        - Promethues:
+            - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
+            - YML配置文件:
+                - prometheus: open_source/open_source_monitor/prometheus/yml/prometheus.md
+                - alertmanager: open_source/open_source_monitor/prometheus/yml/alertmanager.md
+                - node-exporter-alert-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-alert-rules.md
+                - node-exporter-record-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-record-rules.md
+                - rules: open_source/open_source_monitor/prometheus/yml/rules.md
+        - Grafana: 
+            - Grafana简介: open_source/open_source_monitor/grafana/grafana_about.md
+            - Grafana安装: open_source/open_source_monitor/grafana/grafana_install.md           
  
     - Devops:
         - 配置管理工具:
@@ -136,6 +136,7 @@ nav:
             - Jenkins 打包APK: devops/jenkins/jenkins_build_apk.md
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
             - Jenkins 内置变量说明: devops/jenkins/jenkins_inlay_arge.md
+            - Jenkins LDAP认证配置: devops/jenkins/jenkins_ldap.md
             
         - ELK: 
             - ELK基础知识: devops/elk/elk_basic.md
