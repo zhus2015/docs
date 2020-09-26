@@ -226,6 +226,27 @@ adding new entry "ou=Group,dc=loding,dc=com"
 
 
 
+### 开启membereOf功能
+
+```sh
+[root@localhost ldap]# vi memberof_load_configure.ldif
+dn: cn=module{0},cn=config
+objectClass: olcModuleList
+cn: module{0}
+olcModulepath: /usr/lib64/openldap
+olcModuleload: {0}memberof.la
+
+dn: olcOverlay={0}memberof,olcDatabase={2}bdb,cn=config
+objectClass: olcMemberOf
+objectClass: olcOverlayConfig
+objectClass: olcConfig
+objectClass: top
+olcOverlay: {0}memberof
+[root@localhost ldap]# ldapadd -Q -Y EXTERNAL -H ldapi:/// -f memberof_load_configure.ldif
+```
+
+
+
 ### 配置日志
 
 ```
