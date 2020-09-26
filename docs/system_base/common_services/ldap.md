@@ -4,7 +4,15 @@
 
 ## 简述
 
-
+| **关键字** | **英文全称**       | **含义**                                                     |
+| ---------- | ------------------ | :----------------------------------------------------------- |
+| **dc**     | Domain Component   | 域名的部分，其格式是将完整的域名分成几部分，如域名为example.com变成dc=example,dc=com（一条记录的所属位置） |
+| **uid**    | User Id            | 用户ID songtao.xu（一条记录的ID）                            |
+| **ou**     | Organization Unit  | 组织单位，组织单位可以包含其他各种对象（包括其他组织单元），如“oa组”（一条记录的所属组织） |
+| **cn**     | Common Name        | 公共名称，如“Thomas Johansson”（一条记录的名称）             |
+| **sn**     | Surname            | 姓，如“许”                                                   |
+| **dn**     | Distinguished Name | “uid=songtao.xu,ou=oa组,dc=example,dc=com”，一条记录的位置（唯一） |
+| **rdn**    | Relative dn        | 相对辨别名，类似于文件系统中的相对路径，它是与目录树结构无关的部分，如“uid=tom”或“cn= Thomas Johansson” |
 
 ## 安装
 
@@ -113,9 +121,9 @@ adding new entry "cn=inetorgperson,cn=schema,cn=config"
 
 ```
 
-### LDAP DB设置domain name
+### 设置默认域
 
-> 配置ldap服务的域名
+> 配置chdomain.ldif文件
 
 ```sh
 [root@localhost ldap]# vi chdomain.ldif
@@ -151,7 +159,7 @@ olcAccess: {1}to dn.base="" by * read
 olcAccess: {2}to * by dn="cn=admin,dc=loding,dc=com" write by * read
 ```
 
-> 导入LDAP服务域名文件
+> 导入chdomain.ldif文件
 
 ```sh
 [root@localhost ldap]# ldapadd -Y EXTERNAL -H ldapi:/// -f chdomain.ldif
@@ -173,10 +181,10 @@ modifying entry "olcDatabase={2}hdb,cn=config"
 
 
 
-> 生成管理员数据
+> 生成根项目
 
 ```sh
-[root@localhost ldap]# vi rootdn.ldif
+[root@localhost ldap]# vi basedomain.ldif
 # replace to your own domain name for "dc=***,dc=***" section
 dn: dc=loding,dc=com
 objectClass: top
@@ -201,7 +209,7 @@ ou: Group
 
 
 
-> 导入管理员数据
+> 导入根项目数据
 
 ```sh
 [root@localhost ldap]# ldapadd -x -D cn=admin,dc=loding,dc=com -W -f rootdn.ldif
@@ -214,6 +222,22 @@ adding new entry "cn=Manager,dc=loding,dc=com"
 adding new entry "ou=People,dc=loding,dc=com"
 
 adding new entry "ou=Group,dc=loding,dc=com"
+```
+
+
+
+### 配置日志
+
+```
+mkdir -p /var/log/slapd
+
+chown ldap:ldap /var/log/slapd/
+
+touch /var/log/slapd/slapd.log
+
+chown ldap . /var/log/slapd/slapd.log
+
+echo "local4.* /var/log/slapd/slapd.log" >> /etc/rsyslog.conf
 ```
 
 
