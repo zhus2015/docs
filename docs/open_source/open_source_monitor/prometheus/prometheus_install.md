@@ -15,11 +15,11 @@
 用于提供metrics，通过接口进行信息的收集
 
 ```shell
-docker run -d \
---name=node-exporter \
--p 9100:9100 \
--v "/etc/localtime:/etc/localtime" \
-prom/node-exporter
+docker run -d --restart=always \
+           --name=node-exporter \
+           -p 9100:9100 \
+           -v "/etc/localtime:/etc/localtime" \
+           prom/node-exporter
 ```
 
 
@@ -29,17 +29,17 @@ prom/node-exporter
 cadvisor用于收集容器信息
 
 ```shell
-docker run -d \
-  -v "/etc/localtime:/etc/localtime" \
-  --volume=/:/rootfs:ro \
-  --volume=/var/run:/var/run:ro \
-  --volume=/sys:/sys:ro \
-  --volume=/var/lib/docker/:/var/lib/docker:ro \
-  --volume=/dev/disk/:/dev/disk:ro \
-  --publish=8080:8080 \
-  --detach=true \
-  --name=cadvisor \
-  google/cadvisor
+docker run -d --restart=always \
+           -v "/etc/localtime:/etc/localtime" \
+           --volume=/:/rootfs:ro \
+           --volume=/var/run:/var/run:ro \
+           --volume=/sys:/sys:ro \
+           --volume=/var/lib/docker/:/var/lib/docker:ro \
+           --volume=/dev/disk/:/dev/disk:ro \
+           --publish=8080:8080 \
+           --detach=true \
+           --name=cadvisor \
+           google/cadvisor
 ```
 
 
@@ -92,15 +92,17 @@ scrape_configs:
 
 
 
+注意先创建相关目录
+
 ```shell
-docker run --name=prometheus -d \
--p 9090:9090 \
--v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
--v /etc/prometheus/rules.yml:/etc/prometheus/rules.yml \
--v "/etc/localtime:/etc/localtime" \
-prom/prometheus:v2.20.0 \
---config.file=/etc/prometheus/prometheus.yml \
---web.enable-lifecycle
+docker run --user=root --name=prometheus -itd \
+           --restart=always -p 9090:9090 \
+           -v /data/docker/prometheus/data:/prometheus/data \
+           -v /data/docker/prometheus/conf/prometheus.yml:/etc/prometheus/prometheus.yml \
+           -v "/etc/localtime:/etc/localtime" \
+           prom/prometheus:v2.20.0 \
+           --config.file=/etc/prometheus/prometheus.yml \
+           --web.enable-lifecycle
 ```
 
 
@@ -139,11 +141,11 @@ alerting:
 
 ```shell
 $ mkdir -p /data/grafana 
-$ docker run -d  -p 3000:3000 \
---name=grafana \
--v "/etc/localtime:/etc/localtime" \
--v /data/grafana:/var/lib/grafana \
-grafana/grafana
+$ docker run -itd -p 3000:3000 \
+           --restart=always --user=root --name=grafana \
+           -v "/etc/localtime:/etc/localtime" \
+           -v /data/docker/grafana/data:/var/lib/grafana \
+           grafana/grafana
 ```
 
 这里不使用--network=host 可能grafana会出现无法联网的情况

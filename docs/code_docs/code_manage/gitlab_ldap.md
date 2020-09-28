@@ -42,7 +42,9 @@ gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
     sync_ssh_keys: false
 ```
 
+如果想限定从指定用户组获取用户，可以参考下面的写法：
 
+user_filter: '(memberOf=cn=Gitlab,ou=Group,dc=loding,dc=com)'
 
 ## 检查重载配置
 
