@@ -259,6 +259,21 @@ touch /var/log/slapd/slapd.log
 chown ldap . /var/log/slapd/slapd.log
 
 echo "local4.* /var/log/slapd/slapd.log" >> /etc/rsyslog.conf
+
+vim /etc/logrotate.d/ldap
+/var/log/slapd/slapd.log {
+        prerotate
+                /usr/bin/chattr -a /var/log/slapd/slapd.log
+        endscript
+        compress
+        delaycompress
+        notifempty
+        rotate 100
+        size 10M
+        postrotate
+                /usr/bin/chattr +a /var/log/slapd/slapd.log
+        endscript
+}
 ```
 
 
