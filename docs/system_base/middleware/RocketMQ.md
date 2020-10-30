@@ -26,7 +26,7 @@
 
 ### 10.7.202.202
 
-vim conf/2m-2s-async/broker-a.properties
+> vim conf/2m-2s-async/broker-a.properties
 
 ```
 #所属集群名字
@@ -95,7 +95,7 @@ flushDiskType=ASYNC_FLUSH
 
 
 
-vim  conf/2m-2s-async/broker-b-s.properties
+> vim  conf/2m-2s-async/broker-b-s.properties
 
 ```
 #所属集群名字
@@ -166,7 +166,7 @@ flushDiskType=ASYNC_FLUSH
 
 ### 10.7.202.203
 
-vim conf/2m-2s-async/broker-b.properties
+>  vim conf/2m-2s-async/broker-b.properties
 
 ```
 #所属集群名字
@@ -235,7 +235,7 @@ flushDiskType=ASYNC_FLUSH
 
 
 
-vim conf/2m-2s-async/broker-a-s.properties
+> vim conf/2m-2s-async/broker-a-s.properties
 
 ```
 #所属集群名字
