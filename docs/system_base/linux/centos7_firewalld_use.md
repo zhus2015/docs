@@ -26,7 +26,7 @@ systemctl start firewalld      启动Firewalld
 firewall-cmd --state
 ```
 
-![image-20200714133110933](../images/image-20200714133110933.png) 
+![image-20200714133110933](../../images/image-20200714133110933.png) 
 
 
 
@@ -36,7 +36,7 @@ firewall-cmd --state
 firewall-cmd --get-active-zones
 ```
 
-![image-20200714135813638](../images/image-20200714135813638.png) 
+![image-20200714135813638](../../images/image-20200714135813638.png) 
 
 
 
@@ -46,7 +46,7 @@ firewall-cmd --get-active-zones
 firewall-cmd --zone=public --list-ports
 ```
 
-![image-20200714133137513](../images/image-20200714133137513.png) 
+![image-20200714133137513](../../images/image-20200714133137513.png) 
 
 
 
@@ -58,7 +58,7 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 修改配置后必须要重新加载才能生效：firewall-cmd --reload
 ```
 
-![image-20200714133411560](../images/image-20200714133411560.png) 
+![image-20200714133411560](../../images/image-20200714133411560.png) 
 
 
 
@@ -76,7 +76,7 @@ firewall-cmd --zone=public --add-port=8000-9000/tcp --permanent
 firewall-cmd --zone=public --query-port=8080/tcp
 ```
 
-![image-20200714133904031](../images/image-20200714133904031.png) 
+![image-20200714133904031](../../images/image-20200714133904031.png) 
 
 
 
@@ -86,7 +86,7 @@ firewall-cmd --zone=public --query-port=8080/tcp
 firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.10.10.92" port protocol="tcp" port="6379" accept"
 ```
 
-![image-20200714142255149](../images/image-20200714142255149.png) 
+![image-20200714142255149](../../images/image-20200714142255149.png) 
 
 
 
@@ -96,4 +96,4 @@ firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.
 firewall-cmd --zone=public --remove-port=2222/tcp --permanent
 ```
 
-![image-20200714134114576](../images/image-20200714134114576.png) 
+![image-20200714134114576](../../images/image-20200714134114576.png) 

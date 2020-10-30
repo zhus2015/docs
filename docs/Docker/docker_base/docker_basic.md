@@ -20,7 +20,7 @@ Docker 包括三个基本概念
 
 ```sh
 curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-yum makacache fast
+yum clean all && yum makacache fast
 ```
 
 > 安装docker
@@ -33,6 +33,7 @@ yum install docker-ce -y
 
 ```sh
 systemctl start docker
+systemctl enable docker
 ```
 
 

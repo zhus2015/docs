@@ -360,13 +360,13 @@ $ORACLE_HOME/bin/dbca -silent -responseFile /data/database/response/dbca.rsp
 
 稍等一会，会开始自动创建
 
-![img](../images/wps5.jpg) 
+![img](../../images/wps5.jpg) 
 
 
 
 ## 启动数据库
 
-![img](../images/wps6.jpg) 
+![img](../../images/wps6.jpg) 
 
 使用 show parameter；或者 select table_name from dba_tables 看看是否正常
 

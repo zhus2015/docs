@@ -286,7 +286,7 @@ ldapadmin：http://www.ldapadmin.org/download/ldapadmin.html
 
 配置按照自己的配置进行修改即可
 
-![image-20200924211913731](../image/image-20200924211913731.png) 
+![image-20200924211913731](../../images/image-20200924211913731.png) 
 
 
 
@@ -354,14 +354,14 @@ Allow from all
 
 http://10.4.7.110/phpldapadmin
 
-![image-20200924213107941](../image/image-20200924213107941.png)
+![image-20200924213107941](../../images/image-20200924213107941.png)
 
 点击登录即可进行认证登录，注意用户是全路径
 
-![image-20200924213218023](../image/image-20200924213218023.png)
+![image-20200924213218023](../../images/image-20200924213218023.png)
 
 
 
 登录后即可看到我们的域
 
-![image-20200924213243128](../image/image-20200924213243128.png) 
+![image-20200924213243128](../../images/image-20200924213243128.png) 
