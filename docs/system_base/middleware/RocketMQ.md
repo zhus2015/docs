@@ -22,9 +22,9 @@
 
 使用主从异步的模式
 
-### 配置修改
+## 配置修改
 
-#### 10.7.202.202
+### 10.7.202.202
 
 vim conf/2m-2s-async/broker-a.properties
 
@@ -37,6 +37,8 @@ brokerName=broker-202_202
 brokerId=0
 #nameServer地址，分号分割
 namesrvAddr=10.7.202.202:9876;10.7.202.203:9876
+brokerIP1=10.7.202.202
+brokerIP2=10.7.202.202
 #在发送消息时，自动创建服务器不存在的topic，默认创建的队列数
 defaultTopicQueueNums=4
 #是否允许 Broker 自动创建Topic，建议线下开启，线上关闭
@@ -104,6 +106,8 @@ brokerName=broker-202_203
 brokerId=1
 #nameServer地址，分号分割
 namesrvAddr=10.7.202.202:9876;10.7.202.203:9876
+brokerIP1=10.7.202.202
+brokerIP2=10.7.202.203
 #在发送消息时，自动创建服务器不存在的topic，默认创建的队列数
 defaultTopicQueueNums=4
 #是否允许 Broker 自动创建Topic，建议线下开启，线上关闭
@@ -160,7 +164,7 @@ flushDiskType=ASYNC_FLUSH
 
 
 
-#### 10.7.202.203
+### 10.7.202.203
 
 vim conf/2m-2s-async/broker-b.properties
 
@@ -173,6 +177,8 @@ brokerName=broker-202_203
 brokerId=0
 #nameServer地址，分号分割
 namesrvAddr=10.7.202.202:9876;10.7.202.203:9876
+brokerIP1=10.7.202.203
+brokerIP2=10.7.202.203
 #在发送消息时，自动创建服务器不存在的topic，默认创建的队列数
 defaultTopicQueueNums=4
 #是否允许 Broker 自动创建Topic，建议线下开启，线上关闭
@@ -240,6 +246,8 @@ brokerName=broker-202_202
 brokerId=1
 #nameServer地址，分号分割
 namesrvAddr=10.7.202.202:9876;10.7.202.203:9876
+brokerIP1=10.7.202.203
+brokerIP2=10.7.202.202
 #在发送消息时，自动创建服务器不存在的topic，默认创建的队列数
 defaultTopicQueueNums=4
 #是否允许 Broker 自动创建Topic，建议线下开启，线上关闭
@@ -296,9 +304,9 @@ flushDiskType=ASYNC_FLUSH
 
 
 
-### 目录创建
+## 目录创建
 
-#### 10.7.202.202
+### 10.7.202.202
 
 ```
 mkdir -p /data/rocketmq/store/{broker-a,checkpoint,abort}
@@ -308,7 +316,7 @@ mkdir -p /data/rocketmq/store/broker-b-s/{commitlog,consumequeue,index}
 mkdir -p /data/rocketmq/logs
 ```
 
-#### 10.7.202.203
+### 10.7.202.203
 
 ```
 mkdir -p /data/rocketmq/store/{broker-b,checkpoint,abort}
@@ -320,9 +328,9 @@ mkdir -p /data/rocketmq/logs
 
 
 
-### 启动nameServer
+## 启动nameServer
 
-#### 10.7.202.202
+### 10.7.202.202
 
 ```
 nohup sh /data/rocketmq/bin/mqnamesrv > /data/rocketmq/logs/mqnamesrv.log 2>&1 &
@@ -330,7 +338,7 @@ nohup sh /data/rocketmq/bin/mqnamesrv > /data/rocketmq/logs/mqnamesrv.log 2>&1 &
 
 ![image-20201024110026148](../../images/image-20201024110026148.png)
 
-#### 10.7.202.203
+### 10.7.202.203
 
 ```
 nohup sh /data/rocketmq/bin/mqnamesrv > /data/rocketmq/logs/mqnamesrv.log 2>&1 &
@@ -338,15 +346,15 @@ nohup sh /data/rocketmq/bin/mqnamesrv > /data/rocketmq/logs/mqnamesrv.log 2>&1 &
 
 ![image-20201024110246032](../../images/image-20201024110246032.png)
 
-### 启动broke-a
+## 启动broke-a
 
-#### 10.7.202.202
+### 10.7.202.202
 
 ```
-nohup sh /data/rocketmq/bin/mqbroker -n 10.7.202.202:9876 -c /data/rocketmq/conf/2m-2s-async/broker-a.properties > /data/rocketmq/logs/broker-a.log 2>&1 &
+nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-a.properties > /data/rocketmq/logs/broker-a.log 2>&1 &
 ```
 
-#### 10.7.202.203
+### 10.7.202.203
 
 ```
 nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-a-s.properties > /data/rocketmq/logs/broker-a-s.log 2>&1 &
@@ -354,9 +362,9 @@ nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-a
 
 
 
-### 启动broke-b
+## 启动broke-b
 
-#### 10.7.202.203
+### 10.7.202.203
 
 ```
 nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-b.properties > /data/rocketmq/logs/broker-b.log 2>&1 &
@@ -364,7 +372,7 @@ nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-b
 
 
 
-#### 10.7.202.202
+### 10.7.202.202
 
 ```
 nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-b-s.properties > /data/rocketmq/logs/broker-b-s.log 2>&1 &
@@ -372,6 +380,49 @@ nohup sh /data/rocketmq/bin/mqbroker -c /data/rocketmq/conf/2m-2s-async/broker-b
 
 
 
-
+## 集群状态查看
 
 mqadmin clusterList -n 10.7.202.202:9876
+
+![image-20201030110550906](../../images/image-20201030110550906.png)
+
+如果是使用yum安装的jdk可能会有一下报错，需要修改/data/rocketmq/bin/tools.sh脚本中的JAVA_OPT参数
+
+修改后的参数：
+
+```
+JAVA_OPT="${JAVA_OPT} -Djava.ext.dirs=${BASE_DIR}/lib:${JAVA_HOME}/jre/lib/ext:${JAVA_HOME}/lib/ext:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.262.b10-0.el7_8.x86_64/jre/lib/ext"
+```
+
+![image-20201030102312453](../../images/image-20201030102312453.png)
+
+
+
+
+
+## 控制台安装
+
+到GITHUP现在相关源码，地址：https://github.com/apache/rocketmq-externals/tree/master/rocketmq-console
+
+修改配置文件：
+
+```
+# vim src/main/resources/application.properties
+rocketmq.config.namesrvAddr=10.7.202.202:9876;10.7.202.203:9876
+```
+
+打包：
+
+```
+mvn clean package -Dmaven.test.skip=true
+```
+
+将target文件夹下的jar包拷贝到相关服务器上启动即可，默认端口8080，如果端口冲突请自行更改
+
+```
+nohup java -jar rocketmq-console-ng-2.0.0.jar --server.port=28080 2>&1 &
+```
+
+页面访问即可
+
+![image-20201030110954912](../../images/image-20201030110954912.png)
