@@ -225,23 +225,23 @@ grep -E ==egrep 可以不使用\符号
 
 \- '^[条件]' :列出以"条件"开头的行
 
-![png](../images/clipboard-1590459314228.png) 
+![png](../../images/clipboard-1590459314228.png) 
 
 -'[^条件]'：列出除去"条件"的行
 
    例如:grep --color '[^0-9]' 1.txt 
 
-![img](../images/clipboard-1590459325836.png) 
+![img](../../images/clipboard-1590459325836.png) 
 
 -'[r.o]':表示匹配.前后的任意一个字符
 
-![img](../images/clipboard-1590459332028.png) 
+![img](../../images/clipboard-1590459332028.png) 
 
 -'r*o':表示0个或多个*前面的字符
 
 -'r.*o':匹配到任意r开头o结尾的行（贪婪匹配）
 
-![img](../images/clipboard-1590459344565.png) 
+![img](../../images/clipboard-1590459344565.png) 
 
 -'r\?o': 0或1个？前面的字符(\是为了对？进行脱意)  必须使用egrep或者grep -E
 
@@ -391,35 +391,35 @@ sed's#\([^0-9][^0-9]*\)\([0-9][0-9]*\)\([^0-9].*\)\([^a-zA-Z]\)\([a-zA-Z][a-zA-Z
 
 awk -F ':' '{print $3}' 2.txt  以：为分隔符，显示第3段运行结果如图：
 
-![img](../images/clipboard-1590459366136.png) 
+![img](../../images/clipboard-1590459366136.png) 
 
 awk -F ':' '{print $3,$4}' 2.txt 运行结果如图：
 
-![img](../images/clipboard-1590459370829.png) 
+![img](../../images/clipboard-1590459370829.png) 
 
 awk -F ':' 'OFS=":"  {print $3,$4}' 2.txt 指定3段和4段之间的分隔符是： 运行结果如图：
 
-![img](../images/clipboard-1590459379538.png) 
+![img](../../images/clipboard-1590459379538.png) 
 
 awk  '/user/' 2.txt 匹配2.txt中包含user的行 运行结果如图：
 
-![img](../images/clipboard-1590459391306.png) 
+![img](../../images/clipboard-1590459391306.png) 
 
 awk  '/root|user/' 2.txt  匹配2.txt文件中包含user或者root 的行 
 
-![img](../images/clipboard-1590459395843.png) 
+![img](../../images/clipboard-1590459395843.png) 
 
 awk -F ':' '$1~/r*o/' 1.txt  匹配1.txt中以：分割第一段中包含r或者o的行
 
-![img](../images/clipboard-1590459406326.png) 
+![img](../../images/clipboard-1590459406326.png) 
 
 awk -F ':' '$3>=500' 1.txt   匹配第三段数字大于等于500的行，注意数字不能加“”
 
-![img](../images/clipboard-1590459413975.png) 
+![img](../../images/clipboard-1590459413975.png) 
 
 awk -F ':' 'NR<10' 1.txt   匹配小于10行
 
-![img](../images/clipboard-1590459419621.png) 
+![img](../../images/clipboard-1590459419621.png) 
 
 
 
@@ -764,4 +764,4 @@ echo "after exit"
 
 执行结果如下：
 
-![image-20200630105324213](../images/image-20200630105324213.png)
+![image-20200630105324213](../../images/image-20200630105324213.png) 

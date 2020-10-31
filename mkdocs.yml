@@ -60,12 +60,14 @@ nav:
                 - Bind9安装配置: system_base/common_services/bind9.md
             - Rsync:
                 - Sersync配置文件同步: system_base/common_services/sersync.md
+            - LDAP搭建配置: system_base/common_services/ldap.md
         - 中间件: 
             - Nginx:
                 - Nginx简介: system_base/middleware/nginx/nginx_about.md
                 - Nginx的内置变量: system_base/middleware/nginx/nginx_var.md
                 - Nginx处理跨域问题: system_base/middleware/nginx/nginx_cross_domain.md
                 - Nginx常用配置: system_base/middleware/nginx/nginx_config.md
+            - RocketMQ: system_base/middleware/RocketMQ.md
         - 高可用:
             - LVS简介: system_base/high_availability/lvs.md
             - Keepalived高可用: system_base/high_availability/keepalived.md
@@ -107,7 +109,7 @@ nav:
         - 常用开源软件地址: open_source/open_source.md           
         - Zabbix:
             - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
-             - Zabbix监控脚本: open_source/open_source_monitor/zabbix/monitoring_script.md
+            - Zabbix监控脚本: open_source/open_source_monitor/zabbix/monitoring_script.md
         - Promethues:
             - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
             - YML配置文件:

@@ -282,7 +282,7 @@ cd /data/database
 
 安装日志在/tmp/OraInstall2018-06-28_03-55-51AM/下,出现下图说明安装成功
 
-![img](../images/wps1.jpg) 
+![img](../../images/wps1.jpg) 
 
 
 
@@ -316,7 +316,7 @@ su - oracle
 $ORACLE_HOME/bin/netca /silent /responseFile /data/database/response/netca.rsp
 ```
 
-![img](../images/wps2.jpg) 
+![img](../../images/wps2.jpg) 
 
 
 
@@ -326,11 +326,11 @@ $ORACLE_HOME/bin/netca /silent /responseFile /data/database/response/netca.rsp
 lsnrctl status
 ```
 
-![img](../images/wps3.jpg) 
+![img](../../images/wps3.jpg) 
 
 同时看到，相应端口已经起来了
 
-![img](../images/wps4.jpg) 
+![img](../../images/wps4.jpg) 
 
  
 
