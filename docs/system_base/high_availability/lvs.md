@@ -333,11 +333,11 @@ virtual_server 10.4.7.40 80 {
 systemctl start keepalived
 ```
 
-![image-20200822111403291](../images/image-20200822111403291.png)
+![image-20200822111403291](../../images/image-20200822111403291.png)
 
 启动后可以在Keepalived的Master服务器上看到VIP，Backup服务器上没有VIP，说明服务正常
 
-![image-20200822111623154](../images/image-20200822111623154.png)
+![image-20200822111623154](../../images/image-20200822111623154.png)
 
 ### 测试
 
