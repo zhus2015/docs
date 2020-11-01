@@ -75,8 +75,8 @@ lrwxrwxrwx. 1 root root      12 Aug 15 08:56 /usr/local/bin/redis-sentinel -> re
 
 以下报错信息为未安装jemalloc相关包导致的，可以到redis的deps目录下执行make jemalloc进行安装，yum安装的jemalloc在redis启动的时候可能会报Segmentation fault错误
 
-![image-20200815085002784](../images/image-20200815085002784.png)
+![image-20200815085002784](../../images/image-20200815085002784.png)
 
 以下错误是由于未执行部分安装导致的
 
-![image-20200815085408121](../images/image-20200815085408121.png)
+![image-20200815085408121](../../images/image-20200815085408121.png)

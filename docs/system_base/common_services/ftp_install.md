@@ -167,7 +167,7 @@ systemctl start vsftpd
 
 也可以通过命令行进行操作
 
-![image-20200616171352684](../images/image-20200616171352684.png) 
+![image-20200616171352684](../../images/image-20200616171352684.png) 
 
 
 
