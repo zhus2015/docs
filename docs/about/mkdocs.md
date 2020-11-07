@@ -2,7 +2,7 @@
 
 ## 安装使用
 
-```
+```sh
 # 安装
 pip install mkdocs
 
@@ -15,6 +15,9 @@ mkdocs new project
 # 开启本地服务器
 mkdocs serve
 注意：这是是serve不是server
+
+#生成静态网站
+mkdocs build
 ```
 
 
