@@ -103,6 +103,8 @@ nav:
             - Mongodb日常使用: database/mongodb/mongodb_use.md
         - Sqlserver:
             - Sqlserver安装部署: database/sqlserver/sqlserver_install.md
+        - PostgreSQL：
+            - Centos7安装PostgreSQL11: database/postgresql/pgsql_install.md
  
 
     - 监控: 

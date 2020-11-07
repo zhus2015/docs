@@ -31,3 +31,21 @@ systemctl start chronyd
 systemctl enable chronyd
 ```
 
+
+
+
+
+#tengine安装
+
+```
+
+./configure --with-debug --with-stream \
+--prefix=/data/nginx \
+--add-module=./modules/ngx_http_upstream_check_module \
+--add-module=./modules/ngx_http_reqstat_module \
+--add-module=./modules/nginx-module-vts \
+--add-module=./modules/echo-nginx-module \
+--add-module=./modules/ngx_image_thumb \
+--with-http_image_filter_module
+```
+
