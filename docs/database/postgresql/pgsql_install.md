@@ -1,8 +1,4 @@
-
-
 # Centos7安装Postgresql11
-
-
 
 ## 配置Yum源
 

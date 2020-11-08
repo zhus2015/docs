@@ -61,6 +61,12 @@ nav:
             - Rsync:
                 - Sersync配置文件同步: system_base/common_services/sersync.md
             - LDAP搭建配置: system_base/common_services/ldap.md
+            
+        - 配置管理工具:
+            - Ansiable: system_base/config_manage_tools/ansible.md
+            - Puppet: system_base/config_manage_tools/puppet.md
+            - SaltStack: system_base/config_manage_tools/saltstack.md
+            
         - 中间件: 
             - Nginx:
                 - Nginx简介: system_base/middleware/nginx/nginx_about.md
@@ -107,28 +113,23 @@ nav:
             - Centos7安装PostgreSQL11: database/postgresql/pgsql_install.md
  
 
-    - 监控: 
-        - 常用开源软件地址: open_source/open_source.md           
+    - 监控:            
         - Zabbix:
-            - Zabbix安装部署: open_source/open_source_monitor/zabbix/zabbix_install.md
-            - Zabbix监控脚本: open_source/open_source_monitor/zabbix/monitoring_script.md
+            - Zabbix安装部署: monitor/zabbix/zabbix_install.md
+            - Zabbix监控脚本: monitor/zabbix/monitoring_script.md
         - Promethues:
-            - Prometheus安装部署: open_source/open_source_monitor/prometheus/prometheus_install.md
+            - Prometheus安装部署: monitor/prometheus/prometheus_install.md
             - YML配置文件:
-                - prometheus: open_source/open_source_monitor/prometheus/yml/prometheus.md
-                - alertmanager: open_source/open_source_monitor/prometheus/yml/alertmanager.md
-                - node-exporter-alert-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-alert-rules.md
-                - node-exporter-record-rules: open_source/open_source_monitor/prometheus/yml/node-exporter-record-rules.md
-                - rules: open_source/open_source_monitor/prometheus/yml/rules.md
+                - prometheus: monitor/prometheus/yml/prometheus.md
+                - alertmanager: monitor/prometheus/yml/alertmanager.md
+                - node-exporter-alert-rules: monitor/prometheus/yml/node-exporter-alert-rules.md
+                - node-exporter-record-rules: monitor/prometheus/yml/node-exporter-record-rules.md
+                - rules: monitor/prometheus/yml/rules.md
         - Grafana: 
-            - Grafana简介: open_source/open_source_monitor/grafana/grafana_about.md
-            - Grafana安装: open_source/open_source_monitor/grafana/grafana_install.md           
+            - Grafana简介: monitor/grafana/grafana_about.md
+            - Grafana安装: monitor/grafana/grafana_install.md           
  
     - Devops:
-        - 配置管理工具:
-            - Ansiable: devops/config_manage_tools/ansible.md
-            - Puppet: devops/config_manage_tools/puppet.md
-            - SaltStack: devops/config_manage_tools/saltstack.md
                         
         - Jenkins:
             - Jenkins 安装部署: devops/jenkins/jenkins_install.md
@@ -140,8 +141,7 @@ nav:
             - Jenkins 打包APK: devops/jenkins/jenkins_build_apk.md
             - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
             - Jenkins 内置变量说明: devops/jenkins/jenkins_inlay_arge.md
-            - Jenkins LDAP认证配置: devops/jenkins/jenkins_ldap.md
-            
+            - Jenkins LDAP认证配置: devops/jenkins/jenkins_ldap.md       
         - ELK: 
             - ELK基础知识: devops/elk/elk_basic.md
             - ELK安装部署: devops/elk/elk_install.md
@@ -193,6 +193,8 @@ nav:
             - Kubernetes/cka/CKA真题分享.md
             - Kubernetes/cka/2019考试真题.md
             - Kubernetes/cka/20190714考试真题.md
+    - 开源软件:
+        - 常用开源软件地址: open_source/open_source.md
             
     - 开发学习:
         - Python:
