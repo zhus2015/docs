@@ -1,4 +1,4 @@
-# 容器管理工具Portainer
+# 容器图形化管理工具Portainer
 
 Portainer是一个可视化的容器镜像的图形管理工具，利用Portainer可以轻松构建，管理和维护Docker环境。 而且完全免费，基于容器化的安装方式，方便高效部署。
 
@@ -8,22 +8,23 @@ Portainer是一个可视化的容器镜像的图形管理工具，利用Portaine
 
 ## 实验环境
 
-| IP         | 角色             | 备注 |
-| ---------- | ---------------- | ---- |
-| 10.4.7.131 | portainer-server |      |
-| 10.4.7.132 | portainer-agent  |      |
+| IP         | 角色                            | 备注 |
+| ---------- | ------------------------------- | ---- |
+| 10.4.7.131 | portainer-server，swarm manager |      |
+| 10.4.7.132 | portainer-agent，swarm worker   |      |
+| 10.4.7.133 | portainer-agent，swarm worker   |      |
 
 
 
-## Portainer服务端部署
+## Portainer快速部署
 
 ### Server安装部署
 
 ```shell
- # mkdir -p /data/portainer_data
+ # mkdir -p /data/docker/portainer_data
  # docker run -dit -p 8000:8000 -p 9000:9000 --name=portainer --restart=always  \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            -v /data/portainer_data:/data \
+            -v /data/docker/portainer_data:/data \
             portainer/portainer:1.24.1
 ```
 
@@ -34,25 +35,6 @@ Portainer是一个可视化的容器镜像的图形管理工具，利用Portaine
              -v /var/run/docker.sock:/var/run/docker.sock \
              -v /var/lib/docker/volumes:/var/lib/docker/volumes \
              portainer/agent:2.0.0
-```
-
-
-
-### Edge_agent安装
-
-边缘代理节点，一般用来管理swarm集群使用
-
-Edge_agent的命令是添加endpoint节点的时候自动生成，拷贝出来使用即可
-
-```
-docker run -d --restart always -p 8000:80 --name portainer_edge_agent\
-            -v /data/portainer_agent_data:/data \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -v /var/lib/docker/volumes:/var/lib/docker/volumes \
-            -v /:/host  -e EDGE=1 \
-            -e EDGE_ID=6ad0f1ff-6fea-4710-97e2-513ef1066fd8 \
-            -e CAP_HOST_MANAGEMENT=1 \
-            portainer/agent:2.0.0
 ```
 
 
@@ -91,20 +73,50 @@ portainer-ce版本可以选择管理“本机Docker”、Kuberneter集群、和�
 
 ## Portainer管理swarm集群
 
+!!! tip "首先你要有一个swarm集群"
 
+### Portainer服务端部署
+
+> 创建一个独立的网络
 
 ```
-# docker service create --name portainer --publish 9000:9000 \
+docker network create \
+ --driver overlay \
+ --attachable \
+ --subnet 10.12.0.0/24 \
+ portainer_agent_network
+```
+
+
+
+#### swarm部署Portainer服务端
+
+```shell
+docker service create --name portainer --publish 9000:9000 \
+         --network portainer_agent_network \
          --constraint 'node.role == manager' \
          --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \
-         portainer/portainer:1.24.1 -H unix:///var/run/docker.sock
+         portainer/portainer:1.24.1
 
+```
+
+#### docker模式部署
+
+```shell
+docker run -d -p 9000:9000 --name portainer \
+ --network portainer_agent_network \
+ --restart always \
+ -v /var/run/docker.sock:/var/run/docker.sock \
+ -v /data/docker/portainer_data:/data \
+ portainer/portainer:1.24.1
 ```
 
 
 
-```
-# docker service create --name portainer_agent \
+### Portainer客户端(Agent)
+
+```shell
+docker service create --name portainer_agent \
          --network portainer_agent_network \
          --mode global \
          --constraint 'node.platform.os == linux' \
@@ -113,3 +125,28 @@ portainer-ce版本可以选择管理“本机Docker”、Kuberneter集群、和�
          portainer/agent:2.0.0
 ```
 
+
+
+### 配置集群管理
+
+#### 设置管理员用户
+
+![image-20201115123350704](../../images/image-20201115123350704.png)
+
+#### 配置swarm管理
+
+![image-20201115123510913](../../images/image-20201115123510913.png)
+
+Name：自己定义
+
+Agent URL：如果是swarm启动的agent客户端，直接使用task.portainer_agent:9001即可，请根据实际情况修改
+
+点击Connect后，即可看到我们要管理的集群
+
+![image-20201115123951643](../../images/image-20201115123951643.png)
+
+
+
+进入集群，可以通过昨天的任务栏切换查看不同信息
+
+![image-20201115124214102](../../images/image-20201115124214102.png)
