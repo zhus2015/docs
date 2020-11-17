@@ -466,7 +466,6 @@ mkdir -p /data/docker
 ```
 ##注意变更bip的值，第三段为机器IP最后一位
 {
-
  "graph": "/data/docker",
  "storage-driver": "overlay2",
  "insecure-registries": ["registry.access.redhat.com","quay.io","harbor.zs.com"],
@@ -474,7 +473,6 @@ mkdir -p /data/docker
  "bip": "172.7.31.1/24",
  "exec-opts": ["native.cgroupdriver=systemd"],
  "live-restore": true
-
 }
 ```
 
