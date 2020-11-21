@@ -30,7 +30,7 @@ docker swarm init --advertise-addr 10.4.7.131
 
 同时我们还可以通过命令生成加入集群节点的命令
 
-##### 生成添加Manage角色的命令
+##### 生成添加Manage节点命令
 
 ```shell
 docker swarm  join-token manager
@@ -38,7 +38,7 @@ docker swarm  join-token manager
 
 ![image-20201121133217054](../../images/image-20201121133217054.png)
 
-##### 生成添加Worker角色的命令
+##### 生成添加Worker节点命令
 
 ```shell
 docker swarm  join-token worker
@@ -47,6 +47,13 @@ docker swarm  join-token worker
 ![image-20201121133150565](../../images/image-20201121133150565.png)
 
 #### 节点加入集群
+
+!!! danger "注意"
+    是在需要加入集群的节点上执行 
+
+```shell
+docker swarm join --token SWMTKN-1-3w22mga5kru4914afm3yqhugvgtfot78wtu5dlj5es0glc3s67-eeuppkas5juel5y4xn2j9ejdd 10.4.7.131:2377
+```
 
 ![image-20201121133416608](../../images/image-20201121133416608.png)
 
