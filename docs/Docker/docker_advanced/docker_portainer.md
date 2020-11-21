@@ -96,6 +96,7 @@ docker service create --name portainer --publish 9000:9000 \
          --network portainer_agent_network \
          --constraint 'node.role == manager' \
          --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \
+         --mount type=bind,src=/data/docker/portainer_data,dst=/data \
          portainer/portainer:1.24.1
 
 ```
@@ -139,7 +140,7 @@ docker service create --name portainer_agent \
 
 Name：自己定义
 
-Agent URL：如果是swarm启动的agent客户端，直接使用task.portainer_agent:9001即可，请根据实际情况修改
+Agent URL：如果是swarm启动的agent客户端，直接使用tasks.portainer_agent:9001即可，请根据实际情况修改
 
 点击Connect后，即可看到我们要管理的集群
 

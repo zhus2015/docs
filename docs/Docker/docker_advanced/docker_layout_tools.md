@@ -1,12 +1,36 @@
-# Docker Compose
+# Docker三剑客
 
-## 安装
+## Docker Swarm
+
+```
+docker network create \
+--subnet 10.10.0.0/16 \
+--gateway 10.10.0.1 \
+--opt com.docker.network.bridge.name=docker_gwbridge \
+--opt com.docker.network.bridge.enable_icc=false \
+--opt com.docker.network.bridge.enable_ip_masquerade=true \
+docker_gwbridge
+```
+
+
+
+```shell
+docker swarm init --advertise-addr 172.22.43.22
+```
+
+
+
+
+
+## Docker Compose
+
+### 安装
 
 ```sh
 yum install docker-compose -y
 ```
 
-## 使用
+### 使用
 
 ```sh
 在使用docker-compose的命令时，默认会在当前目录下找docker-compose.yml文件
@@ -31,7 +55,7 @@ docker-compose logs -f
 
 
 
-## 例子
+### 例子
 
 ```yml
 version: '3.1'
