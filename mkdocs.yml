@@ -160,7 +160,7 @@ nav:
             - Docker的网络模式: Docker/docker_basic/docker_network.md
         - Docker进阶:
             - Docker三剑客: Docker/docker_advanced/docker_layout_tools.md
-            - Docker可视化管理工具Portainer: Docker/docker_advanced/docker_portainer.md
+            - 可视化管理工具Portainer: Docker/docker_advanced/docker_portainer.md
         - Docker镜像仓库:
             - Docker镜像仓库--Harbor: Docker/docker_library/docker_library_harbor.md
             - Docker镜像仓库Harbor密码重置: Docker/docker_library/harbor_miss_password.md
