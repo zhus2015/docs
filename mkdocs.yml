@@ -37,117 +37,122 @@ nav:
     - 介绍: index.md
     - 系统运维基础:
         - Linux基础:
-            - Centos 7 关闭桌面: system_base/linux/centos7_stop_desktop.md
-            - 更换软件安装源: system_base/linux/change_soft_source.md
-            - 定时任务使用配置: system_base/linux/linux_crontab.md
-            - 系统网络配置: system_base/linux/linux_network_setting.md
-            - 磁盘扩容: system_base/linux/disk_capacity.md
-            - Sytemctl进程管理: system_base/linux/centos7_systemctl_setting.md
-            - Firewalld使用: system_base/linux/centos7_firewalld_use.md
-            - 系统内核优化: system_base/linux/system_optimization.md
-            - RPM打包: system_base/linux/package_rpm.md
+            - Centos 7 关闭桌面: System_base/linux/centos7_stop_desktop.md
+            - 更换软件安装源: System_base/linux/change_soft_source.md
+            - 定时任务使用配置: System_base/linux/linux_crontab.md
+            - 系统网络配置: System_base/linux/linux_network_setting.md
+            - 主机名修改: System_base/linux/centos_change_hostname.md
+            - 磁盘扩容: System_base/linux/disk_capacity.md
+            - Sytemctl进程管理: System_base/linux/centos7_systemctl_setting.md
+            - Firewalld使用: System_base/linux/centos7_firewalld_use.md
+            - 系统内核优化: System_base/linux/system_optimization.md
+            - RPM打包: System_base/linux/package_rpm.md
         - Shell: 
-            - Shell基础: system_base/shell/shell.md
-            - Shell小实验: system_base/shell/shell_test.md
-            - expect交互脚本: system_base/shell/expect.md
-            - 正则匹配: system_base/shell/regular_expression.md
+            - Shell基础: System_base/shell/shell.md
+            - Shell小实验: System_base/shell/shell_test.md
+            - expect交互脚本: System_base/shell/expect.md
+            - 正则匹配: System_base/shell/regular_expression.md
+            - 日常脚本: System_base/shell/script.md
         - 常用服务:
             - FTP: 
-                - FTP安装部署: system_base/common_services/ftp_install.md
-                - FTP错误代码: system_base/common_services/ftp_error_code.md
-                - FTP相关脚本: system_base/common_services/ftp_scripte.md
+                - FTP安装部署: System_base/common_services/ftp_install.md
+                - FTP错误代码: System_base/common_services/ftp_error_code.md
+                - FTP相关脚本: System_base/common_services/ftp_scripte.md
             - DNS:
-                - Bind9安装配置: system_base/common_services/bind9.md
+                - Bind9安装配置: System_base/common_services/bind9.md
             - Rsync:
-                - Sersync配置文件同步: system_base/common_services/sersync.md
-            - LDAP搭建配置: system_base/common_services/ldap.md
+                - Sersync配置文件同步: System_base/common_services/sersync.md
+            - LDAP搭建配置: System_base/common_services/ldap.md
             
         - 配置管理工具:
-            - Ansiable: system_base/config_manage_tools/ansible.md
-            - Puppet: system_base/config_manage_tools/puppet.md
-            - SaltStack: system_base/config_manage_tools/saltstack.md
+            - Ansiable: System_base/config_manage_tools/ansible.md
+            - Puppet: System_base/config_manage_tools/puppet.md
+            - SaltStack: System_base/config_manage_tools/saltstack.md
             
         - 中间件: 
             - Nginx:
-                - Nginx简介: system_base/middleware/nginx/nginx_about.md
-                - Nginx的内置变量: system_base/middleware/nginx/nginx_var.md
-                - Nginx处理跨域问题: system_base/middleware/nginx/nginx_cross_domain.md
-                - Nginx常用配置: system_base/middleware/nginx/nginx_config.md
-            - RocketMQ: system_base/middleware/RocketMQ.md
+                - Nginx简介: System_base/middleware/nginx/nginx_about.md
+                - Nginx的内置变量: System_base/middleware/nginx/nginx_var.md
+                - Nginx处理跨域问题: System_base/middleware/nginx/nginx_cross_domain.md
+                - Nginx常用配置: System_base/middleware/nginx/nginx_config.md
+            - RocketMQ: System_base/middleware/RocketMQ.md
         - 高可用:
-            - LVS简介: system_base/high_availability/lvs.md
-            - Keepalived高可用: system_base/high_availability/keepalived.md
-            - Haproxy: system_base/high_availability/haproxy.md  
-            - DNS轮询: system_base/high_availability/DNS轮询.md
-        - Xshell使用: system_base/xshell.md
+            - LVS简介: System_base/high_availability/lvs.md
+            - Keepalived高可用: System_base/high_availability/keepalived.md
+            - Haproxy: System_base/high_availability/haproxy.md  
+            - DNS轮询: System_base/high_availability/DNS轮询.md
+        - Xshell使用: System_base/xshell.md
     - 代码文档管理: 
         - 代码管理:
-            - SVN: code_docs/code_manage/svn.md
-            - Gogs: code_docs/code_manage/gogs.md
-            - Gitlab: code_docs/code_manage/gitlab.md
-            - Gitlab管理员密码修改: code_docs/code_manage/gitlab_change_password.md
-            - Gitlab LDAP认证配置: code_docs/code_manage/gitlab_ldap.md
+            - SVN: Code_docs/code_manage/svn.md
+            - Gogs: Code_docs/code_manage/gogs.md
+            - Gitlab: Code_docs/code_manage/gitlab.md
+            - Gitlab管理员密码修改: Code_docs/code_manage/gitlab_change_password.md
+            - Gitlab LDAP认证配置: Code_docs/code_manage/gitlab_ldap.md
         - 代码质量管理:
-            - sonarqube: code_docs/code_quality/sonarqube.md
+            - sonarqube: Code_docs/code_quality/sonarqube.md
         - 文档管理:
-            - confluence: code_docs/docs_manage/confluence.md
+            - Confluence文档管理系统: Code_docs/docs_manage/confluence.md
+            - 接口文档工具YAPI: Code_docs/docs_manage/yapi.md
             
     - 数据库:
         - Oracle:
-            - Centos7下静默安装Oracle: database/oracle/oracle_install.md
-            - Oracle日常操作: database/oracle/oracle_use.md
-            - Oracle远程连接: database/oracle/oracle_connet.md
-            - Oracle更改字符集: database/oracle/change_character encoding.md
+            - Centos7下静默安装Oracle: Database/oracle/oracle_install.md
+            - Oracle日常操作: Database/oracle/oracle_use.md
+            - Oracle远程连接: Database/oracle/oracle_connet.md
+            - Oracle更改字符集: Database/oracle/change_character encoding.md
         - Mysql:
-            - Mysql安装部署: database/mysql/mysql_install.md
+            - Mysql安装部署: Database/mysql/mysql_install.md
         - Redis:
-            - Redis安装部署: database/redis/redis_install.md
-            - Redis集群模式: database/redis/redis_cluster.md
-            - Redis集群Codis: database/redis/redis_codis.md
+            - Redis安装部署: Database/redis/redis_install.md
+            - Redis集群模式: Database/redis/redis_cluster.md
+            - Redis集群Codis: Database/redis/redis_codis.md
         - Mongodb:
-            - Mongodb安装部署: database/mongodb/mongodb_install.md
-            - Mongodb日常使用: database/mongodb/mongodb_use.md
+            - Mongodb安装部署: Database/mongodb/mongodb_install.md
+            - Mongodb日常使用: Database/mongodb/mongodb_use.md
         - Sqlserver:
-            - Sqlserver安装部署: database/sqlserver/sqlserver_install.md
+            - Sqlserver安装部署: Database/sqlserver/sqlserver_install.md
         - PostgreSQL:
-            - Centos7安装PostgreSQL11: database/postgresql/pgsql_install.md
+            - Centos7安装PostgreSQL11: Database/postgresql/pgsql_install.md
+            - PostgreSQL日常使用: Database/postgresql/pgsql_use.md
  
     - 监控:            
         - Zabbix:
-            - Zabbix安装部署: monitor/zabbix/zabbix_install.md
-            - Zabbix监控脚本: monitor/zabbix/monitoring_script.md
+            - Zabbix安装部署: Monitor/zabbix/zabbix_install.md
+            - Zabbix监控脚本: Monitor/zabbix/monitoring_script.md
         - Promethues:
-            - Prometheus安装部署: monitor/prometheus/prometheus_install.md
+            - Prometheus安装部署: Monitor/prometheus/prometheus_install.md
             - YML配置文件:
-                - prometheus: monitor/prometheus/yml/prometheus.md
-                - alertmanager: monitor/prometheus/yml/alertmanager.md
-                - node-exporter-alert-rules: monitor/prometheus/yml/node-exporter-alert-rules.md
-                - node-exporter-record-rules: monitor/prometheus/yml/node-exporter-record-rules.md
-                - rules: monitor/prometheus/yml/rules.md
+                - prometheus: Monitor/prometheus/yml/prometheus.md
+                - alertmanager: Monitor/prometheus/yml/alertmanager.md
+                - node-exporter-alert-rules: Monitor/prometheus/yml/node-exporter-alert-rules.md
+                - node-exporter-record-rules: Monitor/prometheus/yml/node-exporter-record-rules.md
+                - rules: Monitor/prometheus/yml/rules.md
         - Grafana: 
-            - Grafana简介: monitor/grafana/grafana_about.md
-            - Grafana安装: monitor/grafana/grafana_install.md           
+            - Grafana简介: Monitor/grafana/grafana_about.md
+            - Grafana安装: Monitor/grafana/grafana_install.md           
+            - Grafana数据源更改: Monitor/grafana/grafana_sourcedata.md          
  
     - Devops:
                         
         - Jenkins:
-            - Jenkins 安装部署: devops/jenkins/jenkins_install.md
-            - Jenkins 参数化构建: devops/jenkins/jenkins_build_arge.md
-            - Jenkins Maven打包程序: devops/jenkins/jenkins_build_java.md
-            - Jenkins SSH通道部署程序: devops/jenkins/jenkins_deploy_ssh.md
-            - Jenkins Webhook触发构建: devops/jenkins/jenkins_webhook_build.md
-            - Jeknins 配置钉钉通知: devops/jenkins/jenkins_message_dingding.md
-            - Jenkins 打包APK: devops/jenkins/jenkins_build_apk.md
-            - Jenkins Pipeline语法说明: devops/jenkins/jenkins_pipeline.md
-            - Jenkins 内置变量说明: devops/jenkins/jenkins_inlay_arge.md
-            - Jenkins LDAP认证配置: devops/jenkins/jenkins_ldap.md       
+            - Jenkins 安装部署: Devops/jenkins/jenkins_install.md
+            - Jenkins 参数化构建: Devops/jenkins/jenkins_build_arge.md
+            - Jenkins Maven打包程序: Devops/jenkins/jenkins_build_java.md
+            - Jenkins SSH通道部署程序: Devops/jenkins/jenkins_deploy_ssh.md
+            - Jenkins Webhook触发构建: Devops/jenkins/jenkins_webhook_build.md
+            - Jeknins 配置钉钉通知: Devops/jenkins/jenkins_message_dingding.md
+            - Jenkins 打包APK: Devops/jenkins/jenkins_build_apk.md
+            - Jenkins Pipeline语法说明: Devops/jenkins/jenkins_pipeline.md
+            - Jenkins 内置变量说明: Devops/jenkins/jenkins_inlay_arge.md
+            - Jenkins LDAP认证配置: Devops/jenkins/jenkins_ldap.md       
         - ELK: 
-            - ELK基础知识: devops/elk/elk_basic.md
-            - ELK安装部署: devops/elk/elk_install.md
-            - ELK使用Docker安装: devops/elk/elk_install_docker.md
-            - ELK收集Nginx日志: devops/elk/elk_collect_nginx_logs.md
-            - ELK数据安全: devops/elk/elk_security.md
-            - ELK集群运维: devops/elk/elk_operation.md
+            - ELK基础知识: Devops/elk/elk_basic.md
+            - ELK安装部署: Devops/elk/elk_install.md
+            - ELK使用Docker安装: Devops/elk/elk_install_docker.md
+            - ELK收集Nginx日志: Devops/elk/elk_collect_nginx_logs.md
+            - ELK数据安全: Devops/elk/elk_security.md
+            - ELK集群运维: Devops/elk/elk_operation.md
             
     - Docker:
         - Docker基础:
@@ -177,7 +182,7 @@ nav:
             - K8S安装部署(核心插件): Kubernetes/deploy/k8s_core_plug_install.md
             - K8S交付apollo配置中心: Kubernetes/deploy/k8s_apollo_install.md
             - K8S交付Dubbo微服务: Kubernetes/deploy/k8s_dubbo_install_new.md
-            - K8S交付Dubbo-monitor微服务: Kubernetes/deploy/k8s_dubbo_monitor_install.md
+            - K8S交付Dubbo-Monitor微服务: Kubernetes/deploy/k8s_dubbo_monitor_install.md
             - K8S交付Prometheus监控(1): Kubernetes/deploy/k8s_prometheus_install_1.md
             - K8S交付Prometheus监控(2): Kubernetes/deploy/k8s_prometheus_install_2.md
             - K8S使用ELK收集日志: Kubernetes/deploy/k8s_elk_install.md
@@ -195,7 +200,7 @@ nav:
             - Kubernetes/cka/2019考试真题.md
             - Kubernetes/cka/20190714考试真题.md
     - 开源软件:
-        - 常用开源软件地址: open_source/open_source.md
+        - 常用开源软件地址: Open_source/open_source.md
             
     - 开发学习:
         - Python:
@@ -207,9 +212,9 @@ nav:
                 - 字符操作: Development/python/python_base/python_string.md
     
     - 关于:
-         - 联系方式: about/contact.md
-         - MKdocs使用: about/mkdocs.md
-         - 图: about/test.md
+         - 联系方式: About/contact.md
+         - MKdocs使用: About/mkdocs.md
+         - 图: About/test.md
          
 markdown_extensions:
     - markdown.extensions.attr_list

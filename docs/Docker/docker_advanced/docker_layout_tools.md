@@ -2,6 +2,10 @@
 
 ## Docker Swarm
 
+### 创建网络
+
+!!! tip "创建网络的目的是为了尽量避免Docker自动创建的网络与已存在网络冲突"
+
 ```
 docker network create \
 --subnet 10.10.0.0/16 \

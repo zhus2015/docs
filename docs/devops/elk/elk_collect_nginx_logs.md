@@ -51,7 +51,7 @@ systemctl start nginx
 
 使用浏览器多访问几次，可以看到产生了部分日志
 
-![image-20200610134203439](images/image-20200610134203439.png)
+![image-20200610134203439](../images/image-20200610134203439.png)
 
 
 
@@ -160,7 +160,7 @@ netstat -lntp |grep 5055
 
 可以看到5055端口已经启动
 
-![image-20200610141542206](images/image-20200610141542206.png)
+![image-20200610141542206](../images/image-20200610141542206.png)
 
 
 
@@ -178,7 +178,7 @@ systemctl start filebeat
 
 进入页面后依次选择选择“Management” -> "Index Management" 可以在这个页面看到我们生成的索引
 
-![image-20200610150021817](images/image-20200610150021817.png)
+![image-20200610150021817](../images/image-20200610150021817.png)
 
 
 
@@ -186,19 +186,19 @@ systemctl start filebeat
 
 > 依次“Management” ->“Index patterns”->"Create index pattern"，
 
-![image-20200610150443575](images/image-20200610150443575.png)
+![image-20200610150443575](../images/image-20200610150443575.png)
 
  
 
 > 在过滤框中输入“filebeat*”，点击next step
 
-![image-20200610150336644](images/image-20200610150336644.png)
+![image-20200610150336644](../images/image-20200610150336644.png)
 
 
 
 > 在下拉框中选择“@timestamp”，然后选择"Create index pattern"
 
-![image-20200610150523083](images/image-20200610150523083.png)
+![image-20200610150523083](../images/image-20200610150523083.png)
 
 
 
@@ -206,7 +206,7 @@ systemctl start filebeat
 
 选择"Discover"，按照图示选择对应过滤器，这时我们就看到了我们的nginx日志，可以尝试刷新页面尝试，看是否可以看到最新的日志，会有一点时间延迟
 
-![image-20200610150747710](images/image-20200610150747710.png) 
+![image-20200610150747710](../images/image-20200610150747710.png) 
 
 
 
