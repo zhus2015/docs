@@ -1,4 +1,6 @@
-# Prometheus简介
+# Prometheus安装部署
+
+## Prometheus简介
 
 参考官网文档：   https://prometheus.io/docs/prometheus/latest/installation/
 
@@ -6,7 +8,7 @@
 
 ![Prometheus architecture](https://prometheus.io/assets/architecture.png)
 
-# Prometheus server服务
+## Prometheus server服务
 
 ```yml
 # my global config
@@ -76,7 +78,7 @@ docker run --name=prometheus -itd \
 
 
 
-# Grafana--数据展示平台
+## Grafana--数据展示平台
 
 ```shell
 $ mkdir -p /data/grafana 
@@ -102,7 +104,7 @@ EOF
 
 
 
-# Node exporter--节点监控工具
+## Node exporter--节点监控工具
 
 用于提供metrics，通过接口进行信息的收集，主要用来收集服务器的相关数据
 
@@ -116,7 +118,7 @@ docker run -d --restart=always \
 
 
 
-# Cadvisor--容器监控插件
+## Cadvisor--容器监控插件
 
 cadvisor用于收集容器信息
 
@@ -136,7 +138,7 @@ docker run -d --restart=always \
 
 
 
-# Alertmanager--告警插件
+## Alertmanager--告警插件
 
 > 启动命令
 
@@ -185,9 +187,9 @@ alerting:
 
 
 
-# Blackbox_exporter
+## Blackbox_exporter
 
-## 部署启动
+### 部署启动
 
 >启动脚本  runblackbox.sh
 
@@ -249,13 +251,13 @@ modules:
     timeout: 5s
 ```
 
-## 服务测试
+### 服务测试
 
 可以通过浏览器访问ip:9115的方法查看服务启动状态
 
 ![image-20201204093309851](../../images/image-20201204093309851.png)
 
-## 应用场景
+### 应用场景
 
 - HTTP 测试
   定义 Request Header 信息
@@ -269,7 +271,7 @@ modules:
   接口联通性
 - SSL 证书过期时间
 
-### HTTP测试
+HTTP测试
 
 - 相关配置内容添加到 Prometheus 配置文件内
 - 对应 blackbox.yml文件的 http_2xx 模块
@@ -297,7 +299,7 @@ modules:
 
 ![image-20201204093645365](../../images/image-20201204093645365.png)
 
-### TCP测试
+#### TCP测试
 
 ```yml
 - job_name: "blackbox_telnet_port]"
@@ -318,7 +320,7 @@ modules:
         replacement: 10.7.201.98:9115
 ```
 
-### ICMP测试
+#### ICMP测试
 
 ```yml
 - job_name: 'blackbox00_ping_idc_ip'
@@ -347,7 +349,7 @@ modules:
 
 
 
-### HTTP、TCP、ICMP告警
+#### HTTP、TCP、ICMP告警
 
 > blackbox-alert.yml
 
@@ -367,7 +369,7 @@ groups:
 
 
 
-# Redis_exporter
+## Redis_exporter
 
 !!! waring "这个项目并不是官方项目"
 
@@ -377,7 +379,7 @@ groups:
 
 Docker仓库地址：https://hub.docker.com/r/oliver006/redis_exporter
 
-## Redis_exporter安装配置
+### Redis_exporter安装配置
 
 这里我们将其可执行文件解压放置到/usr/bin目录下
 
@@ -390,15 +392,15 @@ tar xzf redis_exporter-v1.3.4.linux-amd64.tar.gz
 cp redis_exporter-v1.3.4.linux-amd64/redis_exporter /usr/bin/
 ```
 
-## Redis_exporter启动
+### Redis_exporter启动
 
-### 创建Prometheus用户(存在则跳过)
+#### 创建Prometheus用户(存在则跳过)
 
 ```shell
 useradd -g prometheus -M -s /sbin/nologin prometheus
 ```
 
-### 调整文件权限
+#### 调整文件权限
 
 ```shell
 chown prometheus.prometheus /usr/bin/redis_exporter
@@ -406,7 +408,7 @@ chown prometheus.prometheus /usr/bin/redis_exporter
 
 
 
-### 配置redis_exporter为系统服务方式启动
+配置redis_exporter为系统服务方式启动
 
 > vim  /usr/lib/systemd/system/redis_exporter.service
 
@@ -441,7 +443,7 @@ systemctl start redis_exporter
 systemctl status redis_exporter
 ```
 
-## 添加Prometheus配置
+### 添加Prometheus配置
 
 ```shell
 - job_name: 'redis'
@@ -454,13 +456,13 @@ systemctl status redis_exporter
 
 重启Prometheus加载新的配置文件
 
-## 配置Grafana展示
+### 配置Grafana展示
 
 导入监控模板https://grafana.com/grafana/dashboards/763
 
 
 
-# Rocketmq-exporter
+## Rocketmq-exporter
 
 Rocketmq-exporter是对Rocket进行监控的一个工具
 
