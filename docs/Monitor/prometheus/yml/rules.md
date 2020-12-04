@@ -18,7 +18,7 @@ groups:
 
 
 
-```
+```yml
 groups:
 - name: hostStatsAlert
   rules:

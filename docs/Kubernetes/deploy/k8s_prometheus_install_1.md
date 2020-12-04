@@ -536,7 +536,7 @@ metadata:
   name: blackbox-exporter
   namespace: kube-system
 data:
-  blackbox.yml: |-
+  blackbox.yml:
     modules:
       http_2xx:
         prober: http

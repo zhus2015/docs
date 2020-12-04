@@ -1,10 +1,16 @@
-# RocketMQ集群搭建
+# RocketMQ集群搭建(2m-2s)
+
+官方文档地址：https://github.com/apache/rocketmq/tree/master/docs/cn
+
+软件包下载地址：https://github.com/apache/rocketmq/releases
 
 
 
-多master、多slave模式
+本次部署模式未2master、2slave模式
 
-集群规划
+## 环境介绍
+
+### 环境规划
 
 | ip           | 角色          | 备注         |
 | ------------ | ------------- | ------------ |
@@ -14,11 +20,17 @@
 
 
 
-解压文件
+## 软件下载
+
+本次使用4.7.0版本，请自行到官网下载
 
 配置环境变量
 
+> vim /etc/profile
 
+```
+export PATH=$PATH:/data/nginx/sbin/:/data/rocketmq/bin/
+```
 
 使用主从异步的模式
 

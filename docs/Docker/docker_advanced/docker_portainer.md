@@ -108,8 +108,8 @@ docker run -d -p 9000:9000 --name portainer \
  --network portainer_agent_network \
  --restart always \
  -v /var/run/docker.sock:/var/run/docker.sock \
- -v /data/docker/portainer_data:/data \
- portainer/portainer:1.24.1
+ -v /data/docker/portainer/data:/data \
+ portainer/portainer-ce:2.0.0
 ```
 
 

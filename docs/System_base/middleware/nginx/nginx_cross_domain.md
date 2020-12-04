@@ -1,7 +1,5 @@
 # nginx处理前后端分离跨域问题
 
-
-
 ## 配置方法一
 
 ```shell
@@ -14,7 +12,7 @@ if ($request_method = 'OPTIONS') {
     add_header 'Access-Control-Max-Age' 1728000;
     add_header 'Content-Type' 'text/plain charset=UTF-8';
     add_header 'Content-Length' 0;
-     return 204;
+    return 204;
 }
 
 if ($request_method = 'POST') {
