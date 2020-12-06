@@ -8,7 +8,7 @@
 
 ```shell
 FROM zhus2015/jre8:8u251
-MAINTAINER ZHUSHUAI "zhushuai@iald.cn"
+MAINTAINER ZHUSHUAI "zhus8251@163.com"
 ADD config.yml /opt/prom/config.yml
 ADD jmx_javaagent-0.3.1.jar /opt/prom/
 WORKDIR /opt/project_dir
@@ -22,7 +22,7 @@ CMD ["/entrypoint.sh"]
 #!/bin/sh
 M_OPTS="-Duser.timezone=Asia/Shanghai -javaagent:/opt/prom/jmx_javaagent-0.3.1.jar=$(hostname -i):${M_PORT:-"12346"}:/opt/prom/config.yml"
 C_OPTS=${C_OPTS}
-JAR_BALL=${JAR_BALL}
+JAR_BALL=${JAR_BALL:-"app.jar"}
 exec java -jar ${M_OPTS} ${C_OPTS} ${JAR_BALL}
 ```
 
