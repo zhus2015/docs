@@ -470,3 +470,76 @@ Rocketmq-exporter是对Rocket进行监控的一个工具
 
 Grafana地址：https://grafana.com/grafana/dashboards/10477
 
+Apache官方并没有给出打包好的二进制文件以及封装好的Docker镜像，因此需要我们自己该项目插件进行打包
+
+### 获取代码
+
+```shell
+git clone https://github.com/apache/rocketmq-exporter.git
+```
+
+### 修改配置文件
+
+This image is configurable using different properties, see `application.properties` for a configuration example.
+
+| name                               | Default        | Description                                          |
+| ---------------------------------- | -------------- | ---------------------------------------------------- |
+| `rocketmq.config.namesrvAddr`      | 127.0.0.1:9876 | name server address for broker cluster               |
+| `rocketmq.config.webTelemetryPath` | /metrics       | Path under which to expose metrics                   |
+| `server.port`                      | 5557           | Address to listen on for web interface and telemetry |
+| `rocketmq.config.rocketmqVersion`  | V4_3_2         | rocketmq broker version                              |
+
+### 构建
+
+#### 二进制打包
+
+```shell
+cd rocketmq-exporter
+mvn clean install
+```
+
+#### Docker镜像打包(待确定)
+
+```shell
+mvn package -Dmaven.test.skip=true docker:build
+```
+
+
+
+### 运行
+
+#### 二进制包运行
+
+```shell
+java -jar rocketmq-exporter-0.0.2-SNAPSHOT.jar --rocketmq.config.namesrvAddr=10.1.1.20:9876
+```
+
+如果打包的时候配置了`rocketmq.config.namesrvAddr`参数，启动的时候就不需要再进行配置，程序默认端口5557，可以通过浏览器访问http://ip:5557/metrics看到监控获取到的参数
+
+#### Docker运行
+
+> 打包
+
+````shell
+mdir -p /data/rocketmq-exporter
+cp rocketmq-exporter-0.0.2-SNAPSHOT.jar /data/rocketmq-exporter
+cd /data/rocketmq-exporter
+vim Dockerfile
+FROM zhus2015/jre8:8u251
+MAINTAINER ZHUSHUAI "zhus8251@163.com"
+ADD rocketmq-exporter-0.0.2-SNAPSHOT.jar /opt/project_dir/app.jar
+WORKDIR /opt/project_dir
+ADD entrypoint.sh /entrypoint.sh
+CMD ["/entrypoint.sh"]
+
+````
+
+> vim entrypoint.sh
+
+```
+#!/bin/sh
+M_OPTS="-Duser.timezone=Asia/Shanghai"
+C_OPTS=${C_OPTS}
+exec java -jar ${M_OPTS} ${C_OPTS} app.jar
+```
+

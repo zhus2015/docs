@@ -8,7 +8,7 @@
 
 ```shell
 FROM zhus2015/jre8:8u251
-MAINTAINER ZHUSHUAI "zhushuai@iald.cn"
+MAINTAINER ZHUSHUAI "zhus8251@163.com"
 ADD config.yml /opt/prom/config.yml
 ADD jmx_javaagent-0.3.1.jar /opt/prom/
 WORKDIR /opt/project_dir

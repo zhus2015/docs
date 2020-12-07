@@ -44,7 +44,7 @@ cd jre1.8.0_251
 
 ```shell
 #删除文本文件
-rm -rf COPYRIGHT LICENSE README release THIRDPARTYLICENSEREADME-JAVAFX.txtTHIRDPARTYLICENSEREADME.txt Welcome.html \
+rm -rf COPYRIGHT LICENSE README release THIRDPARTYLICENSEREADME-JAVAFX.txtTHIRDPARTYLICENSEREADME.txt Welcome.html
 #删除其他无用文件
 rm -rf lib/plugin.jar \
 	lib/ext/jfxrt.jar \
