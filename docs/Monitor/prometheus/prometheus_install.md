@@ -102,8 +102,6 @@ deep_squal 160
 EOF
 ```
 
-
-
 ## Node exporter--节点监控工具
 
 用于提供metrics，通过接口进行信息的收集，主要用来收集服务器的相关数据
@@ -271,7 +269,7 @@ modules:
   接口联通性
 - SSL 证书过期时间
 
-HTTP测试
+#### HTTP测试
 
 - 相关配置内容添加到 Prometheus 配置文件内
 - 对应 blackbox.yml文件的 http_2xx 模块
@@ -323,7 +321,7 @@ HTTP测试
 #### ICMP测试
 
 ```yml
-- job_name: 'blackbox00_ping_idc_ip'
+- job_name: 'blackbox_ping_idc_ip'
   scrape_interval: 10s
   metrics_path: /probe
   params:
@@ -345,6 +343,25 @@ HTTP测试
         regex: .*
         target_label: __address__
         replacement: 10.7.201.98:9115
+```
+
+#### POST测试
+
+> Prometheus配置文件修改
+
+```yml
+- job_name: 'blackbox_http_post'
+  metrics_path: /probe
+  params:
+    module: [http_post_2xx]
+  
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: 10.7.201.98:9115
 ```
 
 
@@ -480,6 +497,8 @@ git clone https://github.com/apache/rocketmq-exporter.git
 
 ### 修改配置文件
 
+这一步可以略过，通过启动参数执行也可以
+
 This image is configurable using different properties, see `application.properties` for a configuration example.
 
 | name                               | Default        | Description                                          |
@@ -498,13 +517,30 @@ cd rocketmq-exporter
 mvn clean install
 ```
 
-#### Docker镜像打包(待确定)
+#### Docker镜像打包
 
-```shell
-mvn package -Dmaven.test.skip=true docker:build
+> 修改Dockerfile文件(src/main/docker/Dockerfile)
+
+```
+FROM java:8
+MAINTAINER breeze
+ADD rocketmq-exporter-0.0.2-SNAPSHOT.jar quickstart.jar
+EXPOSE 5557
+ENTRYPOINT ["java","-jar","quickstart.jar"]
 ```
 
+主要就是`rocketmq-exporter-0.0.2-SNAPSHOT.jar`包名称，要和自己生成的包一致
 
+> 打包并推送到个人仓库
+
+```shell
+#打包Docker镜像
+mvn package -Dmaven.test.skip=true docker:build
+#修改tag
+docker tag e9179c2f01de zhus2015/rocketmq-exporter:0.0.2
+#推送到个人仓库
+docker push zhus2015/rocketmq-exporter:0.0.2
+```
 
 ### 运行
 
@@ -518,28 +554,94 @@ java -jar rocketmq-exporter-0.0.2-SNAPSHOT.jar --rocketmq.config.namesrvAddr=10.
 
 #### Docker运行
 
-> 打包
-
 ````shell
-mdir -p /data/rocketmq-exporter
-cp rocketmq-exporter-0.0.2-SNAPSHOT.jar /data/rocketmq-exporter
-cd /data/rocketmq-exporter
-vim Dockerfile
-FROM zhus2015/jre8:8u251
-MAINTAINER ZHUSHUAI "zhus8251@163.com"
-ADD rocketmq-exporter-0.0.2-SNAPSHOT.jar /opt/project_dir/app.jar
-WORKDIR /opt/project_dir
-ADD entrypoint.sh /entrypoint.sh
-CMD ["/entrypoint.sh"]
-
+docker run -d --name rmq-export -p 5557:5557 zhus2015/rocketmq-exporter:0.0.2 \
+           --rocketmq.config.namesrvAddr=10.1.1.10:9876 \
+           -rocketmq.config.rocketmqVersion=V4_7_1
 ````
 
-> vim entrypoint.sh
+启动参数根据自己的需求进行修改，启动后可以通过浏览器访问http://ip:5557/metrics查看是否已经获取到了相关监控参数
 
-```
-#!/bin/sh
-M_OPTS="-Duser.timezone=Asia/Shanghai"
-C_OPTS=${C_OPTS}
-exec java -jar ${M_OPTS} ${C_OPTS} app.jar
+### 修改Prometheus配置
+
+```yml
+- job_name: 'test-rocketmq'
+  scrape_interval: 5s
+  metrics_path: '/metrics'
+  static_configs:
+    - targets: ['10.7.202.202:5557']
 ```
 
+重启Prometheus使配置生效
+
+### 添加Grafana图表
+
+官方提供了一个展示页面，需要根据自己的需求进行相关的修改即可
+
+官方地址：https://grafana.com/grafana/dashboards/10477
+
+
+
+### 告警规则
+
+```yml
+###
+# Sample prometheus rules/alerts for rocketmq.
+#
+###
+# Galera Alerts
+ 
+groups:
+- name: GaleraAlerts
+  rules:
+  - alert: RocketMQClusterProduceHigh
+    expr: sum(rocketmq_producer_tps) by (cluster) >= 10
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.cluster}} Sending tps too high.'
+      summary: cluster send tps too high
+  - alert: RocketMQClusterProduceLow
+    expr: sum(rocketmq_producer_tps) by (cluster) < 1
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.cluster}} Sending tps too low.'
+      summary: cluster send tps too low
+  - alert: RocketMQClusterConsumeHigh
+    expr: sum(rocketmq_consumer_tps) by (cluster) >= 10
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.cluster}} consuming tps too high.'
+      summary: cluster consume tps too high
+  - alert: RocketMQClusterConsumeLow
+    expr: sum(rocketmq_consumer_tps) by (cluster) < 1
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: '{{$labels.cluster}} consuming tps too low.'
+      summary: cluster consume tps too low
+  - alert: ConsumerFallingBehind
+    expr: (sum(rocketmq_producer_offset) by (topic) - on(topic)  group_right  sum(rocketmq_consumer_offset) by (group,topic)) - ignoring(group) group_left sum (avg_over_time(rocketmq_producer_tps[5m])) by (topic)*5*60 > 0
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: 'consumer {{$labels.group}} on {{$labels.topic}} lag behind
+        and is falling behind (behind value {{$value}}).'
+      summary: consumer lag behind
+  - alert: GroupGetLatencyByStoretime
+    expr: rocketmq_group_get_latency_by_storetime > 1000
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      description: 'consumer {{$labels.group}} on {{$labels.broker}}, {{$labels.topic}} consume time lag behind message store time
+        and (behind value is {{$value}}).'
+      summary: message consumes time lag behind message store time too much 
+```
