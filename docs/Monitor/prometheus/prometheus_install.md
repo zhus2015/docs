@@ -142,6 +142,7 @@ docker run -d --restart=always \
 
 ```shell
 docker run -d -p 9093:9093 \
+           --restart=always \
            --name alertmanager \
            -v "/etc/localtime:/etc/localtime" \
            -v /etc/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml \
@@ -193,14 +194,14 @@ alerting:
 
 ```shell
 #! /bin/bash
-
 comtainer_name=blackbox-exporter
 docker stop $comtainer_name
 docker rm $comtainer_name
 docker run --name $comtainer_name -d -p 9115:9115 \
-	-v /data/docker/prometheus/blackbox.yml:/etc/blackbox_exporter/config.yml \
-        -v "/etc/localtime:/etc/localtime" \
-	prom/blackbox-exporter \
+           --restart=always \ 
+	       -v /data/docker/prometheus/blackbox.yml:/etc/blackbox_exporter/config.yml \
+           -v "/etc/localtime:/etc/localtime" \
+	       prom/blackbox-exporter \
 ```
 
 > 配置文件blackbox.yml
@@ -386,6 +387,16 @@ groups:
 
 
 
+```
+- resolve：DNS解析持续时间
+- connect：TCP连接建立的持续时间
+- tls：    TLS连接协商持续时间（我认为这包括TCP连接建立持续时间）
+- processing：建立连接与接收响应的第一个字节之间的持续时间
+- transfer：转移响应的持续时间
+```
+
+
+
 ## Redis_exporter
 
 !!! waring "这个项目并不是官方项目"
@@ -556,6 +567,7 @@ java -jar rocketmq-exporter-0.0.2-SNAPSHOT.jar --rocketmq.config.namesrvAddr=10.
 
 ````shell
 docker run -d --name rmq-export -p 5557:5557 zhus2015/rocketmq-exporter:0.0.2 \
+           --restart=always \
            --rocketmq.config.namesrvAddr=10.1.1.10:9876 \
            -rocketmq.config.rocketmqVersion=V4_7_1
 ````
