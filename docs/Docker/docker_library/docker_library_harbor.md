@@ -64,6 +64,8 @@ harbor_admin_password: 默认管理密码
 
 data_volume:  数据存储路径
 
+> 如果你没有https证书，需要将https相关配置注释，否则会安装失败
+
 ### 执行安装脚本
 
 需要稍微等待一会

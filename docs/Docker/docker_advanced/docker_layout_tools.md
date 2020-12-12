@@ -1,81 +1,16 @@
 # Docker三剑客
 
-## Docker Swarm
+# Docker Compose
 
-### Docker Swarm集群搭建
-
-#### 创建网络
-
-!!! tip "创建网络的目的是为了尽量避免Docker自动创建的网络与已存在网络冲突"
-
-```shell
-docker network create \
---subnet 10.10.0.0/16 \
---gateway 10.10.0.1 \
---opt com.docker.network.bridge.name=docker_gwbridge \
---opt com.docker.network.bridge.enable_icc=false \
---opt com.docker.network.bridge.enable_ip_masquerade=true \
-docker_gwbridge
-```
-
-#### Swarm集群初始化
-
-```shell
-docker swarm init --advertise-addr 10.4.7.131
-```
-
-![image-20201121132431049](../../images/image-20201121132431049.png)
-
-这时可以看到加入swarm节点的命令，使用此命令即可使一台机器以work节点的角色加入swarm集群
-
-同时我们还可以通过命令生成加入集群节点的命令
-
-##### 生成添加Manage节点命令
-
-```shell
-docker swarm  join-token manager
-```
-
-![image-20201121133217054](../../images/image-20201121133217054.png)
-
-##### 生成添加Worker节点命令
-
-```shell
-docker swarm  join-token worker
-```
-
-![image-20201121133150565](../../images/image-20201121133150565.png)
-
-#### 节点加入集群
-
-!!! danger "注意"
-    是在需要加入集群的节点上执行 
-
-```shell
-docker swarm join --token SWMTKN-1-3w22mga5kru4914afm3yqhugvgtfot78wtu5dlj5es0glc3s67-eeuppkas5juel5y4xn2j9ejdd 10.4.7.131:2377
-```
-
-![image-20201121133416608](../../images/image-20201121133416608.png)
-
-#### 查看集群运行状态
-
-```
-docker node ls
-```
-
-![image-20201121133442889](../../images/image-20201121133442889.png)
-
-
-
-## Docker Compose
-
-### 安装
+## 安装
 
 ```sh
 yum install docker-compose -y
 ```
 
-### 使用
+
+
+## 使用
 
 ```sh
 在使用docker-compose的命令时，默认会在当前目录下找docker-compose.yml文件
@@ -98,9 +33,7 @@ docker-compose logs -f
 
 
 
-
-
-### 例子
+## 例子
 
 ```yml
 version: '3.1'
@@ -147,3 +80,67 @@ networks:
 
 
 
+# Docker Swarm
+
+## Docker Swarm集群搭建
+
+### 创建网络
+
+!!! tip "创建网络的目的是为了尽量避免Docker自动创建的网络与已存在网络冲突"
+
+```shell
+docker network create \
+--subnet 10.10.0.0/16 \
+--gateway 10.10.0.1 \
+--opt com.docker.network.bridge.name=docker_gwbridge \
+--opt com.docker.network.bridge.enable_icc=false \
+--opt com.docker.network.bridge.enable_ip_masquerade=true \
+docker_gwbridge
+```
+
+### Swarm集群初始化
+
+```shell
+docker swarm init --advertise-addr 10.4.7.131
+```
+
+![image-20201121132431049](../../images/image-20201121132431049.png)
+
+这时可以看到加入swarm节点的命令，使用此命令即可使一台机器以work节点的角色加入swarm集群
+
+同时我们还可以通过命令生成加入集群节点的命令
+
+#### 生成添加Manage节点命令
+
+```shell
+docker swarm  join-token manager
+```
+
+![image-20201121133217054](../../images/image-20201121133217054.png)
+
+#### 生成添加Worker节点命令
+
+```shell
+docker swarm  join-token worker
+```
+
+![image-20201121133150565](../../images/image-20201121133150565.png)
+
+### 节点加入集群
+
+!!! danger "注意"
+    是在需要加入集群的节点上执行 
+
+```shell
+docker swarm join --token SWMTKN-1-3w22mga5kru4914afm3yqhugvgtfot78wtu5dlj5es0glc3s67-eeuppkas5juel5y4xn2j9ejdd 10.4.7.131:2377
+```
+
+![image-20201121133416608](../../images/image-20201121133416608.png)
+
+### 查看集群运行状态
+
+```
+docker node ls
+```
+
+![image-20201121133442889](../../images/image-20201121133442889.png)
