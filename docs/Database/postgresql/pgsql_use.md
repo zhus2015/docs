@@ -45,5 +45,30 @@ psql -d db_name -U user_name -f sql_file.sql
 
 
 
+## 开启慢日志记录
 
+全局设置
+修改配置postgres.conf：
 
+```shell
+log_min_duration_statement=5000
+```
+
+然后加载配置：
+
+```sql
+postgres=# select pg_reload_conf();
+postgres=# show log_min_duration_statement;
+log_min_duration_statement
+----------------------------
+5s
+(1 row)
+```
+
+　　
+
+也可以针对某个用户或者某数据库进行设置
+
+```sql
+postgres=# alter database test set log_min_duration_statement=5000;
+```

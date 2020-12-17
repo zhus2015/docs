@@ -6,7 +6,7 @@
 
 
 
-本次部署模式未2master、2slave模式
+本次部署模式为2master、2slave模式
 
 ## 环境介绍
 
