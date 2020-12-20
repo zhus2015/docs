@@ -186,6 +186,44 @@ alerting:
 
 
 
+## Consul自动注册服务
+
+### 部署安装
+
+Consul有多种安装部署方式，这里使用Docker进行部署
+
+```shell
+docker run --name consul --restart=always -d -p 8500:8500 \
+           -v /data/docker/prometheus/consul/data:/consul/data \
+           consul
+```
+
+启动后可以通过浏览器看到一下页面
+
+![image-20201212103840334](../../images/image-20201212103840334.png)
+
+### 注册服务
+
+这里通过官方提供的API接口添加服务
+
+```shell
+curl -X PUT -d '{"id": "node-exporter","name": "node-exporter-10.4.7.131","address": "10.4.7.131","port": 9100,"tags": ["test"],"checks": [{"http": "http://10.4.7.131:9100/metrics", "interval": "5s"}]}'  http://10.4.7.101:8500/v1/agent/service/register
+```
+
+可以看到我们新注册的测试服务已经添加到Consul中了
+
+![image-20201212103854040](../../images/image-20201212103854040.png)
+
+### 注销服务
+
+```shell
+curl -X PUT http://10.4.7.101:8500/v1/agent/service/deregister/node-exporter 
+```
+
+
+
+
+
 ## Blackbox_exporter
 
 ### 部署启动
