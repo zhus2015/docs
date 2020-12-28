@@ -102,38 +102,6 @@ deep_squal 160
 EOF
 ```
 
-## Node exporter--节点监控工具
-
-用于提供metrics，通过接口进行信息的收集，主要用来收集服务器的相关数据
-
-```shell
-docker run -d --restart=always \
-           --name=node-exporter \
-           -p 9100:9100 \
-           -v "/etc/localtime:/etc/localtime" \
-           prom/node-exporter
-```
-
-
-
-## Cadvisor--容器监控插件
-
-cadvisor用于收集容器信息
-
-```shell
-docker run -d --restart=always \
-           -v "/etc/localtime:/etc/localtime" \
-           --volume=/:/rootfs:ro \
-           --volume=/var/run:/var/run:ro \
-           --volume=/sys:/sys:ro \
-           --volume=/var/lib/docker/:/var/lib/docker:ro \
-           --volume=/dev/disk/:/dev/disk:ro \
-           --publish=8080:8080 \
-           --detach=true \
-           --name=cadvisor \
-           google/cadvisor
-```
-
 
 
 ## Alertmanager--告警插件
@@ -164,7 +132,7 @@ route:
 receivers:
 - name: 'dingtalk'
   webhook_configs:
-  - url: 'http://10.10.10.103:8060/dingtalk/webhookedu/send'  #钉钉web-hook地址
+  - url: 'http://10.10.10.103:8060/dingtalk/webhookhaha/send'  #钉钉web-hook地址
     send_resolved: true
 
 inhibit_rules:
@@ -183,6 +151,145 @@ alerting:
     - static_configs:
         - targets: ["10.10.10.103:9093"]
 ```
+
+## DingDing通知
+
+### 编辑启动文件
+
+> vim /data/prometheus/cmd/run-dingtalk.sh
+
+```shell
+#! /bin/bash
+
+docker stop dingtalk
+docker rm dingtalk
+docker run --name dingtalk --restart always  \
+	-d -p 8060:8060 \
+	-v /data/prometheus/conf/dingtalk.yml:/etc/dingtalk.yml \
+    -v /data/prometheus/conf/dingding.tmpl:/etc/dingding.tmpl \
+    docker.io/zhus2015/prometheus-webhook-dingtalk:v1.0.0 \
+	--config.file=/etc/dingtalk.yml
+
+	#timonwong/prometheus-webhook-dingtalk:v1.4.0 \
+docker logs -f dingtalk
+```
+
+这里的镜像是我重新进行了环境字符集的定义，其他内容未作修改
+
+### 编辑Dingtalk配置文件
+
+```yml
+timeout: 5s
+templates:
+  - /etc/dingding.tmpl
+targets:
+  webhookedu:
+    url: https://oapi.dingtalk.com/robot/send?access_token=xxxxx
+    secret: xxxxx
+    message:
+      title: '{{ template "ding.link.title" . }}'
+      text: '{{ template "ding.link.content" . }}'
+  webhook_mention_all:
+    url: https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxx
+    mention:
+      all: true
+  webhook_mention_users:
+    url: https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxx
+    mention:
+      mobiles: ['156xxxx8827', '189xxxx8325']
+```
+
+注意将xxxxx内容替换为自己机器人的相关配置
+
+### 编辑自定义模板文件
+
+> vim /data/prometheus/conf/dingding.tmpl
+
+```
+{{ define "__subject" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .GroupLabels.SortedPairs.Values | join " " }} {{ if gt (len .CommonLabels) (
+len .GroupLabels) }}({{ with .CommonLabels.Remove .GroupLabels.Names }}{{ .Values | join " " }}{{ end }}){{ end }}{{ end }}
+{{ define "__alertmanagerURL" }}{{ .ExternalURL }}/#/alerts?receiver={{ .Receiver }}{{ end }}
+
+{{ define "__text_alert_list" }}{{ range . }}
+**Labels**
+{{ range .Labels.SortedPairs }}> - {{ .Name }}: {{ .Value | markdown | html }}
+{{ end }}
+**Annotations**
+{{ range .Annotations.SortedPairs }}> - {{ .Name }}: {{ .Value | markdown | html }}
+{{ end }}
+**Source:** [{{ .GeneratorURL }}]({{ .GeneratorURL }})
+{{ end }}{{ end }}
+
+{{ define "default.__text_alert_list" }}{{ range . }}
+---
+**告警级别:** {{ .Labels.severity | upper }}
+
+**触发时间:** {{ dateInZone "2006.01.02 15:04:05" (.StartsAt) "Asia/Shanghai" }}
+
+**事件信息:** 
+{{ range .Annotations.SortedPairs }}> - {{ .Name }}: {{ .Value | markdown | html }}
+
+
+{{ end }}
+
+**事件标签:**
+{{ range .Labels.SortedPairs }}{{ if and (ne (.Name) "severity") (ne (.Name) "summary") (ne (.Name) "team") }}> - {{ .Name }}: {{ .Value | markdown | html }}
+{{ end }}{{ end }}
+{{ end }}
+{{ end }}
+{{ define "default.__text_alertresovle_list" }}{{ range . }}
+---
+**告警级别:** {{ .Labels.severity | upper }}
+
+**触发时间:** {{ dateInZone "2006.01.02 15:04:05" (.StartsAt) "Asia/Shanghai" }}
+
+**结束时间:** {{ dateInZone "2006.01.02 15:04:05" (.EndsAt) "Asia/Shanghai" }}
+
+**事件信息:**
+{{ range .Annotations.SortedPairs }}> - {{ .Name }}: {{ .Value | markdown | html }}
+
+
+{{ end }}
+
+**事件标签:**
+{{ range .Labels.SortedPairs }}{{ if and (ne (.Name) "severity") (ne (.Name) "summary") (ne (.Name) "team") }}> - {{ .Name }}: {{ .Value | markdown | html }}
+{{ end }}{{ end }}
+{{ end }}
+{{ end }}
+
+{{/* Default */}}
+{{ define "default.title" }}{{ template "__subject" . }}{{ end }}
+{{ define "default.content" }}#### \[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}\] **[{{ index .GroupLabels "alertname" }}]({{ template "__alertmanag
+erURL" . }})**
+{{ if gt (len .Alerts.Firing) 0 -}}
+
+**====侦测到故障====**
+{{ template "default.__text_alert_list" .Alerts.Firing }}
+
+
+{{- end }}
+
+{{ if gt (len .Alerts.Resolved) 0 -}}
+**====故障恢复====**
+{{ template "default.__text_alertresovle_list" .Alerts.Resolved }}
+
+
+{{- end }}
+{{- end }}
+
+{{/* Legacy */}}
+{{ define "legacy.title" }}{{ template "__subject" . }}{{ end }}
+{{ define "legacy.content" }}#### \[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}\] **[{{ index .GroupLabels "alertname" }}]({{ template "__alertmanage
+rURL" . }})**
+{{ template "__text_alert_list" .Alerts.Firing }}
+{{- end }}
+
+{{/* Following names for compatibility */}}
+{{ define "ding.link.title" }}{{ template "default.title" . }}{{ end }}
+{{ define "ding.link.content" }}{{ template "default.content" . }}{{ end }}
+```
+
+### 启动脚本进行相关测试通知即可
 
 
 
@@ -221,6 +328,38 @@ curl -X PUT http://10.4.7.101:8500/v1/agent/service/deregister/node-exporter
 ```
 
 
+
+## Node exporter--节点监控工具
+
+用于提供metrics，通过接口进行信息的收集，主要用来收集服务器的相关数据
+
+```shell
+docker run -d --restart=always \
+           --name=node-exporter \
+           -p 9100:9100 \
+           -v "/etc/localtime:/etc/localtime" \
+           prom/node-exporter
+```
+
+
+
+## Cadvisor--容器监控插件
+
+cadvisor用于收集容器信息
+
+```shell
+docker run -d --restart=always \
+           -v "/etc/localtime:/etc/localtime" \
+           --volume=/:/rootfs:ro \
+           --volume=/var/run:/var/run:ro \
+           --volume=/sys:/sys:ro \
+           --volume=/var/lib/docker/:/var/lib/docker:ro \
+           --volume=/dev/disk/:/dev/disk:ro \
+           --publish=8080:8080 \
+           --detach=true \
+           --name=cadvisor \
+           google/cadvisor
+```
 
 
 
