@@ -169,11 +169,9 @@ tmpfs                    182M     0  182M   0% /run/user/0
 
 
 
-
-
 EXSI扩容记录
 
-```
+```shell
 pvresize /dev/sdb
 pvresize /dev/sdb
 lvextend -l  +100%FREE /dev/vg_group/lv_data  	  
