@@ -481,6 +481,19 @@ awk -F ':' '{sum+=$4};END {print sum}' test.txt
 
 
 
+> 删除空格
+
+```shell
+#删除全部空格
+sed s/[[:space:]]//g
+#删除行末空格
+sed ‘s/[ \t]*$//g'
+#删除行首空格
+sed ‘s/^[ \t]*//g'
+```
+
+
+
 ## Shell逻辑判断
 
 ### 常用判断逻辑

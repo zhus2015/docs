@@ -134,8 +134,27 @@ ORDER BY total_size DESC
 
 ## 查看连接数
 
+### 查看最大连接数
+
 ```
+show max_connections;
+```
+
+
+
+### 查看当前连接的
+
+```shell
 select count(*), usename from pg_stat_activity group by usename;
+
+select usename, count(*) from pg_stat_activity group by usename order by count(*) desc;
+
+```
+
+### 查看当前连接信息
+
+```
+select datname,client_addr,pid,application_name,state from pg_stat_activity;
 ```
 
 
@@ -178,5 +197,13 @@ select T.PID, T.STATE, T.QUERY, T.WAIT_EVENT_TYPE, T.WAIT_EVENT,
        T.QUERY_START
   from PG_STAT_ACTIVITY T
  where T.DATNAME = 'cloud-platform-sso';
+```
+
+
+
+### 解锁用户
+
+```
+select user_unlock('xxxx');
 ```
 
