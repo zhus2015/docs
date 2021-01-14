@@ -167,7 +167,7 @@ chmod 777 /data/elasticsearch/data
 #!/bin/bash
 docker stop elasticsearch
 docker rm elasticsearch
-docker run -dit  --name elasticsearch \
+docker run -dit  --name elasticsearch --restart=always \
            -p 9200:9200 -p 9300:9300 \
            -v /data/elasticsearch/logs:/usr/share/elastaicsearch/logs \
            -v /data/elasticsearch/data:/usr/share/elasticsearch/data \
