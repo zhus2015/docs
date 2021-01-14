@@ -21,7 +21,7 @@ MinIO是一个非常轻量的服务,可以很简单的和其他应用的结合�
 #### 稳定版
 
 ```shell
-Copydocker run -p 9000:9000 \
+docker run -p 9000:9000 \
   -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \
   -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
   minio/minio server /data
@@ -30,7 +30,7 @@ Copydocker run -p 9000:9000 \
 #### 尝鲜版
 
 ```shell
-Copydocker run -p 9000:9000 \
+docker run -p 9000:9000 \
   -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE" \
   -e "MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
   minio/minio:edge server /data
@@ -58,7 +58,7 @@ chmod +x minio
 默认的配置目录是 `${HOME}/.minio`，你可以使用`--config-dir`命令行选项重写之。MinIO server在首次启动时会生成一个新的`config.json`，里面带有自动生成的访问凭据。
 
 ```
-Copyminio server --config-dir /etc/minio /data
+minio server --config-dir /etc/minio /data
 ```
 
 截止到 MinIO `RELEASE.2018-08-02T23-11-36Z` 版本, MinIO server 的配置文件(`config.json`) 被存储在通过 `--config-dir` 指定的目录或者默认的 `${HOME}/.minio` 目录。 但是从 `RELEASE.2018-08-18T03-49-57Z` 版本之后, 配置文件 (仅仅), 已经被迁移到存储后端 (存储后端指的是启动一个服务器的时候，传递给MinIO server的目录)。
@@ -68,7 +68,7 @@ Copyminio server --config-dir /etc/minio /data
 此外，`--config-dir`现在是一个旧配置，计划在将来删除，因此请相应地更新本地startup和ansible脚本。
 
 ```
-Copyminio server /data
+minio server /data
 ```
 
 MinIO还使用管理员凭据对所有配置，IAM和策略内容进行加密。
@@ -80,7 +80,7 @@ TLS证书存在`${HOME}/.minio/certs`目录下，你需要将证书放在该目�
 以下是一个具有TLS证书的MinIO server的目录结构。
 
 ```
-Copy$ mc tree --files ~/.minio
+$ mc tree --files ~/.minio
 /home/user1/.minio
 └─ certs
    ├─ CAs
@@ -95,7 +95,7 @@ Copy$ mc tree --files ~/.minio
 只能通过环境变量`MINIO_ACCESS_KEY` 和 `MINIO_SECRET_KEY` 更改MinIO的admin凭据和root凭据。使用这两个值的组合，MinIO加密存储在后端的配置
 
 ```
-Copyexport MINIO_ACCESS_KEY=minio
+export MINIO_ACCESS_KEY=minio
 export MINIO_SECRET_KEY=minio13
 minio server /data
 ```
@@ -107,7 +107,7 @@ minio server /data
 > 旧的环境变量永远不会在内存中被记住，并且在使用新凭据迁移现有内容后立即销毁。在服务器再次成功重启后，你可以安全的删除它们。
 
 ```
-Copyexport MINIO_ACCESS_KEY=newminio
+export MINIO_ACCESS_KEY=newminio
 export MINIO_SECRET_KEY=newminio123
 export MINIO_ACCESS_KEY_OLD=minio
 export MINIO_SECRET_KEY_OLD=minio123
@@ -121,7 +121,7 @@ minio server /data
 #### 区域
 
 ```
-CopyKEY:
+KEY:
 region  服务器的物理位置标记
 
 ARGS:
@@ -132,7 +132,7 @@ comment  (sentence)  为这个设置添加一个可选的注释
 或者通过环境变量
 
 ```
-CopyKEY:
+KEY:
 region  服务器的物理位置标记
 
 ARGS:
@@ -143,7 +143,7 @@ MINIO_REGION_COMMENT  (sentence)  为这个设置添加一个可选的注释
 示例:
 
 ```
-Copyexport MINIO_REGION_NAME="my_region"
+export MINIO_REGION_NAME="my_region"
 minio server /data
 ```
 
@@ -152,7 +152,7 @@ minio server /data
 默认情况下，标准存储类型的奇偶校验值设置为N/2，低冗余的存储类型奇偶校验值设置为2。在[此处](https://github.com/minio/minio/blob/master/docs/zh_CN/erasure/storage-class/README.md)了解有关MinIO服务器存储类型的更多信息。
 
 ```
-CopyKEY:
+KEY:
 storage_class  定义对象级冗余
 
 ARGS:
@@ -164,7 +164,7 @@ comment   (sentence)  为这个设置添加一个可选的注释
 或者通过环境变量
 
 ```
-CopyKEY:
+KEY:
 storage_class  定义对象级冗余
 
 ARGS:
@@ -178,7 +178,7 @@ MINIO_STORAGE_CLASS_COMMENT   (sentence)  为这个设置添加一个可选的�
 MinIO为主要的网关部署提供了缓存存储层，使您可以缓存内容以实现更快的读取速度，并节省从云中重复下载的成本。
 
 ```
-CopyKEY:
+KEY:
 cache  添加缓存存储层
 
 ARGS:
@@ -193,7 +193,7 @@ comment  (sentence)  为这个设置添加一个可选的注释
 或者通过环境变量
 
 ```
-CopyKEY:
+KEY:
 cache  添加缓存存储层
 
 ARGS:
@@ -212,7 +212,7 @@ MinIO支持在etcd上存储加密的IAM assets和Bucket DNS记录。
 > NOTE: if *path_prefix* is set then MinIO will not federate your buckets, namespaced IAM assets are assumed as isolated tenants, only buckets are considered globally unique but performing a lookup with a *bucket* which belongs to a different tenant will fail unlike federated setups where MinIO would port-forward and route the request to relevant cluster accordingly. This is a special feature, federated deployments should not need to set *path_prefix*.
 
 ```
-CopyKEY:
+KEY:
 etcd  为IAM and Bucket DNS联合多个集群
 
 ARGS:
@@ -227,7 +227,7 @@ comment          (sentence)  为这个设置添加一个可选的注释
 或者通过环境变量
 
 ```
-CopyKEY:
+KEY:
 etcd  为IAM and Bucket DNS联合多个集群
 
 ARGS:
@@ -244,7 +244,7 @@ MINIO_ETCD_COMMENT          (sentence)  为这个设置添加一个可选的注�
 默认情况下，服务器/集群同时处理的并发请求数没有限制。 但是，可以使用API子系统强加这种限制。 在[此处](https://github.com/minio/minio/blob/master/docs/zh_CN/throttle/README.md)阅读有关MinIO服务器中限制限制的更多信息。
 
 ```
-CopyKEY:
+KEY:
 api  管理全局HTTP API调用的特定功能，例如限制，身份验证类型等.
 
 ARGS:
@@ -257,7 +257,7 @@ cors_allow_origin  (csv)       设置CORS请求允许的来源列表,以逗号�
 或者通过环境变量
 
 ```
-CopyMINIO_API_REQUESTS_MAX       (number)    设置并发请求的最大数量，例如 "1600"
+MINIO_API_REQUESTS_MAX       (number)    设置并发请求的最大数量，例如 "1600"
 MINIO_API_REQUESTS_DEADLINE  (duration)  设置等待处理的API请求的期限，例如 "1m"
 MINIO_API_CORS_ALLOW_ORIGIN  (csv)       设置CORS请求允许的来源列表,以逗号分割,例如 "https://example1.com,https://example2.com"
 ```
@@ -267,7 +267,7 @@ MINIO_API_CORS_ALLOW_ORIGIN  (csv)       设置CORS请求允许的来源列表,�
 MinIO支持如下列表中的通知。要配置单个目标，请参阅[此处](https://docs.min.io/cn/minio-bucket-notification-guide.html)的更多详细文档
 
 ```
-Copynotify_webhook        发布 bucket 通知到 webhook endpoints
+notify_webhook        发布 bucket 通知到 webhook endpoints
 notify_amqp           发布 bucket 通知到 AMQP endpoints
 notify_kafka          发布 bucket 通知到 Kafka endpoints
 notify_mqtt           发布 bucket 通知到 MQTT endpoints
@@ -286,19 +286,19 @@ notify_redis          发布 bucket 通知到 Redis datastores
 #### 列出所有可用的配置key
 
 ```
-Copy~ mc admin config set myminio/
+~ mc admin config set myminio/
 ```
 
 #### 获取每个key的帮助
 
 ```
-Copy~ mc admin config set myminio/ <key>
+~ mc admin config set myminio/ <key>
 ```
 
 例如: `mc admin config set myminio/ etcd` 会返回 `etcd` 可用的配置参数
 
 ```
-Copy~ mc admin config set play/ etcd
+~ mc admin config set play/ etcd
 KEY:
 etcd  federate multiple clusters for IAM and Bucket DNS
 
@@ -314,7 +314,7 @@ comment          (sentence)  optionally add a comment to this setting
 要获取每个配置参数的等效ENV，请使用`--env`标志
 
 ```
-Copy~ mc admin config set play/ etcd --env
+~ mc admin config set play/ etcd --env
 KEY:
 etcd  federate multiple clusters for IAM and Bucket DNS
 
@@ -345,7 +345,7 @@ MINIO_ETCD_COMMENT          (sentence)  optionally add a comment to this setting
 示例: 如下设置将使采集器的速度降低三倍, 减少了系统资源的使用，但是反映到更新的延迟会增加。
 
 ```
-Copyexport MINIO_DISK_USAGE_CRAWL_DELAY=30
+export MINIO_DISK_USAGE_CRAWL_DELAY=30
 minio server /data
 ```
 
@@ -356,7 +356,7 @@ minio server /data
 示例:
 
 ```
-Copyexport MINIO_BROWSER=off
+export MINIO_BROWSER=off
 minio server /data
 ```
 
@@ -367,14 +367,14 @@ minio server /data
 示例:
 
 ```
-Copyexport MINIO_DOMAIN=mydomain.com
+export MINIO_DOMAIN=mydomain.com
 minio server /data
 ```
 
 `MINIO_DOMAIN`环境变量支持逗号分隔的多域名配置
 
 ```
-Copyexport MINIO_DOMAIN=sub1.mydomain.com,sub2.mydomain.com
+export MINIO_DOMAIN=sub1.mydomain.com,sub2.mydomain.com
 ```
 
 
@@ -481,3 +481,38 @@ if err != nil {
 }
 log.Println("Uploaded", "my-objectname", " of size: ", n, "Successfully.")
 ```
+
+
+
+## Prometheus监控接入
+
+minio默认无法直接访问自带的Prometheus插件信息
+
+有两种方法可以进行配置
+
+### 方法一
+
+在启动的时候增加加入指定以下参数
+
+```shell
+export MINIO_PROMETHEUS_AUTH_TYPE="public"
+```
+
+这样在启动后，就可以直接通过访问http://minio_ip:port/minio/prometheus/metrics看到相关监控信息
+
+### 方法二
+
+通过mc管理工具生成访问的token
+
+通过以下命令生成Prometheus配置
+
+```shell
+mc admin prometheus generate <alias>
+```
+
+注意：替换命令中<alias>值为自己配置，详情请搜索mc工具相关配置
+
+![image-20210113092415678](../images/image-20210113092415678.png)
+
+将生成的配置直接粘贴到Prometheus配置中即可使用
+
