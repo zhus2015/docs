@@ -207,3 +207,10 @@ select T.PID, T.STATE, T.QUERY, T.WAIT_EVENT_TYPE, T.WAIT_EVENT,
 select user_unlock('xxxx');
 ```
 
+
+
+```shell
+alter user username valid until '2999-01-01';   --修改用户到期时间
+alter user username set Passwordlock=off; --关闭用户密码错误次数限制
+```
+

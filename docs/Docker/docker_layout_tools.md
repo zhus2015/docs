@@ -104,7 +104,7 @@ docker_gwbridge
 docker swarm init --advertise-addr 10.4.7.131
 ```
 
-![image-20201121132431049](../../images/image-20201121132431049.png)
+![image-20201121132431049](../images/image-20201121132431049.png)
 
 这时可以看到加入swarm节点的命令，使用此命令即可使一台机器以work节点的角色加入swarm集群
 
@@ -116,7 +116,7 @@ docker swarm init --advertise-addr 10.4.7.131
 docker swarm  join-token manager
 ```
 
-![image-20201121133217054](../../images/image-20201121133217054.png)
+![image-20201121133217054](../images/image-20201121133217054.png)
 
 #### 生成添加Worker节点命令
 
@@ -124,7 +124,7 @@ docker swarm  join-token manager
 docker swarm  join-token worker
 ```
 
-![image-20201121133150565](../../images/image-20201121133150565.png)
+![image-20201121133150565](../images/image-20201121133150565.png)
 
 ### 节点加入集群
 
@@ -135,7 +135,7 @@ docker swarm  join-token worker
 docker swarm join --token SWMTKN-1-3w22mga5kru4914afm3yqhugvgtfot78wtu5dlj5es0glc3s67-eeuppkas5juel5y4xn2j9ejdd 10.4.7.131:2377
 ```
 
-![image-20201121133416608](../../images/image-20201121133416608.png)
+![image-20201121133416608](../images/image-20201121133416608.png)
 
 ### 查看集群运行状态
 
@@ -143,4 +143,4 @@ docker swarm join --token SWMTKN-1-3w22mga5kru4914afm3yqhugvgtfot78wtu5dlj5es0gl
 docker node ls
 ```
 
-![image-20201121133442889](../../images/image-20201121133442889.png)
+![image-20201121133442889](../images/image-20201121133442889.png)
