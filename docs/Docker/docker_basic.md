@@ -60,7 +60,35 @@ systemctl restart docker
 
 
 
-## 镜像的获取与容器的使用**
+## 容器日志大小的限制
+
+> 修改配置文件：vim /etc/docker/daemon.json
+
+```json
+{
+  "log-driver":"json-file",
+  "log-opts": {"max-size":"500m", "max-file":"3"}
+}
+```
+
+max-size:"500m"  指定容器单个日志的最大500m
+
+max-file:"3" 指定容器保留3个日志
+
+
+
+> 然后重启docker的守护线程
+
+```shell
+systemctl daemon-reload
+systemctl restart docker
+```
+
+注意：此项修改仅对新建容器生效
+
+
+
+## 镜像的获取与容器的使用
 
 ### 镜像查看
 

@@ -365,3 +365,97 @@ http://10.4.7.110/phpldapadmin
 登录后即可看到我们的域
 
 ![image-20200924213243128](../../images/image-20200924213243128.png) 
+
+
+
+## LDAP配置自主修改密码服务
+
+服务架构httpd+php
+
+相关软件包地址：https://ltb-project.org/rpm
+
+Centos7安装包：https://ltb-project.org/rpm/7Server/noarch/self-service-password-1.3-1.el7.noarch.rpm
+
+### 部署
+
+```
+yum install https://ltb-project.org/rpm/7Server/noarch/self-service-password-1.3-1.el7.noarch.rpm
+```
+
+
+
+### WEB配置
+
+```
+配置apache: /etc/httpd/conf.d/self-service-password.conf
+
+NameVirtualHost *:80
+<VirtualHost *:80>
+       ServerName changepasswd.xxxxx.net
+       DocumentRoot /usr/share/self-service-password
+       DirectoryIndex index.php
+       AddDefaultCharset UTF-8
+      <Directory "/usr/share/self-service-password">
+            AllowOverride None
+            Require all granted
+      </Directory>
+      LogLevel warn   
+      ErrorLog /var/log/httpd/ssp_error_log
+      CustomLog /var/log/httpd/ssp_access_log combined
+</VirtualHost>
+```
+
+
+
+### 功能配置
+
+```
+vim  /usr/share/self-service-password/conf/config.inc.php
+
+#关闭 问题验证 和 短信验证(视个人需要)：
+$use_questions=false;
+$use_sms= false;
+
+#配置 LDAP
+$ldap_url = "ldap://ldap.xxxxx.net";
+$ldap_starttls = false;
+$ldap_binddn = "cn=Manager,dc=ldap,dc=xxxxxx,dc=net";   
+$ldap_bindpw = "xxxxxxxxx";
+$ldap_base = "dc=ldap,dc=xxxxxx,dc=net";
+$ldap_login_attribute = "cn";
+$ldap_fullname_attribute = "cn";
+$ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
+$who_change_password = "manager";   #指定LDAP 以什么用户身份更改密码
+
+#配置邮件
+$mail_from = "elk@xxxxx.com";
+$mail_from_name = "企业账号密码重置";
+$mail_signature = "";
+    $notify_on_change = true;      #密码修改成功后，向用户发送通知邮件
+$mail_sendmailpath = '/usr/sbin/sendmail';   #需安装sendmail服务 yum install -y sendmail
+$mail_protocol = 'smtp';
+$mail_smtp_debug = 0;
+$mail_debug_format = 'html';
+$mail_smtp_host = 'smtp.gmail.com';
+$mail_smtp_auth = true;
+$mail_smtp_user = 'elk@xxxxxx.com';
+$mail_smtp_pass = 'xxxxxx';
+$mail_smtp_port = 587;
+$mail_smtp_timeout = 30;
+$mail_smtp_keepalive = false;
+$mail_smtp_secure = 'tls';
+$mail_contenttype = 'text/plain';
+$mail_wordwrap = 0;
+$mail_charset = 'utf-8';
+$mail_priority = 3;
+$mail_newline = PHP_EOL;
+```
+
+注意修改配置： $keyphrase = "secret";  ---> $keyphrase = "ldapchangepasswd"; #任意字符串
+
+否则页面会出现报错问题
+
+
+
+![image-20210224142754093](images/image-20210224142754093.png)
+

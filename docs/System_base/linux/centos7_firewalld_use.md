@@ -18,7 +18,7 @@ systemctl start firewalld      启动Firewalld
 
 
 
-## firewall-cmd命令使用
+## firewall-cmd查看信息
 
 ### 查看firewall-cmd运行状态
 
@@ -27,6 +27,12 @@ firewall-cmd --state
 ```
 
 ![image-20200714133110933](../../images/image-20200714133110933.png) 
+
+### 查看开放所有规则
+
+```shell
+firewall-cmd --list-all
+```
 
 
 
@@ -50,6 +56,16 @@ firewall-cmd --zone=public --list-ports
 
 
 
+### 查看指定端口开放信息
+
+```sh
+firewall-cmd --zone=public --query-port=8080/tcp
+```
+
+![image-20200714133904031](../../images/image-20200714133904031.png) 
+
+## 开放端口
+
 ### 开放指定端口
 
 ```sh
@@ -70,16 +86,6 @@ firewall-cmd --zone=public --add-port=8000-9000/tcp --permanent
 
 
 
-### 查看指定端口开放信息
-
-```sh
-firewall-cmd --zone=public --query-port=8080/tcp
-```
-
-![image-20200714133904031](../../images/image-20200714133904031.png) 
-
-
-
 ### 指定源地址开放端口
 
 ```sh
@@ -90,6 +96,8 @@ firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.
 
 
 
+## 删除规则
+
 ### 删除开放端口
 
 ```sh
@@ -97,3 +105,12 @@ firewall-cmd --zone=public --remove-port=2222/tcp --permanent
 ```
 
 ![image-20200714134114576](../../images/image-20200714134114576.png) 
+
+
+
+### 删除指定规则
+
+```
+firewall-cmd --permanent --remove-rich-rule="rule family="ipv4" source address="10.10.10.92" port protocol="tcp" port="6379" accept"
+```
+

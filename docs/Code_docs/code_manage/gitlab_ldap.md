@@ -36,10 +36,10 @@ gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
       name: 'cn'
       first_name: 'givenName'
       last_name:  'sn'
-    ## EE only
     group_base: ''
     admin_group: ''
     sync_ssh_keys: false
+EOS
 ```
 
 如果想限定从指定用户组获取用户，可以参考下面的写法：
