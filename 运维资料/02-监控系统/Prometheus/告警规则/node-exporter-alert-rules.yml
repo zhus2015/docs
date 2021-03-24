@@ -1,0 +1,193 @@
+groups:
+  - name: node-exporter-alert
+    rules:
+    - alert: node-exporter-down
+      expr: node_exporter:up{client="node"} == 0 
+      for: 30s
+      labels: 
+        severity: critical
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 宕机了"  
+        description: ""
+        #description: "instance: {{ $labels.instance }} \n- job: {{ $labels.job }} 关机了， 时间已经1分钟了。" 
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+
+    - alert: node-exporter-cpu-high 
+      expr:  node_exporter:cpu:total:percent > 80
+      for: 3m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} cpu 使用率高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+#    - alert: node-exporter-cpu-iowait-high 
+#      expr:  node_exporter:cpu:iowait:percent >= 12
+#      for: 3m
+#      labels: 
+#        severity: warning
+#      annotations: 
+#        summary: "instance: {{ $labels.instance }} cpu iowait 使用率高于 {{ $value }}"  
+#        description: ""    
+#        value: "{{ $value }}"
+#        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-load-load1-high 
+      #expr:  (node_exporter:load:load1) > (node_exporter:cpu:count) * 1.2
+      expr:  sum by (instance,job) (node_load1{job!="dyjyzyk"}) > (node_exporter:cpu:count) * 1.5 or sum by (instance,job) (node_load1{job="dyjyzyk"}) > (node_exporter:cpu:count) * 2.5
+      for: 3m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} load1高于{{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-memory-high
+      expr:  node_exporter:memory:used:percent > 90
+      for: 3m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} memory 使用率高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-disk-high-used-gt90
+      expr:  node_exporter:disk:used:percent > 90
+      for: 10m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} disk 使用率高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+#    - alert: node-exporter-disk-high-used-gt80
+#      expr:  node_exporter:disk:used:percent > 80
+#      for: 10m
+#      labels:
+#        severity: info
+#      annotations:
+#        summary: "instance: {{ $labels.instance }} disk 使用率高于 {{ $value }}"
+#        description: ""
+#        value: "{{ $value }}"
+#        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-disk-read:count-high
+      expr:  node_exporter:disk:read:count:rate{disk!~"ssd"} > 4500 or node_exporter:disk:read:count:rate{disk=~"ssd"} > 7000
+      for: 2m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} iops read 使用率高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-disk-write-count-high
+      expr:  node_exporter:disk:write:count:rate{disk!~"ssd"} > 4500 or node_exporter:disk:write:count:rate{disk=~"ssd"} > 7000
+      for: 2m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} iops write 使用率高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+
+    - alert: node-exporter-disk-read-mb-high
+      expr:  node_exporter:disk:read:mb:rate{disk!~"ssd"} > 300 or node_exporter:disk:read:mb:rate{disk=~"ssd"} > 600
+      for: 2m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 读取字节数 高于 {{ $value }}"  
+        description: ""    
+        instance: "{{ $labels.instance }}"
+        value: "{{ $value }}"
+
+    - alert: node-exporter-disk-write-mb-high
+      expr:  node_exporter:disk:write:mb:rate{disk!~"ssd"} > 300 or node_exporter:disk:write:mb:rate{disk=~"ssd"} > 600
+      for: 2m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 写入字节数 高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-filefd-allocated-percent-high 
+      expr:  node_exporter:filefd_allocated:percent > 80
+      for: 10m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 打开文件描述符 高于 {{ $value }}%"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-network-netin-error-rate-high
+      expr:  node_exporter:network:netin:error:rate > 4
+      for: 1m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 包进入的错误速率 高于 {{ $value }} %"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-network-netin-packet-rate-high
+      expr:  node_exporter:network:netin:packet:rate > 350000
+      for: 1m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 包进入速率 高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-network-netout-packet-rate-high
+      expr:  node_exporter:network:netout:packet:rate > 350000
+      for: 1m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} 包流出速率 高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-network-tcp-total-count-high
+      expr:  node_exporter:network:tcp:total:count > 40000
+      for: 1m
+      labels: 
+        severity: warning
+      annotations: 
+        summary: "instance: {{ $labels.instance }} tcp连接数量 高于 {{ $value }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"
+
+    - alert: node-exporter-time-offset-high
+      expr:  node_exporter:time:offset > 0.3
+      for: 2m
+      labels: 
+        severity: warning
+      annotations:
+        summary: "instance: {{ $labels.instance }} {{ $labels.desc }}  {{ $value }} {{ $labels.unit }}"  
+        description: ""    
+        value: "{{ $value }}"
+        instance: "{{ $labels.instance }}"

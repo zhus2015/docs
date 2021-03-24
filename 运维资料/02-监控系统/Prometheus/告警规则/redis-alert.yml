@@ -1,0 +1,36 @@
+groups:
+  - name: RedisAlert
+    rules:
+    - alert: RedisDown
+      expr: redis_up == 0
+      for: 30s
+      labels: 
+        severity: critical
+      annotations: 
+        summary: "instance: {{ $labels.instance }} redis service is down"
+
+    #连接利用率大于90%告警
+    - alert: RedisTooManyConnections
+      expr: (redis_connected_clients/redis_config_maxclients * 100)  > 90
+      for: 45s
+      labels:
+        severity: warning
+      annotations:
+        summary: "{{ $labels.instance }} redis server connection utilization greater than 90%"
+
+    - alert: RedisOutOfMemory
+      expr: redis_memory_used_bytes / redis_config_maxmemory * 100 > 90 
+      for: 45s
+      labels:
+        severity: warning
+      annotations:
+        summary: "{{ $labels.instance }} redis server Memory utilization greater than 90%"
+
+    #拒绝连接数量
+    - alert: RedisRejectedConnections
+      expr: increase(redis_rejected_connections_total[1m]) > 5 
+      for: 45s
+      labels:
+        severity: warning
+      annotations:
+        summary: "{{ $labels.instance }} redis 每分钟拒绝连接数量大于5"

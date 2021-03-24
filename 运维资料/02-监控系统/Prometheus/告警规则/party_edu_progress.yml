@@ -1,0 +1,11 @@
+groups:
+- name: example
+  rules:
+  - alert: party-edu-progress-alert
+    expr: uri_currentnum{job="party-edu-server-api",uri="/api/study/progress"} * 6 < 3
+    for: 10s
+    labels:
+      severity: warning
+    annotations:
+      summary: "学习进度记录接口告警"
+      description: "学习进度记录接口请求量低，目前为{{ $value }}"

@@ -1,0 +1,12 @@
+groups:
+  - name: program-response-alert
+    rules:
+    - alert: program-response-time
+      expr: avg_over_time(uri_avgtime{client="program",job!~"api-party-edu|party-edu-server-api"}[10s]) > 500
+      for: 45s
+      labels:
+        severity: warning
+      annotations: 
+        summary: "{{ $labels.instance}} {{ $labels.uri }} 响应时间大于 500ms"  
+        value: "{{ $value }}"
+        #uri: "{{ $labels.instance }}"

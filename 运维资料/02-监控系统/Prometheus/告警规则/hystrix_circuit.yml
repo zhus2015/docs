@@ -1,0 +1,11 @@
+groups:
+- name: example
+  rules:
+  - alert: circuitbreaker_hystrix
+    expr: hystrix_circuit_breaker_open{job="party-edu-server-api"} > 0
+    for:  2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "党员教育接口熔断 - {{ $labels.commandName }}"
+      description: "{{ $labels.instance }} , {{ $labels.commandName }} 熔断。"

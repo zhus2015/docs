@@ -1,0 +1,34 @@
+groups:
+- name: elasticsearch-alerte
+  rules:
+  - alert: elasticsearch_thread_pool_active_count
+    expr: elasticsearch_thread_pool_active_count{type="write"} == 32
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "elasticsearh {{ $labels.host }} write写线程池数量持续等于32超过5分钟"
+
+#  - alert: elasticsearch_thread_pool_queue_count
+#    expr: sum (elasticsearch_thread_pool_queue_count) by (host,type) >=70
+#    for: 60s
+#    labels:
+#      severity: warning
+#    annotations:
+#      summary: "{{ $labels.instance }} 线程池中排队的线程数大于 70"
+
+  - alert: elasticsearch-cluster-health-is-yellow
+    expr: elasticsearch_cluster_health_status{color="yellow"} == 1
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "{{ $labels.instance }} elasticsearh 健康状态为黄色"
+
+  - alert: elasticsearch-cluster-health-is-red
+    expr: elasticsearch_cluster_health_status{color="red"} == 1
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "{{ $labels.instance }} elasticsearh 健康状态为红色，集群故障!!"

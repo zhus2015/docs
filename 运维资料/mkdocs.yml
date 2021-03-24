@@ -1,0 +1,81 @@
+site_name: 'zhus Docs'
+site_url: 'https://loding.top'
+site_description: 'ZhuS Docs'
+site_author: 'loding'
+
+#repo_name: 'Github Star'
+repo_url: 'https://github.com/zhus2015/docs'
+edit_uri: ''
+
+theme:
+    name: 'material'
+    #name: 'Bootstrap'
+    logo: 'images/facio.ico'
+    favicon: 'images/facio.ico'
+    language: 'zh'
+    highlightjs: true
+    feature:
+        tabs: true
+    hljs_languages:
+        - yaml
+        - django
+        - rust
+    font:
+        text: Roboto
+        code: Roboto Mono
+    palette:
+        scheme: default
+        primary: black
+        accent: indigo
+        
+plugins:
+    - search
+#copyright: 
+#google_analytics:
+
+nav:
+    - 介绍: index.md
+         
+markdown_extensions:
+    - markdown.extensions.attr_list
+    - admonition
+    - codehilite:
+        guess_lang: True
+        linenums: False
+    - toc:
+        permalink: True
+    - footnotes
+    - attr_list
+    - def_list
+    - tables
+    - abbr
+    - md_in_html
+    - pymdownx.extra
+    - pymdownx.arithmatex
+    - pymdownx.betterem:
+        smart_enable: all
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.emoji:
+        emoji_generator: !!python/name:pymdownx.emoji.to_png
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.superfences
+    - pymdownx.tasklist
+    - pymdownx.tilde
+    - pymdownx.betterem
+    - pymdownx.progressbar
+
+extra_css:
+    - css/extra.css
+    - css/simpleLightbox.min.css
+    - css/custom.css
+    
+extra_javascript:
+    - 'js/extra.js'
+    - 'js/simpleLightbox.js'
+    - 'js/custom.js'
+    - js/umlconvert.js
