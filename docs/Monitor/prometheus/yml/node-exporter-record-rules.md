@@ -133,28 +133,28 @@ groups:
    
 ##############################################################################################
 #                                 disk                                                       #
-    - expr: node_filesystem_size_bytes{job="node-exporter" ,fstype=~"ext4|xfs"}
+    - expr: node_filesystem_size_bytes{job="node-exporter" ,fstype=~"ext.*|xfs"}
       record: node_exporter:disk:usage:total
       labels: 
         desc: "节点的磁盘总量"
         unit: byte
         job: "node-exporter"
 
-    - expr: node_filesystem_avail_bytes{job="node-exporter",fstype=~"ext4|xfs"}
+    - expr: node_filesystem_avail_bytes{job="node-exporter",fstype=~"ext.*|xfs"}
       record: node_exporter:disk:usage:free
       labels: 
         desc: "节点的磁盘剩余空间"
         unit: byte
         job: "node-exporter"
 
-    - expr: node_filesystem_size_bytes{job="node-exporter",fstype=~"ext4|xfs"} - node_filesystem_avail_bytes{job="node-exporter",fstype=~"ext4|xfs"}
+    - expr: node_filesystem_size_bytes{job="node-exporter",fstype=~"ext.*|xfs"} - node_filesystem_avail_bytes{job="node-exporter",fstype=~"ext.*|xfs"}
       record: node_exporter:disk:usage:used
       labels: 
         desc: "节点的磁盘使用的空间"
         unit: byte
         job: "node-exporter"
 
-    - expr:  (1 - node_filesystem_avail_bytes{job="node-exporter",fstype=~"ext4|xfs"} / node_filesystem_size_bytes{job="node-exporter",fstype=~"ext4|xfs"}) * 100 
+    - expr:  (1 - node_filesystem_avail_bytes{job="node-exporter",fstype=~"ext.*|xfs"} / node_filesystem_size_bytes{job="node-exporter",fstype=~"ext.*|xfs"}) * 100 
       record: node_exporter:disk:used:percent    
       labels: 
         desc: "节点的磁盘的使用百分比"

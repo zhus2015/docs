@@ -156,14 +156,14 @@ nav:
             
     - Docker:
         - Docker基础:
-            - Docker基础知识: Docker/docker_basic/docker_basic.md
-            - Docker的网络模式: Docker/docker_basic/docker_network.md
+            - Docker基础知识: Docker/docker_basic.md
+            - Docker的网络模式: Docker/docker_network.md
         - Docker进阶:
-            - Docker三剑客: Docker/docker_advanced/docker_layout_tools.md
-            - 可视化管理工具Portainer: Docker/docker_advanced/docker_portainer.md
+            - Docker三剑客: Docker/docker_layout_tools.md
+            - 可视化管理工具Portainer: Docker/docker_portainer.md
         - Docker镜像仓库:
-            - Docker镜像仓库--Harbor: Docker/docker_library/docker_library_harbor.md
-            - Docker镜像仓库Harbor密码重置: Docker/docker_library/harbor_miss_password.md
+            - Docker镜像仓库--Harbor: Docker/docker_library_harbor.md
+            - Docker镜像仓库Harbor密码重置: Docker/harbor_miss_password.md
         - Docker镜像制作:
             - 制作jre镜像: Docker/docker_images/make_jre_images.md
             - 制作运行jar包的镜像: Docker/docker_images/make_jre_jar_images.md

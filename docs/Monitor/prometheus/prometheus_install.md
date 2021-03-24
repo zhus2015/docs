@@ -66,15 +66,24 @@ docker run --name=prometheus -itd \
            prom/prometheus:v2.20.0 \
            --config.file=/etc/prometheus/prometheus.yml \
            --storage.tsdb.retention=90d \
+           --web.enable-admin-api \
            --web.enable-lifecycle
 ```
 
 - --web.enable-lifecycle：启用热加载配置文件
   可以通过 curl -X POST  http://localhost:9090/-/reload 命令不重启加载新的配置项目
+- --web.enable-admin-api：启用管理api
 - --storage.tsdb.retention=90d：配置数据存储时间，Prometheus默认保留数据时间为15天
 - --config.file：指定配置文件
 
 !!! waring "注意挂载之前需要将配置文件的权限修改为777，否则有可能出现配置文件无法同步"
+
+```
+curl -X POST -g 'http://localhost:9090/api/v1/admin/tsdb/delete_series?match[]={__name__=~".+"}&start=2020-12-01T00:00:00Z&end=2020-12-31T00:00:00Z'
+curl -X POST http://127.0.0.1:9090/api/v1/admin/tsdb/clean_tombstones
+```
+
+
 
 
 
@@ -106,6 +115,8 @@ EOF
 
 ## Alertmanager--告警插件
 
+### 基础安装配置
+
 > 启动命令
 
 ```shell
@@ -124,11 +135,12 @@ global:
   resolve_timeout: 5m
 
 route:
-  group_by: ['alertname']
-  group_wait: 10s
-  group_interval: 10s
-  repeat_interval: 1h
-  receiver: 'dingtalk'
+  group_by: ['alertname'] #采用那个标签作为分组依据  
+  group_wait: 10s #组告警等待时间
+  group_interval: 10s  #两组告警间隔时间
+  repeat_interval: 1h #发送重复告警的周期。如果已经发送了通知，再次发送之前需要等待多长时间
+  receiver: 'dingtalk' #默认告警接受人
+  
 receivers:
 - name: 'dingtalk'
   webhook_configs:
@@ -151,6 +163,54 @@ alerting:
     - static_configs:
         - targets: ["10.10.10.103:9093"]
 ```
+
+### 分组告警通知
+
+```yml
+route:
+  receiver: 'default-receiver'  
+  # 为一个组发送通知的初始等待时间，默认30s、等待是时间内为了合并更多同类邮件
+  group_wait: 30s
+  # 在发送新告警前的等待时间。通常5m或以上、第二组发送邮件间隔时间
+  group_interval: 5m
+  # 发送重复告警的周期。如果已经发送了通知，再次发送之前需要等待多长时间。通常3小时或以上
+  repeat_interval: 4h
+  # 报警分组依据，根据标签进行分组
+  group_by: [cluster, alertname]
+
+  # 所有不匹配以下子路由的告警都将保留在根节点，并发送到“default-receiver”
+  routes:
+    
+    # 所有service=mysql或者service=cassandra的告警分配到数据库接收端
+  - receiver: 'database-pager'
+    group_wait: 10s
+    match_re:
+      # 使用正则匹配告警包含两个服务，发送到database-page
+      service: mysql|cassandra
+    
+    # 所有带有team=frontend标签的告警都与此子路由匹配
+    # 它们是按产品和环境分组的，而不是集群
+  - receiver: 'frontend-pager'
+    group_by: [product, environment]
+    match:
+      # 所有告警标签带有frontend发送到frontend-pager
+      team: frontend
+
+# receiver标记：告警接受者 
+receivers:
+# name：报警来源自定义名称
+- name: 'database-pager'
+      webhook_configs:
+      - url: 'http://10.10.10.103:8060/dingtalk/webhookhaha/send'  #钉钉web-hook地址
+        send_resolved: true
+- name: 'frontend-pager'
+      # email_configs：通过邮箱发送报警
+      email_configs:
+        # to：指定接收端email
+        - to: '123@163.com'
+```
+
+
 
 ## DingDing通知
 
